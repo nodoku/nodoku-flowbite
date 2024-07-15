@@ -1,0 +1,10 @@
+{
+  "core/card": {
+    "schema": "schemas/card/visual-schema.json",
+    "implementation": "CoreCard"
+  },
+  "core/carousel": {
+    "schema": "schemas/carousel/visual-schema.json",
+    "implementation": "CoreCarousel"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "description": "Lb-Caroursel visual schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "OptionsType": {
+      "type": "object",
+      "properties": {
+        "slide": {
+          "type": "boolean"
+        },
+        "slideInterval": {
+          "type": "number"
+        },
+        "indicators": {
+          "type": "boolean"
+        },
+        "draggable": {
+          "type": "boolean"
+        },
+        "pauseOnHover": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ThemeType": {
+      "type": "object",
+      "properties": {
+        "className": {
+          "type": "string"
+        },
+        "slideCommon": {
+          "type": "object",
+          "properties": {
+            "className": {
+              "type": "string"
+            },
+            "bgBlur": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "slides": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "className": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "additionalProperties": false
+        }
+
+      },
+      "additionalProperties": false
+    }
+
+  },
+
+
+  "type": "object",
+  "allOf": [
+    {
+      "properties": {
+        "ns": {
+          "type": "string",
+          "pattern": "[\\w-]+"
+        },
+        "theme": {
+          "$ref": "#/definitions/ThemeType"
+        },
+        "options": {
+          "$ref": "#/definitions/OptionsType"
+        }
+      }
+    },
+    {
+      "oneOf": [
+        {
+          "properties": {
+            "contentKeys": {
+              "type": "array",
+              "items": {
+                "$ref": "../visual-common.json#/definitions/ContentKey"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "contentKey": {
+              "$ref": "../visual-common.json#/definitions/ContentKey"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
