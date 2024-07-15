@@ -9,9 +9,9 @@
     ".": "./dist/nodoku-flowbite.main.lib.js"
   },
   "dependencies": {
-    "nodoku-core": "../nodoku-core"
   },
   "peerDependencies": {
+    "nodoku-core": "file:../nodoku-core/dist",
     "@types/node": "^20.12.11",
     "@types/react": "^18.3.2",
     "@types/react-dom": "18.3.0",
@@ -35,6 +35,6 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "dist": "shx mkdir -p dist && shx cp package-dist.json dist/package.json && shx cp nodoku.manifest.json dist && tsc"
+    "dist": "shx mkdir -p dist && shx cp package-dist.json dist/package.json && shx cp nodoku.manifest.json dist && shx cp -r schemas ./dist && tsc"
   }
 }

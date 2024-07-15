@@ -54,50 +54,32 @@
           },
           "additionalProperties": false
         }
-
       },
       "additionalProperties": false
     }
-
   },
-
-
   "type": "object",
-  "allOf": [
-    {
-      "properties": {
-        "ns": {
-          "type": "string",
-          "pattern": "[\\w-]+"
-        },
-        "theme": {
-          "$ref": "#/definitions/ThemeType"
-        },
-        "options": {
-          "$ref": "#/definitions/OptionsType"
-        }
+  "properties": {
+    "contentKeys": {
+      "type": "array",
+      "items": {
+        "$ref": "../../../node_modules/nodoku-core/schemas/content-key-schema.json#/definitions/ContentKey"
       }
     },
-    {
-      "oneOf": [
-        {
-          "properties": {
-            "contentKeys": {
-              "type": "array",
-              "items": {
-                "$ref": "../../content-key-schema.json#/definitions/ContentKey"
-              }
-            }
-          }
-        },
-        {
-          "properties": {
-            "contentKey": {
-              "$ref": "../../content-key-schema.json#/definitions/ContentKey"
-            }
-          }
-        }
-      ]
+    "ns": {
+      "type": "string",
+      "pattern": "[\\w-]+"
+    },
+    "theme": {
+      "$ref": "#/definitions/ThemeType"
+    },
+    "options": {
+      "$ref": "#/definitions/OptionsType"
     }
+  },
+  "additionalProperties": false,
+  "additionalItems": false,
+  "required": [
+    "contentKeys"
   ]
 }
