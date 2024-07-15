@@ -85,7 +85,7 @@
             "contentKeys": {
               "type": "array",
               "items": {
-                "$ref": "../visual-common.json#/definitions/ContentKey"
+                "$ref": "../../content-key-schema.json#/definitions/ContentKey"
               }
             }
           }
@@ -93,7 +93,7 @@
         {
           "properties": {
             "contentKey": {
-              "$ref": "../visual-common.json#/definitions/ContentKey"
+              "$ref": "../../content-key-schema.json#/definitions/ContentKey"
             }
           }
         }

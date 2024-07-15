@@ -1,5 +1,5 @@
 import React, {JSX} from "react";
-import {Carousel, CarouselProps, Flowbite, getTheme} from "flowbite-react";
+import {Carousel, CarouselProps} from "flowbite-react";
 import {LbComponentProps, LbContentBlock, LbTranslatedText} from "nodoku-core";
 import {LbCarouselVisualTheme} from "./lb-carousel-visual-theme";
 

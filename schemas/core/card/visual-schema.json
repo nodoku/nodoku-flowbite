@@ -33,7 +33,7 @@
             "contentKeys": {
               "type": "array",
               "items": {
-                "$ref": "../content-key-schema.json#/definitions/ContentKey"
+                "$ref": "../../content-key-schema.json#/definitions/ContentKey"
               }
             }
           }
@@ -41,7 +41,7 @@
         {
           "properties": {
             "contentKey": {
-              "$ref": "../content-key-schema.json#/definitions/ContentKey"
+              "$ref": "../../content-key-schema.json#/definitions/ContentKey"
             }
           }
         }
