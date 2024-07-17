@@ -1,5 +1,4 @@
 {
-  "description": "Lb-Caroursel visual schema",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "OptionsType": {
