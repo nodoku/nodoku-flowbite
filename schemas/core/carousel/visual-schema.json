@@ -63,7 +63,7 @@
     "contentKeys": {
       "type": "array",
       "items": {
-        "$ref": "../../../node_modules/nodoku-core/schemas/content-key-schema.json#/definitions/ContentKey"
+        "$ref": "../../../node_modules/nodoku-core/schemas/visual-common-schema.json#/definitions/ContentKey"
       }
     },
     "ns": {
