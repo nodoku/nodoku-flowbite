@@ -1,9 +1,9 @@
 import React, {JSX} from "react";
 import {Carousel, CarouselProps} from "flowbite-react";
 import {LbComponentProps, LbContentBlock, LbTranslatedText} from "nodoku-core";
-import {LbCarouselVisualTheme} from "./lb-carousel-visual-theme";
+import {CarouselTheme} from "./carousel-theme";
 
-export async function CoreCarousel(props: LbComponentProps<LbCarouselVisualTheme, CarouselProps>): Promise<JSX.Element> {
+export async function CarouselImpl(props: LbComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
 
     const {lng, i18nextProvider} = props;
 
@@ -76,5 +76,3 @@ export async function CoreCarousel(props: LbComponentProps<LbCarouselVisualTheme
 
     );
 }
-
-export default CoreCarousel;

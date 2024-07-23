@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,6 +19,7 @@
     "declaration": true,
     "declarationDir": "./dist/types",
     "outDir": "./dist/out",
+    "rootDir": "./src"
   },
   "include": [
     "src/**/*.ts",

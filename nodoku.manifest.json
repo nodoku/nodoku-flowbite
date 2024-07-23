@@ -1,10 +1,13 @@
 {
-  "core/card": {
-    "schema": "./schemas/core/card/visual-schema.json",
-    "implementation": "CoreCard"
-  },
-  "core/carousel": {
-    "schema": "./schemas/core/carousel/visual-schema.json",
-    "implementation": "CoreCarousel"
+  "namespace": "NodokuFlowbite",
+  "components": {
+    "flowbite/card": {
+      "schemaFile": "./schema/components/card/visual-schema.json",
+      "implementation": "Card"
+    },
+    "flowbite/carousel": {
+      "schemaFile": "./schema/components/carousel/visual-schema.json",
+      "implementation": "Carousel"
+    }
   }
 }

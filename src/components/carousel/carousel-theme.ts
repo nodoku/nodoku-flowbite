@@ -1,4 +1,4 @@
-export class LbCarouselVisualTheme {
+export class CarouselTheme {
     className?: string;
     slideCommon?: {
         className: string,

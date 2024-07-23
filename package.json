@@ -2,12 +2,9 @@
   "name": "nodoku-flowbite",
   "version": "0.1.0",
   "description": "a collection of visual components, based on React and Flowbite, for Nodoku static site generator",
-  "types": "dist/types/index.d.ts",
-  "main": "dist/nodoku-flowbite.main.lib.js",
+  "types": "./dist/types/index.d.ts",
+  "main": "./dist/out/index.js",
   "type": "module",
-  "exports": {
-    ".": "./dist/nodoku-flowbite.main.lib.js"
-  },
   "dependencies": {
   },
   "peerDependencies": {
@@ -35,6 +32,6 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "dist": "shx mkdir -p dist && shx cp package-dist.json dist/package.json && shx cp nodoku.manifest.json dist && shx cp -r schemas ./dist && tsc"
+    "dist": "shx rm -rf dist && shx mkdir -p dist && shx cp package-dist.json dist/package.json && shx cp nodoku.manifest.json dist && shx cp -r ./schema ./dist && tsc"
   }
 }

@@ -1,22 +1,19 @@
-// "use server"
-
 import React, {JSX} from "react";
 import {CarouselProps} from "flowbite-react";
-import {LbCardVisualTheme} from "./lb-card-visual-theme";
+import {CardTheme} from "./card-theme";
 import {LbComponentProps, LbContentBlock, LbTranslatedText} from "nodoku-core";
 
-export async function CoreCard(props: LbComponentProps<LbCardVisualTheme, CarouselProps>): Promise<JSX.Element> {
+export async function CardImpl(props: LbComponentProps<CardTheme, CarouselProps>): Promise<JSX.Element> {
 
-
-    const { content, visual, lng, i18nextProvider } = props;
+    const {content, visual, lng, i18nextProvider} = props;
 
     console.log("content card ", JSON.stringify(content));
     console.log("visual card ", JSON.stringify(visual));
 
     const block: LbContentBlock = content[0];
-    const { url, alt } = block.images[0];
+    const {url, alt} = block.images[0];
 
-    const { t } = await i18nextProvider(lng);
+    const {t} = await i18nextProvider(lng);
 
     return (
 
@@ -62,5 +59,3 @@ export async function CoreCard(props: LbComponentProps<LbCardVisualTheme, Carous
     );
 
 }
-
-export default CoreCard;
