@@ -14,19 +14,15 @@
   },
   "type": "object",
   "properties": {
-    "contentKey": {
-      "$ref": "../../../node_modules/nodoku-core/schemas/visual-common-schema.json#/definitions/ContentKey"
-    },
-    "ns": {
-      "type": "string",
-      "pattern": "[\\w-]+"
+    "selector": {
+      "$ref": "../../../node_modules/nodoku-core/schemas/skin-common-schema.json#/definitions/Selector"
     },
     "theme": {
       "$ref": "#/definitions/ThemeType"
     }
   },
   "required": [
-    "contentKey"
+    "selector"
   ],
   "additionalItems": false,
   "additionalProperties": false

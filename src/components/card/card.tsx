@@ -1,16 +1,16 @@
 import React, {JSX} from "react";
 import {CarouselProps} from "flowbite-react";
 import {CardTheme} from "./card-theme";
-import {LbComponentProps, LbContentBlock, LbTranslatedText} from "nodoku-core";
+import {NdSkinComponentProps, NdContentBlock, LbTranslatedText} from "nodoku-core";
 
-export async function CardImpl(props: LbComponentProps<CardTheme, CarouselProps>): Promise<JSX.Element> {
+export async function CardImpl(props: NdSkinComponentProps<CardTheme, CarouselProps>): Promise<JSX.Element> {
 
-    const {content, visual, lng, i18nextProvider} = props;
+    const {content, theme, lng, i18nextProvider} = props;
 
     console.log("content card ", JSON.stringify(content));
-    console.log("visual card ", JSON.stringify(visual));
+    console.log("visual card ", JSON.stringify(theme));
 
-    const block: LbContentBlock = content[0];
+    const block: NdContentBlock = content[0];
     const {url, alt} = block.images[0];
 
     const {t} = await i18nextProvider(lng);

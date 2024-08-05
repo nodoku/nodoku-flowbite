@@ -3,11 +3,13 @@
   "components": {
     "flowbite/card": {
       "schemaFile": "./schema/components/card/visual-schema.json",
-      "implementation": "Card"
+      "implementation": "Card",
+      "numBlocks": 1
     },
     "flowbite/carousel": {
       "schemaFile": "./schema/components/carousel/visual-schema.json",
-      "implementation": "Carousel"
+      "implementation": "Carousel",
+      "numBlocks": "unlimited"
     }
   }
 }

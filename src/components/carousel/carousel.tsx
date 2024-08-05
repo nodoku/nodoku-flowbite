@@ -1,22 +1,22 @@
 import React, {JSX} from "react";
 import {Carousel, CarouselProps} from "flowbite-react";
-import {LbComponentProps, LbContentBlock, LbTranslatedText} from "nodoku-core";
+import {NdSkinComponentProps, LbTranslatedText, NdContentBlock, NdContent} from "nodoku-core";
 import {CarouselTheme} from "./carousel-theme";
 
-export async function CarouselImpl(props: LbComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
+export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
 
     const {lng, i18nextProvider} = props;
 
     const {t} = await i18nextProvider(lng);
 
-    const {rowIndex, componentIndex, content, options, visual} = props;
+    const {rowIndex, componentIndex, content, options, theme} = props;
 
-    const slideClassNames: { className: string }[] = visual.slides;
+    const slideClassNames: { className: string }[] = theme?.slides ? theme.slides : [];
 
-    const slides: JSX.Element[] = content.map(((b: LbContentBlock, slideIndex: number) => {
+    const slides: JSX.Element[] = content.map(((b: NdContentBlock, slideIndex: number) => {
 
         const themeClassName = slideClassNames[slideIndex].className
-        const slideContent: LbContentBlock = content[slideIndex];
+        const slideContent: NdContentBlock = content[slideIndex];
 
         var bgClassName: string = "";
         var style: React.CSSProperties = {};
