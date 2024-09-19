@@ -1,63 +1,89 @@
 import React, {JSX} from "react";
-import {Carousel, CarouselProps} from "flowbite-react";
-import {NdSkinComponentProps, LbTranslatedText, NdContentBlock, NdContent} from "nodoku-core";
+import {Carousel} from "flowbite-react";
+import {mergeTheme, NdCode, NdContentBlock, NdList, NdSkinComponentProps, NdTranslatedText} from "nodoku-core";
 import {CarouselTheme} from "./carousel-theme";
+import {NodokuComponents} from "nodoku-components";
+import {CarouselExtOptions} from "./carousel-ext-options";
+import path from "node:path";
+import HighlightedCode = NodokuComponents.HighlightedCode;
+import ListComp = NodokuComponents.ListComp;
 
-export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
+
+export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselExtOptions>): Promise<JSX.Element> {
 
     const {lng, i18nextProvider} = props;
 
     const {t} = await i18nextProvider(lng);
 
-    const {rowIndex, componentIndex, content, options, theme} = props;
+    const {rowIndex,
+        componentIndex,
+        content, options, theme, themes, defaultThemeName} = props;
 
-    const slideClassNames: { className: string }[] = theme?.slides ? theme.slides : [];
 
-    const slides: JSX.Element[] = content.map(((b: NdContentBlock, slideIndex: number) => {
+    const effectiveTheme: CarouselTheme = mergeTheme(theme, CarouselTheme.defaultTheme);
+    const effectiveOptions: CarouselExtOptions = mergeTheme(options, CarouselExtOptions.defaultOptions)
 
-        const themeClassName = slideClassNames[slideIndex].className
-        const slideContent: NdContentBlock = content[slideIndex];
+    // console.log("carousel effectiveTheme", effectiveTheme);
 
-        var bgClassName: string = "";
-        var style: React.CSSProperties = {};
+    // const slideClassNames: { className: string }[] = theme?.slides ? theme.slides : [];
 
-        if (slideContent.bgImage && slideContent.bgImage.url) {
+    const slides: JSX.Element[] = await Promise.all(content.map(async (b: NdContentBlock, slideIndex: number) => {
 
-            bgClassName = "bg-cover bg-no-repeat"
-            style = {
-                backgroundImage: `url(${slideContent.bgImage.url && t(slideContent.bgImage.url.key, slideContent.bgImage.url.ns)})`,
-                zIndex: -10
-            } as React.CSSProperties;
+        // const themeClassName = slideClassNames[slideIndex].className
 
-        }
+        const slideTheme: CarouselTheme = themes.length > 0 ? themes[slideIndex % themes.length] : {};
+
+        const effectiveSlideTheme: CarouselTheme = mergeTheme(slideTheme, effectiveTheme);
+
+        const block: NdContentBlock = content[slideIndex];
+
+        var style: React.CSSProperties = block.bgImage ? {
+            backgroundImage: `url(${t(block.bgImage.url.key, block.bgImage?.url?.ns)})`
+        } : {};
 
         return (
             <div key={`row-${rowIndex}-component-${componentIndex}-slide-${slideIndex}`}
-                 className={`w-full flex flex-col h-full items-center justify-center text-center ${themeClassName} bg-blend-overlay blur-none `}
-            >
-                <div className={`absolute top-0 left-0 right-0 bottom-0 blur-sm opacity-100 ${bgClassName}`}
-                     style={style}>
-                </div>
-                <div
-                    className={"text-6xl lg:text-9xl md:text-6xl sm:text-4xl mb-6"}>{slideContent.title && t(slideContent.title.key, slideContent.title.ns)}</div>
-                <div
-                    className={"text-4xl lg:text-6xl md:text-4xl sm:text-2xl mb-6"}>{slideContent.subTitle && t(slideContent.subTitle.key, slideContent.subTitle.ns)}</div>
-                <div className={"text-2xl lg:text-3xl md:text-2xl sm:text-1xl "}>{
-                    content[slideIndex].paragraphs?.map((p: LbTranslatedText, k: number) => <p
-                        key={k}>{p && t(p.key, p.ns)}</p>)}
-                </div>
+                 className={`${effectiveSlideTheme.slideContainerStyle?.base} ${effectiveSlideTheme.slideContainerStyle?.decoration}`} >
+                <div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgImageStyle?.base} ${effectiveSlideTheme.bgImageStyle?.decoration}`} style={style}></div>
+                <div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgColorStyle?.base} ${effectiveSlideTheme.bgColorStyle?.decoration}`}></div>
+                {block.title &&
+                    <div className={`${effectiveSlideTheme.titleStyle?.base} ${effectiveSlideTheme.titleStyle?.decoration}`}>
+                        {t(block.title.key, block.title.ns)}
+                    </div>
+                }
+                {block.subTitle &&
+                    <div className={`${effectiveSlideTheme.subtitleStyle?.base} ${effectiveSlideTheme.subtitleStyle?.decoration}`}>
+                        {t(block.subTitle.key, block.subTitle.ns)}
+                    </div>
+                }
+                {await Promise.all(block.paragraphs.map(async (p: NdTranslatedText | NdList | NdCode, ip: number) => {
+                    if (p instanceof NdTranslatedText) {
+                        return (
+                            <p key={ip}
+                               className={`${effectiveTheme.paragraphStyle?.base} ${effectiveTheme.paragraphStyle?.decoration}`}>
+                                {p && t(p.key, p.ns)}
+                            </p>
+                        )
+                    } if (p instanceof NdCode) {
+                        return await HighlightedCode({code: p as NdCode, theme: effectiveTheme.codeHighlightTheme!, defaultThemeName: defaultThemeName})
+                    } else {
+                        return await ListComp({list: p as NdList, lng: lng, i18nextProvider: i18nextProvider, listTheme: effectiveTheme.listTheme!})
+                        // return await <ListComp list={p as NdList} lng={lng} i18nextProvider={i18nextProvider} />
+                    }
+                }))}
 
 
-                {slideContent.footer &&
-                    <a href="#"
-                       className={"inline-flex items-center px-3 py-2 mt-10 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"}>
-                        {slideContent.footer && t(slideContent.footer.key, slideContent.footer.ns)}
-                        <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                  d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
+                {block.footer &&
+                    <div className={`${effectiveSlideTheme.footerContainerStyle?.base} ${effectiveSlideTheme.footerContainerStyle?.decoration}`}>
+                        <a href="#" className={`${effectiveSlideTheme.footerButtonStyle?.base} ${effectiveSlideTheme.footerButtonStyle?.decoration}`}>
+                            {t(block.footer.key, block.footer.ns)}
+                            <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                      d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </a>
+                    </div>
 
                 }
             </div>
@@ -68,7 +94,7 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
 
     return (
 
-        <div className={"aspect-square lg:aspect-carousel md:aspect-carousel sm:aspect-carousel "}>
+        <div className={`${effectiveOptions.containerStyle?.base} ${effectiveOptions.containerStyle?.decoration} carousel-start`}>
             <Carousel  {...options}>
                 {slides}
             </Carousel>

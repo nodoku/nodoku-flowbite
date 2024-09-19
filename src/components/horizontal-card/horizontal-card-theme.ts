@@ -1,9 +1,9 @@
 import {ThemeStyle} from "nodoku-core";
-import {NodokuComponents} from "../../../../nodoku-components";
+import {NodokuComponents} from "nodoku-components";
 import HighlightedCodeTheme = NodokuComponents.HighlightedCodeTheme;
 import ListCompTheme = NodokuComponents.ListCompTheme;
 
-export class CardTheme {
+export class HorizontalCardTheme {
 
     className?: string;
 
@@ -20,15 +20,15 @@ export class CardTheme {
     codeHighlightTheme?: HighlightedCodeTheme;
     listTheme?: ListCompTheme;
 
-    static defaultTheme: CardTheme = {
+    static defaultTheme: HorizontalCardTheme = {
         // containerStyle: {
-        //     base: "w-full pb-10",
-        //     decoration: "border rounded-lg shadow border-gray-200 dark:border-gray-700"
+        //     base: "flex flex-col items-center md:flex-row md:max-w-xl ",
+        //     decoration: "border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-700"
         // },
         //
         // bgImageStyle: {
         //     base: "-z-20 bg-cover bg-no-repeat",
-        //     decoration: "blur-sm "
+        //     decoration: "blur-none "
         // },
         //
         // bgColorStyle: {
@@ -37,17 +37,17 @@ export class CardTheme {
         // },
         //
         // imageStyle: {
-        //     base: "",
+        //     base: "object-cover w-full h-full md:w-48 md:rounded-none md:rounded-s-lg",
         //     decoration: "rounded-t-lg",
         // },
         //
         // innerContainerStyle: {
-        //     base: "",
-        //     decoration: "p-5"
+        //     base: "flex flex-col h-full items-start justify-start pb-12 leading-normal",
+        //     decoration: "p-4"
         // },
         //
         // titleStyle: {
-        //     base: "mb-2 text-3xl font-bold tracking-tight ",
+        //     base: "mb-2 text-2xl font-bold tracking-tight",
         //     decoration: "text-gray-900 dark:text-white"
         // },
         //
@@ -63,7 +63,7 @@ export class CardTheme {
         //
         // footerContainerStyle: {
         //     base: "absolute bottom-0 right-0",
-        //     decoration: "p-3"
+        //     decoration: "p-4"
         // },
         //
         // footerButtonStyle: {
@@ -76,8 +76,9 @@ export class CardTheme {
         //     dark: "a11y-dark"
         // }
 
+
     }
 
 }
 
-export default CardTheme.defaultTheme;
+export default HorizontalCardTheme.defaultTheme;
