@@ -3,17 +3,20 @@ import {ThemeStyle} from "nodoku-core";
 
 export class CarouselExtOptions {
 
-    containerStyle?: ThemeStyle;
+
     props?: CarouselProps;
 
     public static defaultOptions: CarouselExtOptions = {
 
-        containerStyle: {
-            base: "",
-            decoration: ""
-        },
+        // containerStyle: {
+        //     base: "",
+        //     decoration: ""
+        // },
 
-        props: {}
+        props: {
+            slide: false,
+            slideInterval: 10000
+        }
 
     }
 }

@@ -5,10 +5,20 @@ import {mergeTheme} from "nodoku-core";
 import {NodokuComponents} from "nodoku-components";
 import HighlightedCode = NodokuComponents.HighlightedCode;
 import ListComp = NodokuComponents.ListComp;
+import Paragraphs = NodokuComponents.Paragraphs;
 
 export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Promise<JSX.Element> {
 
-    const {componentIndex, content, theme, themes, lng, i18nextProvider, defaultThemeName} = props;
+    const {
+        componentIndex,
+        content,
+        theme,
+        themes,
+        lng,
+        i18nextProvider,
+        imageUrlProvider,
+        defaultThemeName
+    } = props;
 
     // console.log("content card ", JSON.stringify(content));
     // console.log("visual card theme", JSON.stringify(theme));
@@ -25,8 +35,8 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
 
     const {t} = await i18nextProvider(lng);
 
-    var style: React.CSSProperties = block.bgImage ? {
-        backgroundImage: `url(${t(block.bgImage.url.key, block.bgImage?.url?.ns)})`
+    var style: React.CSSProperties = block.bgImageUrl ? {
+        backgroundImage: `url(${await imageUrlProvider(t(block.bgImageUrl.key, block.bgImageUrl.ns))})`
     } : {};
 
     const absZero = "absolute top-0 left-0 right-0 bottom-0";
@@ -38,40 +48,32 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
             <div className={`${absZero} ${effectiveTheme.bgColorStyle?.base} ${effectiveTheme.bgColorStyle?.decoration}`}></div>
 
             {url &&
-                <a href="#">
+                <a href="#" className={"inline-block"}>
                     <img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}
-                         src={t(url.key, url.ns)} alt={alt && t(alt.key, alt.ns)}/>
+                         src={await imageUrlProvider(t(url.key, url.ns))} alt={alt && t(alt.key, alt.ns)}/>
                 </a>
             }
             <div className={`${effectiveTheme.innerContainerStyle?.base} ${effectiveTheme.innerContainerStyle?.decoration}`}>
                 {block.title &&
                     <a href="#">
-                        <h5 className={`${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}>
-                            {block.title && t(block.title.key, block.title.ns)}
-                        </h5>
+                        <h3 className={`${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}
+                             dangerouslySetInnerHTML={{__html: t(block.title.key, block.title.ns)}} />
                     </a>
                 }
                 {block.subTitle &&
-                    <h6 className={`${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}>
-                        {block.subTitle && t(block.subTitle.key, block.subTitle.ns)}
-                    </h6>
+                    <h4 className={`${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}
+                        dangerouslySetInnerHTML={{__html: t(block.subTitle.key, block.subTitle.ns)}} />
                 }
 
-                {await Promise.all(block.paragraphs.map(async (p: NdTranslatedText | NdList | NdCode, ip: number) => {
-                    if (p instanceof NdTranslatedText) {
-                        return (
-                            <p key={ip}
-                               className={`${effectiveTheme.paragraphStyle?.base} ${effectiveTheme.paragraphStyle?.decoration}`}>
-                                {p && t(p.key, p.ns)}
-                            </p>
-                        )
-                    } if (p instanceof NdCode) {
-                        return await HighlightedCode({code: p as NdCode, theme: effectiveTheme.codeHighlightTheme!, defaultThemeName: defaultThemeName})
-                    } else {
-                        return await ListComp({list: p as NdList, lng: lng, i18nextProvider: i18nextProvider, listTheme: effectiveTheme.listTheme!})
-                        // return await <ListComp list={p as NdList} lng={lng} i18nextProvider={i18nextProvider} />
-                    }
-                }))}
+                {await Paragraphs({
+                    lng: lng,
+                    blockParagraphs: block.paragraphs,
+                    paragraphStyle: effectiveTheme.paragraphStyle,
+                    codeHighlightTheme: effectiveTheme.codeHighlightTheme!,
+                    listTheme: effectiveTheme.listTheme!,
+                    defaultThemeName: defaultThemeName,
+                    i18nextProvider: i18nextProvider
+                })}
             </div>
 
             {block.footer &&

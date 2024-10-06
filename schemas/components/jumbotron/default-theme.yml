@@ -1,21 +1,21 @@
 containerStyle:
-    base: py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16
-    decoration: bg-white dark:bg-gray-900
+    base: py-8 px-4 text-center lg:py-16
+    decoration: ''
 bgImageStyle:
-    base: '-z-20 bg-cover bg-no-repeat'
-    decoration: 'blur-sm '
+    base: -z-20 bg-cover bg-no-repeat bg-center
+    decoration: blur-sm
 bgColorStyle:
-    base: '-z-10'
+    base: -z-10
     decoration: opacity-50 bg-gray-100 dark:bg-gray-700
 titleStyle:
-    base: mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl
-    decoration: text-gray-900 dark:text-white
+    base: mb-4 lg:text-6xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl
+    decoration: ''
 subTitleStyle:
-    base: mb-8 text-xl font-normal lg:text-2xl sm:px-16 lg:px-48
-    decoration: text-gray-700 dark:text-gray-200
+    base: mb-8 lg:text-4xl font-normal md:text-2xl sm:px-16 lg:px-48
+    decoration: ''
 paragraphStyle:
-    base: 'mb-8 text-lg font-normal lg:text-xl sm:px-16 lg:px-48 '
-    decoration: text-gray-500 dark:text-gray-400
+    base: mb-4 lg:text-2xl font-normal md:text-xl sm:px-16 lg:px-48
+    decoration: ''
 footerStyle:
     base: flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0
     decoration: ''

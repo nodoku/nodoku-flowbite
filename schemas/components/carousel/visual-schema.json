@@ -14,7 +14,7 @@
     "titleStyle": {
       "$ref": "../../../node_modules/nodoku-core/schemas/skin-common-schema.json#/definitions/ThemeStyle"
     },
-    "subtitleStyle": {
+    "subTitleStyle": {
       "$ref": "../../../node_modules/nodoku-core/schemas/skin-common-schema.json#/definitions/ThemeStyle"
     },
     "paragraphStyle": {

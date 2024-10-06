@@ -10,6 +10,7 @@ import {JumbotronTheme} from "./components/jumbotron/jumbotron-theme";
 import {JumbotronImpl} from "./components/jumbotron/jumbotron";
 import {CarouselExtOptions} from "./components/carousel/carousel-ext-options";
 import {register} from "node:module";
+import {CarouselProps} from "flowbite-react";
 
 console.log("import.meta.url", import.meta.url)
 register('./yaml-load-hooks.js', import.meta.url, {
@@ -28,7 +29,7 @@ export namespace NodokuFlowbite {
         return HorizontalCardImpl(props)
     }
 
-    export async function Carousel(props: NdSkinComponentProps<CarouselTheme, CarouselExtOptions>): Promise<JSX.Element> {
+    export async function Carousel(props: NdSkinComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
         return CarouselImpl(props)
     }
 

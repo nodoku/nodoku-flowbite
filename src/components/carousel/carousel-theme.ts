@@ -5,11 +5,12 @@ import ListCompTheme = NodokuComponents.ListCompTheme;
 
 
 export class CarouselTheme {
+    containerStyle?: ThemeStyle;
     bgImageStyle?: ThemeStyle;
     bgColorStyle?: ThemeStyle;
     slideContainerStyle?: ThemeStyle;
     titleStyle?: ThemeStyle;
-    subtitleStyle?: ThemeStyle;
+    subTitleStyle?: ThemeStyle;
     paragraphStyle?: ThemeStyle;
     footerContainerStyle?: ThemeStyle;
     footerButtonStyle?: ThemeStyle;

@@ -43,6 +43,7 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "dist": "shx rm -rf dist && tsc && shx cp -r schemas ./dist && nodoku-gen-component-default-theme && shx cp nodoku.manifest.json dist"
+    "dist": "shx rm -rf dist && tsc && shx cp -r schemas ./dist && shx cp nodoku.manifest.json dist",
+    "gen-default-theme": "nodoku-gen-component-default-theme"
   }
 }

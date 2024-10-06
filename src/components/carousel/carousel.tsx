@@ -1,5 +1,5 @@
 import React, {JSX} from "react";
-import {Carousel} from "flowbite-react";
+import {Carousel, CarouselProps} from "flowbite-react";
 import {mergeTheme, NdCode, NdContentBlock, NdList, NdSkinComponentProps, NdTranslatedText} from "nodoku-core";
 import {CarouselTheme} from "./carousel-theme";
 import {NodokuComponents} from "nodoku-components";
@@ -7,21 +7,30 @@ import {CarouselExtOptions} from "./carousel-ext-options";
 import path from "node:path";
 import HighlightedCode = NodokuComponents.HighlightedCode;
 import ListComp = NodokuComponents.ListComp;
+import Paragraphs = NodokuComponents.Paragraphs;
+import Backgrounds = NodokuComponents.Backgrounds;
 
 
-export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselExtOptions>): Promise<JSX.Element> {
+export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
 
-    const {lng, i18nextProvider} = props;
+    const {lng, i18nextProvider, imageUrlProvider} = props;
 
     const {t} = await i18nextProvider(lng);
 
-    const {rowIndex,
+    const {
+        rowIndex,
         componentIndex,
-        content, options, theme, themes, defaultThemeName} = props;
+        content,
+        options,
+        theme,
+        themes,
+        defaultThemeName
+    } = props;
 
 
     const effectiveTheme: CarouselTheme = mergeTheme(theme, CarouselTheme.defaultTheme);
-    const effectiveOptions: CarouselExtOptions = mergeTheme(options, CarouselExtOptions.defaultOptions)
+    // const effectiveOptions: CarouselExtOptions = mergeTheme(options, CarouselExtOptions.defaultOptions)
+
 
     // console.log("carousel effectiveTheme", effectiveTheme);
 
@@ -35,42 +44,53 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
 
         const effectiveSlideTheme: CarouselTheme = mergeTheme(slideTheme, effectiveTheme);
 
-        const block: NdContentBlock = content[slideIndex];
+        const block: NdContentBlock = b; //content[slideIndex];
 
-        var style: React.CSSProperties = block.bgImage ? {
-            backgroundImage: `url(${t(block.bgImage.url.key, block.bgImage?.url?.ns)})`
-        } : {};
+        // var style: React.CSSProperties = block.bgImageUrl ? {
+        //     backgroundImage: `url(${await imageUrlProvider(t(block.bgImageUrl.key, block.bgImageUrl.ns))})`
+        // } : (block.images && block.images.length > 0 ? {
+        //     backgroundImage: `url(${await imageUrlProvider(t(block.images[0].url.key, block.images[0].url?.ns))})`
+        // }: {});
+
+        const paragraphs = await Paragraphs({
+            lng: lng,
+            blockParagraphs: block.paragraphs,
+            paragraphStyle: effectiveSlideTheme.paragraphStyle,
+            codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme!,
+            listTheme: effectiveSlideTheme.listTheme!,
+            defaultThemeName: defaultThemeName,
+            i18nextProvider: i18nextProvider
+        });
+
+        const backgrounds = await Backgrounds({
+            lng: lng,
+            defaultThemeName: defaultThemeName,
+            bgColorStyle: effectiveSlideTheme.bgColorStyle,
+            bgImageStyle: effectiveSlideTheme.bgImageStyle,
+            i18nextProvider: i18nextProvider,
+            bgImageUrl: block.bgImageUrl,
+            imageUrlProvider: imageUrlProvider
+        });
+
 
         return (
             <div key={`row-${rowIndex}-component-${componentIndex}-slide-${slideIndex}`}
                  className={`${effectiveSlideTheme.slideContainerStyle?.base} ${effectiveSlideTheme.slideContainerStyle?.decoration}`} >
-                <div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgImageStyle?.base} ${effectiveSlideTheme.bgImageStyle?.decoration}`} style={style}></div>
-                <div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgColorStyle?.base} ${effectiveSlideTheme.bgColorStyle?.decoration}`}></div>
+                {/*<div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgImageStyle?.base} ${effectiveSlideTheme.bgImageStyle?.decoration}`} style={style}></div>*/}
+                {/*<div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgColorStyle?.base} ${effectiveSlideTheme.bgColorStyle?.decoration}`}></div>*/}
+
+                {backgrounds}
+
                 {block.title &&
-                    <div className={`${effectiveSlideTheme.titleStyle?.base} ${effectiveSlideTheme.titleStyle?.decoration}`}>
-                        {t(block.title.key, block.title.ns)}
-                    </div>
+                    <div className={`${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}
+                         dangerouslySetInnerHTML={{__html: t(block.title.key, block.title.ns)}} />
                 }
                 {block.subTitle &&
-                    <div className={`${effectiveSlideTheme.subtitleStyle?.base} ${effectiveSlideTheme.subtitleStyle?.decoration}`}>
-                        {t(block.subTitle.key, block.subTitle.ns)}
-                    </div>
+                    <div className={`${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}
+                         dangerouslySetInnerHTML={{__html: t(block.subTitle.key, block.subTitle.ns)}} />
                 }
-                {await Promise.all(block.paragraphs.map(async (p: NdTranslatedText | NdList | NdCode, ip: number) => {
-                    if (p instanceof NdTranslatedText) {
-                        return (
-                            <p key={ip}
-                               className={`${effectiveTheme.paragraphStyle?.base} ${effectiveTheme.paragraphStyle?.decoration}`}>
-                                {p && t(p.key, p.ns)}
-                            </p>
-                        )
-                    } if (p instanceof NdCode) {
-                        return await HighlightedCode({code: p as NdCode, theme: effectiveTheme.codeHighlightTheme!, defaultThemeName: defaultThemeName})
-                    } else {
-                        return await ListComp({list: p as NdList, lng: lng, i18nextProvider: i18nextProvider, listTheme: effectiveTheme.listTheme!})
-                        // return await <ListComp list={p as NdList} lng={lng} i18nextProvider={i18nextProvider} />
-                    }
-                }))}
+
+                {paragraphs}
 
 
                 {block.footer &&
@@ -94,7 +114,7 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
 
     return (
 
-        <div className={`${effectiveOptions.containerStyle?.base} ${effectiveOptions.containerStyle?.decoration} carousel-start`}>
+        <div className={`relative ${effectiveTheme.containerStyle?.base} ${effectiveTheme.containerStyle?.decoration} carousel-container-main`}>
             <Carousel  {...options}>
                 {slides}
             </Carousel>

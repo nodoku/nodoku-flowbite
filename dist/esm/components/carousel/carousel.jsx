@@ -36,79 +36,73 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import React from "react";
 import { Carousel } from "flowbite-react";
-import { mergeTheme, NdCode, NdTranslatedText } from "nodoku-core";
+import { mergeTheme } from "nodoku-core";
 import { CarouselTheme } from "./carousel-theme";
 import { NodokuComponents } from "nodoku-components";
-import { CarouselExtOptions } from "./carousel-ext-options";
-var HighlightedCode = NodokuComponents.HighlightedCode;
-var ListComp = NodokuComponents.ListComp;
+var Paragraphs = NodokuComponents.Paragraphs;
+var Backgrounds = NodokuComponents.Backgrounds;
 export function CarouselImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var lng, i18nextProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, effectiveOptions, slides;
+        var lng, i18nextProvider, imageUrlProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides;
         var _this = this;
         var _a, _b;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
-                    lng = props.lng, i18nextProvider = props.i18nextProvider;
+                    lng = props.lng, i18nextProvider = props.i18nextProvider, imageUrlProvider = props.imageUrlProvider;
                     return [4 /*yield*/, i18nextProvider(lng)];
                 case 1:
                     t = (_c.sent()).t;
                     rowIndex = props.rowIndex, componentIndex = props.componentIndex, content = props.content, options = props.options, theme = props.theme, themes = props.themes, defaultThemeName = props.defaultThemeName;
                     effectiveTheme = mergeTheme(theme, CarouselTheme.defaultTheme);
-                    effectiveOptions = mergeTheme(options, CarouselExtOptions.defaultOptions);
                     return [4 /*yield*/, Promise.all(content.map(function (b, slideIndex) { return __awaiter(_this, void 0, void 0, function () {
-                            var slideTheme, effectiveSlideTheme, block, style;
-                            var _this = this;
-                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
-                            return __generator(this, function (_s) {
-                                switch (_s.label) {
+                            var slideTheme, effectiveSlideTheme, block, paragraphs, backgrounds;
+                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+                            return __generator(this, function (_l) {
+                                switch (_l.label) {
                                     case 0:
                                         slideTheme = themes.length > 0 ? themes[slideIndex % themes.length] : {};
                                         effectiveSlideTheme = mergeTheme(slideTheme, effectiveTheme);
-                                        block = content[slideIndex];
-                                        style = block.bgImage ? {
-                                            backgroundImage: "url(".concat(t(block.bgImage.url.key, (_b = (_a = block.bgImage) === null || _a === void 0 ? void 0 : _a.url) === null || _b === void 0 ? void 0 : _b.ns), ")")
-                                        } : {};
-                                        return [4 /*yield*/, Promise.all(block.paragraphs.map(function (p, ip) { return __awaiter(_this, void 0, void 0, function () {
-                                                var _a, _b;
-                                                return __generator(this, function (_c) {
-                                                    switch (_c.label) {
-                                                        case 0:
-                                                            if (p instanceof NdTranslatedText) {
-                                                                return [2 /*return*/, (<p key={ip} className={"".concat((_a = effectiveTheme.paragraphStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveTheme.paragraphStyle) === null || _b === void 0 ? void 0 : _b.decoration)}>
-                                {p && t(p.key, p.ns)}
-                            </p>)];
-                                                            }
-                                                            if (!(p instanceof NdCode)) return [3 /*break*/, 2];
-                                                            return [4 /*yield*/, HighlightedCode({ code: p, theme: effectiveTheme.codeHighlightTheme, defaultThemeName: defaultThemeName })];
-                                                        case 1: return [2 /*return*/, _c.sent()];
-                                                        case 2: return [4 /*yield*/, ListComp({ list: p, lng: lng, i18nextProvider: i18nextProvider, listTheme: effectiveTheme.listTheme })
-                                                            // return await <ListComp list={p as NdList} lng={lng} i18nextProvider={i18nextProvider} />
-                                                        ];
-                                                        case 3: return [2 /*return*/, _c.sent()
-                                                            // return await <ListComp list={p as NdList} lng={lng} i18nextProvider={i18nextProvider} />
-                                                        ];
-                                                    }
-                                                });
-                                            }); }))];
-                                    case 1: return [2 /*return*/, (<div key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"".concat((_c = effectiveSlideTheme.slideContainerStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveSlideTheme.slideContainerStyle) === null || _d === void 0 ? void 0 : _d.decoration)}>
-                <div className={"absolute top-0 left-0 right-0 bottom-0 ".concat((_e = effectiveSlideTheme.bgImageStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveSlideTheme.bgImageStyle) === null || _f === void 0 ? void 0 : _f.decoration)} style={style}></div>
-                <div className={"absolute top-0 left-0 right-0 bottom-0 ".concat((_g = effectiveSlideTheme.bgColorStyle) === null || _g === void 0 ? void 0 : _g.base, " ").concat((_h = effectiveSlideTheme.bgColorStyle) === null || _h === void 0 ? void 0 : _h.decoration)}></div>
+                                        block = b;
+                                        return [4 /*yield*/, Paragraphs({
+                                                lng: lng,
+                                                blockParagraphs: block.paragraphs,
+                                                paragraphStyle: effectiveSlideTheme.paragraphStyle,
+                                                codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme,
+                                                listTheme: effectiveSlideTheme.listTheme,
+                                                defaultThemeName: defaultThemeName,
+                                                i18nextProvider: i18nextProvider
+                                            })];
+                                    case 1:
+                                        paragraphs = _l.sent();
+                                        return [4 /*yield*/, Backgrounds({
+                                                lng: lng,
+                                                defaultThemeName: defaultThemeName,
+                                                bgColorStyle: effectiveSlideTheme.bgColorStyle,
+                                                bgImageStyle: effectiveSlideTheme.bgImageStyle,
+                                                i18nextProvider: i18nextProvider,
+                                                bgImageUrl: block.bgImageUrl,
+                                                imageUrlProvider: imageUrlProvider
+                                            })];
+                                    case 2:
+                                        backgrounds = _l.sent();
+                                        return [2 /*return*/, (<div key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"".concat((_a = effectiveSlideTheme.slideContainerStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveSlideTheme.slideContainerStyle) === null || _b === void 0 ? void 0 : _b.decoration)}>
+                {/*<div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgImageStyle?.base} ${effectiveSlideTheme.bgImageStyle?.decoration}`} style={style}></div>*/}
+                {/*<div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgColorStyle?.base} ${effectiveSlideTheme.bgColorStyle?.decoration}`}></div>*/}
+
+                {backgrounds}
+
                 {block.title &&
-                                                <div className={"".concat((_j = effectiveSlideTheme.titleStyle) === null || _j === void 0 ? void 0 : _j.base, " ").concat((_k = effectiveSlideTheme.titleStyle) === null || _k === void 0 ? void 0 : _k.decoration)}>
-                        {t(block.title.key, block.title.ns)}
-                    </div>}
+                                                    <div className={"".concat((_c = effectiveTheme.titleStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.titleStyle) === null || _d === void 0 ? void 0 : _d.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title.key, block.title.ns) }}/>}
                 {block.subTitle &&
-                                                <div className={"".concat((_l = effectiveSlideTheme.subtitleStyle) === null || _l === void 0 ? void 0 : _l.base, " ").concat((_m = effectiveSlideTheme.subtitleStyle) === null || _m === void 0 ? void 0 : _m.decoration)}>
-                        {t(block.subTitle.key, block.subTitle.ns)}
-                    </div>}
-                {_s.sent()}
+                                                    <div className={"".concat((_e = effectiveTheme.subTitleStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.subTitleStyle) === null || _f === void 0 ? void 0 : _f.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle.key, block.subTitle.ns) }}/>}
+
+                {paragraphs}
 
 
                 {block.footer &&
-                                                <div className={"".concat((_o = effectiveSlideTheme.footerContainerStyle) === null || _o === void 0 ? void 0 : _o.base, " ").concat((_p = effectiveSlideTheme.footerContainerStyle) === null || _p === void 0 ? void 0 : _p.decoration)}>
-                        <a href="#" className={"".concat((_q = effectiveSlideTheme.footerButtonStyle) === null || _q === void 0 ? void 0 : _q.base, " ").concat((_r = effectiveSlideTheme.footerButtonStyle) === null || _r === void 0 ? void 0 : _r.decoration)}>
+                                                    <div className={"".concat((_g = effectiveSlideTheme.footerContainerStyle) === null || _g === void 0 ? void 0 : _g.base, " ").concat((_h = effectiveSlideTheme.footerContainerStyle) === null || _h === void 0 ? void 0 : _h.decoration)}>
+                        <a href="#" className={"".concat((_j = effectiveSlideTheme.footerButtonStyle) === null || _j === void 0 ? void 0 : _j.base, " ").concat((_k = effectiveSlideTheme.footerButtonStyle) === null || _k === void 0 ? void 0 : _k.decoration)}>
                             {t(block.footer.key, block.footer.ns)}
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -121,7 +115,7 @@ export function CarouselImpl(props) {
                         }); }))];
                 case 2:
                     slides = _c.sent();
-                    return [2 /*return*/, (<div className={"".concat((_a = effectiveOptions.containerStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveOptions.containerStyle) === null || _b === void 0 ? void 0 : _b.decoration, " carousel-start")}>
+                    return [2 /*return*/, (<div className={"relative ".concat((_a = effectiveTheme.containerStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveTheme.containerStyle) === null || _b === void 0 ? void 0 : _b.decoration, " carousel-container-main")}>
             <Carousel {...options}>
                 {slides}
             </Carousel>

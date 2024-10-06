@@ -2,26 +2,26 @@ containerStyle:
     base: w-full pb-10
     decoration: border rounded-lg shadow border-gray-200 dark:border-gray-700
 bgImageStyle:
-    base: '-z-20 bg-cover bg-no-repeat'
-    decoration: 'blur-sm '
+    base: -z-20 bg-cover bg-no-repeat
+    decoration: blur-sm
 bgColorStyle:
-    base: '-z-10'
-    decoration: opacity-50 bg-white dark:bg-gray-700
+    base: -z-10
+    decoration: opacity-90 bg-gray-300 dark:bg-gray-700
 imageStyle:
-    base: ''
-    decoration: rounded-t-lg
+    base: rounded-t-lg object-cover
+    decoration: aspect-video
 innerContainerStyle:
-    base: ''
-    decoration: p-5
+    base: p-5
+    decoration:
 titleStyle:
-    base: 'mb-2 text-3xl font-bold tracking-tight '
-    decoration: text-gray-900 dark:text-white
+    base: mb-2 text-3xl font-bold tracking-tight
+    decoration: ''
 subTitleStyle:
-    base: 'mb-2 text-2xl tracking-tight '
-    decoration: text-gray-900 dark:text-white
+    base: mb-2 text-2xl tracking-tight
+    decoration: ''
 paragraphStyle:
-    base: 'mb-3 font-normal '
-    decoration: text-gray-700 dark:text-gray-400
+    base: mb-3 font-normal
+    decoration: ''
 footerContainerStyle:
     base: absolute bottom-0 right-0
     decoration: p-3

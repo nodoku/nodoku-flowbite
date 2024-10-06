@@ -5,11 +5,22 @@ import {mergeTheme} from "nodoku-core";
 import {NodokuComponents} from "nodoku-components";
 import ListComp = NodokuComponents.ListComp;
 import HighlightedCode = NodokuComponents.HighlightedCode;
+import Paragraphs = NodokuComponents.Paragraphs;
+import Backgrounds = NodokuComponents.Backgrounds;
 
 
 export async function JumbotronImpl(props: NdSkinComponentProps<JumbotronTheme, void>): Promise<JSX.Element> {
 
-    const {componentIndex, content, theme, themes, lng, i18nextProvider, defaultThemeName} = props;
+    const {
+        componentIndex,
+        content,
+        theme,
+        themes,
+        lng,
+        i18nextProvider,
+        imageUrlProvider,
+        defaultThemeName
+    } = props;
 
     // console.log("content card ", JSON.stringify(content));
     // console.log("visual card ", JSON.stringify(theme));
@@ -23,42 +34,53 @@ export async function JumbotronImpl(props: NdSkinComponentProps<JumbotronTheme, 
 
     const {t} = await i18nextProvider(lng);
 
-    var style: React.CSSProperties = block.bgImage ? {
-        backgroundImage: `url(${t(block.bgImage.url.key, block.bgImage?.url?.ns)})`
-    } : {};
+    // var style: React.CSSProperties = block.bgImageUrl ? {
+    //     backgroundImage: `url(${await imageUrlProvider(t(block.bgImageUrl.key, block.bgImageUrl.ns))})`
+    // } : (block.images && block.images.length > 0 ? {
+    //     backgroundImage: `url(${await imageUrlProvider(t(block.images[0].url.key, block.images[0].url?.ns))})`
+    // }: {});
 
     // console.log("effective theme", effectiveTheme)
 
+
+    const paragraphs = await Paragraphs({
+        lng: lng,
+        blockParagraphs: block.paragraphs,
+        paragraphStyle: effectiveTheme.paragraphStyle,
+        codeHighlightTheme: effectiveTheme.codeHighlightTheme!,
+        listTheme: effectiveTheme.listTheme!,
+        defaultThemeName: defaultThemeName,
+        i18nextProvider: i18nextProvider
+    });
+
+    const backgrounds = await Backgrounds({
+        lng: lng,
+        defaultThemeName: defaultThemeName,
+        bgColorStyle: effectiveTheme.bgColorStyle,
+        bgImageStyle: effectiveTheme.bgImageStyle,
+        i18nextProvider: i18nextProvider,
+        bgImageUrl: block.bgImageUrl,
+        imageUrlProvider: imageUrlProvider
+    });
+
     return (
         <section className={`relative ${effectiveTheme.containerStyle?.base} ${effectiveTheme.containerStyle?.decoration}`}>
-            <div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveTheme.bgImageStyle?.base} ${effectiveTheme.bgImageStyle?.decoration}`} style={style}></div>
-            <div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveTheme.bgColorStyle?.base} ${effectiveTheme.bgColorStyle?.decoration}`}></div>
+            {/*<div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveTheme.bgImageStyle?.base} ${effectiveTheme.bgImageStyle?.decoration}`} style={style}></div>*/}
+            {/*<div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveTheme.bgColorStyle?.base} ${effectiveTheme.bgColorStyle?.decoration}`}></div>*/}
+
+            {backgrounds}
 
             {/*<div className={`${effectiveTheme.containerStyle?.base} ${effectiveTheme.containerStyle?.decoration}`}>*/}
                 {block.title &&
-                    <h1 className={`${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}>
-                        {t(block.title.key, block.title.ns)}
-                    </h1>
+                    <h1 className={`${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}
+                        dangerouslySetInnerHTML={{__html: t(block.title.key, block.title.ns)}} />
                 }
                 {block.subTitle &&
-                    <p className={`${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}>
-                        {t(block.subTitle.key, block.subTitle.ns)}
-                    </p>
+                    <h2 className={`${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}
+                        dangerouslySetInnerHTML={{__html: t(block.subTitle.key, block.subTitle.ns)}} />
                 }
-                {await Promise.all(block.paragraphs.map(async (p: NdTranslatedText | NdList | NdCode, ip: number) => {
-                    if (p instanceof NdTranslatedText) {
-                        return (
-                            <p className={`${effectiveTheme.paragraphStyle?.base} ${effectiveTheme.paragraphStyle?.decoration}`}>
-                                {p && t(p.key, p.ns)}
-                            </p>
-                        )
-                    } if (p instanceof NdCode) {
-                        return await HighlightedCode({code: p as NdCode, theme: effectiveTheme.codeHighlightTheme!, defaultThemeName: defaultThemeName})
-                    } else {
-                        return await ListComp({list: p as NdList, lng: lng, i18nextProvider: i18nextProvider, listTheme: effectiveTheme.listTheme!})
-                        // return await <ListComp list={p as NdList} lng={lng} i18nextProvider={i18nextProvider} />
-                    }
-                }))}
+
+                {paragraphs}
 
                 {block.footer &&
                     <div>

@@ -24,13 +24,6 @@
     }
   },
   "type": "object",
-  "properties": {
-    "containerStyle": {
-      "$ref": "../../../node_modules/nodoku-core/schemas/skin-common-schema.json#/definitions/ThemeStyle"
-    },
-    "props": {
-      "$ref": "#/definitions/CarouselProps"
-    }
-  },
+  "$ref": "#/definitions/CarouselProps",
   "additionalProperties": false
 }

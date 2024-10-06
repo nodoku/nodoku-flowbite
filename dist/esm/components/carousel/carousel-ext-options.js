@@ -2,11 +2,14 @@ var CarouselExtOptions = /** @class */ (function () {
     function CarouselExtOptions() {
     }
     CarouselExtOptions.defaultOptions = {
-        containerStyle: {
-            base: "",
-            decoration: ""
-        },
-        props: {}
+        // containerStyle: {
+        //     base: "",
+        //     decoration: ""
+        // },
+        props: {
+            slide: false,
+            slideInterval: 10000
+        }
     };
     return CarouselExtOptions;
 }());
