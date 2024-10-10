@@ -1,12 +1,8 @@
 import React, {JSX} from "react";
 import {Carousel, CarouselProps} from "flowbite-react";
-import {mergeTheme, NdCode, NdContentBlock, NdList, NdSkinComponentProps, NdTranslatedText} from "nodoku-core";
+import {mergeTheme, NdContentBlock, NdSkinComponentProps} from "nodoku-core";
 import {CarouselTheme} from "./carousel-theme";
 import {NodokuComponents} from "nodoku-components";
-import {CarouselExtOptions} from "./carousel-ext-options";
-import path from "node:path";
-import HighlightedCode = NodokuComponents.HighlightedCode;
-import ListComp = NodokuComponents.ListComp;
 import Paragraphs = NodokuComponents.Paragraphs;
 import Backgrounds = NodokuComponents.Backgrounds;
 
@@ -44,13 +40,7 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
 
         const effectiveSlideTheme: CarouselTheme = mergeTheme(slideTheme, effectiveTheme);
 
-        const block: NdContentBlock = b; //content[slideIndex];
-
-        // var style: React.CSSProperties = block.bgImageUrl ? {
-        //     backgroundImage: `url(${await imageUrlProvider(t(block.bgImageUrl.key, block.bgImageUrl.ns))})`
-        // } : (block.images && block.images.length > 0 ? {
-        //     backgroundImage: `url(${await imageUrlProvider(t(block.images[0].url.key, block.images[0].url?.ns))})`
-        // }: {});
+        const block: NdContentBlock = b;
 
         const paragraphs = await Paragraphs({
             lng: lng,
@@ -76,8 +66,6 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
         return (
             <div key={`row-${rowIndex}-component-${componentIndex}-slide-${slideIndex}`}
                  className={`${effectiveSlideTheme.slideContainerStyle?.base} ${effectiveSlideTheme.slideContainerStyle?.decoration}`} >
-                {/*<div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgImageStyle?.base} ${effectiveSlideTheme.bgImageStyle?.decoration}`} style={style}></div>*/}
-                {/*<div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgColorStyle?.base} ${effectiveSlideTheme.bgColorStyle?.decoration}`}></div>*/}
 
                 {backgrounds}
 

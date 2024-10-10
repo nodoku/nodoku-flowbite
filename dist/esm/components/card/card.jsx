@@ -39,13 +39,13 @@ import { CardTheme } from "./card-theme";
 import { mergeTheme } from "nodoku-core";
 import { NodokuComponents } from "nodoku-components";
 var Paragraphs = NodokuComponents.Paragraphs;
+var Backgrounds = NodokuComponents.Backgrounds;
 export function CardImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var componentIndex, content, theme, themes, lng, i18nextProvider, imageUrlProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, style, _b, _c, absZero, _d;
-        var _e;
-        var _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y;
-        return __generator(this, function (_z) {
-            switch (_z.label) {
+        var componentIndex, content, theme, themes, lng, i18nextProvider, imageUrlProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, paragraphs, backgrounds, _b;
+        var _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
+        return __generator(this, function (_s) {
+            switch (_s.label) {
                 case 0:
                     componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, imageUrlProvider = props.imageUrlProvider, defaultThemeName = props.defaultThemeName;
                     effectiveTheme = mergeTheme(theme, CardTheme.defaultTheme);
@@ -56,58 +56,58 @@ export function CardImpl(props) {
                     _a = block.images[0], url = _a.url, alt = _a.alt;
                     return [4 /*yield*/, i18nextProvider(lng)];
                 case 1:
-                    t = (_z.sent()).t;
-                    if (!block.bgImageUrl) return [3 /*break*/, 3];
-                    _e = {};
-                    _c = "url(".concat;
-                    return [4 /*yield*/, imageUrlProvider(t(block.bgImageUrl.key, block.bgImageUrl.ns))];
+                    t = (_s.sent()).t;
+                    return [4 /*yield*/, Paragraphs({
+                            lng: lng,
+                            blockParagraphs: block.paragraphs,
+                            paragraphStyle: effectiveTheme.paragraphStyle,
+                            codeHighlightTheme: effectiveTheme.codeHighlightTheme,
+                            listTheme: effectiveTheme.listTheme,
+                            defaultThemeName: defaultThemeName,
+                            i18nextProvider: i18nextProvider
+                        })];
                 case 2:
-                    _b = (_e.backgroundImage = _c.apply("url(", [_z.sent(), ")"]),
-                        _e);
-                    return [3 /*break*/, 4];
+                    paragraphs = _s.sent();
+                    return [4 /*yield*/, Backgrounds({
+                            lng: lng,
+                            defaultThemeName: defaultThemeName,
+                            bgColorStyle: effectiveTheme.bgColorStyle,
+                            bgImageStyle: effectiveTheme.bgImageStyle,
+                            i18nextProvider: i18nextProvider,
+                            bgImageUrl: block.bgImageUrl,
+                            imageUrlProvider: imageUrlProvider
+                        })];
                 case 3:
-                    _b = {};
-                    _z.label = 4;
-                case 4:
-                    style = _b;
-                    absZero = "absolute top-0 left-0 right-0 bottom-0";
-                    _d = url;
-                    if (!_d) return [3 /*break*/, 6];
+                    backgrounds = _s.sent();
+                    _b = url;
+                    if (!_b) return [3 /*break*/, 5];
                     return [4 /*yield*/, imageUrlProvider(t(url.key, url.ns))];
-                case 5:
-                    _d = <a href="#" className={"inline-block"}>
-                    <img className={"".concat((_m = effectiveTheme.imageStyle) === null || _m === void 0 ? void 0 : _m.base, " ").concat((_o = effectiveTheme.imageStyle) === null || _o === void 0 ? void 0 : _o.decoration)} src={_z.sent()} alt={alt && t(alt.key, alt.ns)}/>
+                case 4:
+                    _b = <a href="#" className={"inline-block"}>
+                    <img className={"".concat((_e = effectiveTheme.imageStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.imageStyle) === null || _f === void 0 ? void 0 : _f.decoration)} src={_s.sent()} alt={alt && t(alt.key, alt.ns)}/>
                 </a>;
-                    _z.label = 6;
-                case 6: return [4 /*yield*/, Paragraphs({
-                        lng: lng,
-                        blockParagraphs: block.paragraphs,
-                        paragraphStyle: effectiveTheme.paragraphStyle,
-                        codeHighlightTheme: effectiveTheme.codeHighlightTheme,
-                        listTheme: effectiveTheme.listTheme,
-                        defaultThemeName: defaultThemeName,
-                        i18nextProvider: i18nextProvider
-                    })];
-                case 7: return [2 /*return*/, (<div className={"relative ".concat((_f = effectiveTheme.containerStyle) === null || _f === void 0 ? void 0 : _f.base, " ").concat((_g = effectiveTheme.containerStyle) === null || _g === void 0 ? void 0 : _g.decoration)}>
-            <div className={"".concat(absZero, " ").concat((_h = effectiveTheme.bgImageStyle) === null || _h === void 0 ? void 0 : _h.base, " ").concat((_j = effectiveTheme.bgImageStyle) === null || _j === void 0 ? void 0 : _j.decoration)} style={style}></div>
-            <div className={"".concat(absZero, " ").concat((_k = effectiveTheme.bgColorStyle) === null || _k === void 0 ? void 0 : _k.base, " ").concat((_l = effectiveTheme.bgColorStyle) === null || _l === void 0 ? void 0 : _l.decoration)}></div>
+                    _s.label = 5;
+                case 5: return [2 /*return*/, (<div className={"relative ".concat((_c = effectiveTheme.containerStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.containerStyle) === null || _d === void 0 ? void 0 : _d.decoration)}>
 
-            {_d}
-            <div className={"".concat((_p = effectiveTheme.innerContainerStyle) === null || _p === void 0 ? void 0 : _p.base, " ").concat((_q = effectiveTheme.innerContainerStyle) === null || _q === void 0 ? void 0 : _q.decoration)}>
+            {backgrounds}
+
+            {_b}
+            <div className={"".concat((_g = effectiveTheme.innerContainerStyle) === null || _g === void 0 ? void 0 : _g.base, " ").concat((_h = effectiveTheme.innerContainerStyle) === null || _h === void 0 ? void 0 : _h.decoration)}>
                 {block.title &&
                             <a href="#">
-                        <h3 className={"".concat((_r = effectiveTheme.titleStyle) === null || _r === void 0 ? void 0 : _r.base, " ").concat((_s = effectiveTheme.titleStyle) === null || _s === void 0 ? void 0 : _s.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title.key, block.title.ns) }}/>
+                        <h3 className={"".concat((_j = effectiveTheme.titleStyle) === null || _j === void 0 ? void 0 : _j.base, " ").concat((_k = effectiveTheme.titleStyle) === null || _k === void 0 ? void 0 : _k.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title.key, block.title.ns) }}/>
                     </a>}
                 {block.subTitle &&
-                            <h4 className={"".concat((_t = effectiveTheme.subTitleStyle) === null || _t === void 0 ? void 0 : _t.base, " ").concat((_u = effectiveTheme.subTitleStyle) === null || _u === void 0 ? void 0 : _u.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle.key, block.subTitle.ns) }}/>}
+                            <h4 className={"".concat((_l = effectiveTheme.subTitleStyle) === null || _l === void 0 ? void 0 : _l.base, " ").concat((_m = effectiveTheme.subTitleStyle) === null || _m === void 0 ? void 0 : _m.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle.key, block.subTitle.ns) }}/>}
 
-                {_z.sent()}
+                {paragraphs}
+
             </div>
 
             {block.footer &&
-                            <div className={"".concat((_v = effectiveTheme.footerContainerStyle) === null || _v === void 0 ? void 0 : _v.base, " ").concat((_w = effectiveTheme.footerContainerStyle) === null || _w === void 0 ? void 0 : _w.decoration)}>
+                            <div className={"".concat((_o = effectiveTheme.footerContainerStyle) === null || _o === void 0 ? void 0 : _o.base, " ").concat((_p = effectiveTheme.footerContainerStyle) === null || _p === void 0 ? void 0 : _p.decoration)}>
 
-                    <a href="#" className={"".concat((_x = effectiveTheme.footerButtonStyle) === null || _x === void 0 ? void 0 : _x.base, " ").concat((_y = effectiveTheme.footerButtonStyle) === null || _y === void 0 ? void 0 : _y.decoration)}>
+                    <a href="#" className={"".concat((_q = effectiveTheme.footerButtonStyle) === null || _q === void 0 ? void 0 : _q.base, " ").concat((_r = effectiveTheme.footerButtonStyle) === null || _r === void 0 ? void 0 : _r.decoration)}>
                         {t(block.footer.key, block.footer.ns)}
                         <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

@@ -1,11 +1,9 @@
 import React, {JSX} from "react";
 import {CardTheme} from "./card-theme";
-import {NdCode, NdContentBlock, NdList, NdSkinComponentProps, NdTranslatedText} from "nodoku-core";
-import {mergeTheme} from "nodoku-core";
+import {mergeTheme, NdContentBlock, NdSkinComponentProps} from "nodoku-core";
 import {NodokuComponents} from "nodoku-components";
-import HighlightedCode = NodokuComponents.HighlightedCode;
-import ListComp = NodokuComponents.ListComp;
 import Paragraphs = NodokuComponents.Paragraphs;
+import Backgrounds = NodokuComponents.Backgrounds;
 
 export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Promise<JSX.Element> {
 
@@ -35,17 +33,31 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
 
     const {t} = await i18nextProvider(lng);
 
-    var style: React.CSSProperties = block.bgImageUrl ? {
-        backgroundImage: `url(${await imageUrlProvider(t(block.bgImageUrl.key, block.bgImageUrl.ns))})`
-    } : {};
+    const paragraphs = await Paragraphs({
+        lng: lng,
+        blockParagraphs: block.paragraphs,
+        paragraphStyle: effectiveTheme.paragraphStyle,
+        codeHighlightTheme: effectiveTheme.codeHighlightTheme!,
+        listTheme: effectiveTheme.listTheme!,
+        defaultThemeName: defaultThemeName,
+        i18nextProvider: i18nextProvider
+    })
 
-    const absZero = "absolute top-0 left-0 right-0 bottom-0";
+    const backgrounds = await Backgrounds({
+        lng: lng,
+        defaultThemeName: defaultThemeName,
+        bgColorStyle: effectiveTheme.bgColorStyle,
+        bgImageStyle: effectiveTheme.bgImageStyle,
+        i18nextProvider: i18nextProvider,
+        bgImageUrl: block.bgImageUrl,
+        imageUrlProvider: imageUrlProvider
+    });
 
     return (
 
         <div className={`relative ${effectiveTheme.containerStyle?.base} ${effectiveTheme.containerStyle?.decoration}`}>
-            <div className={`${absZero} ${effectiveTheme.bgImageStyle?.base} ${effectiveTheme.bgImageStyle?.decoration}`} style={style}></div>
-            <div className={`${absZero} ${effectiveTheme.bgColorStyle?.base} ${effectiveTheme.bgColorStyle?.decoration}`}></div>
+
+            {backgrounds}
 
             {url &&
                 <a href="#" className={"inline-block"}>
@@ -65,15 +77,8 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
                         dangerouslySetInnerHTML={{__html: t(block.subTitle.key, block.subTitle.ns)}} />
                 }
 
-                {await Paragraphs({
-                    lng: lng,
-                    blockParagraphs: block.paragraphs,
-                    paragraphStyle: effectiveTheme.paragraphStyle,
-                    codeHighlightTheme: effectiveTheme.codeHighlightTheme!,
-                    listTheme: effectiveTheme.listTheme!,
-                    defaultThemeName: defaultThemeName,
-                    i18nextProvider: i18nextProvider
-                })}
+                {paragraphs}
+
             </div>
 
             {block.footer &&

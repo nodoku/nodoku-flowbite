@@ -87,8 +87,6 @@ export function CarouselImpl(props) {
                                     case 2:
                                         backgrounds = _l.sent();
                                         return [2 /*return*/, (<div key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"".concat((_a = effectiveSlideTheme.slideContainerStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveSlideTheme.slideContainerStyle) === null || _b === void 0 ? void 0 : _b.decoration)}>
-                {/*<div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgImageStyle?.base} ${effectiveSlideTheme.bgImageStyle?.decoration}`} style={style}></div>*/}
-                {/*<div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveSlideTheme.bgColorStyle?.base} ${effectiveSlideTheme.bgColorStyle?.decoration}`}></div>*/}
 
                 {backgrounds}
 

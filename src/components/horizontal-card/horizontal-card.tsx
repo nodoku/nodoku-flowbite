@@ -1,20 +1,9 @@
 import React, {JSX} from "react";
 import {HorizontalCardTheme} from "./horizontal-card-theme";
-import {
-    I18nextProvider,
-    NdCode,
-    NdContentBlock,
-    NdDefaultThemeName,
-    NdList,
-    NdSkinComponentProps,
-    NdTranslatedText,
-    ThemeStyle
-} from "nodoku-core";
-import {mergeTheme} from "nodoku-core";
+import {mergeTheme, NdContentBlock, NdSkinComponentProps} from "nodoku-core";
 import {NodokuComponents} from "nodoku-components";
-import HighlightedCode = NodokuComponents.HighlightedCode;
-import ListComp = NodokuComponents.ListComp;
 import Paragraphs = NodokuComponents.Paragraphs;
+import Backgrounds = NodokuComponents.Backgrounds;
 
 export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalCardTheme, void>): Promise<JSX.Element> {
 
@@ -56,27 +45,31 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
 
     const imgUrl = await imageUrlProvider(t(url.key, url.ns))
 
-    // const paragraphs: JSX.Element[] = await Promise.all(block.paragraphs.map(async (p: NdTranslatedText | NdList | NdCode, ip: number): Promise<JSX.Element> => {
-    //     if (p instanceof NdTranslatedText) {
-    //         return (
-    //             <p key={ip}
-    //                className={`${effectiveTheme.paragraphStyle?.base} ${effectiveTheme.paragraphStyle?.decoration}`}
-    //                dangerouslySetInnerHTML={{__html: /*t(p.key, p.ns)*/"kaka lala"}} />
-    //         )
-    //     } else if (p instanceof NdCode) {
-    //         return await HighlightedCode({code: p as NdCode, theme: effectiveTheme.codeHighlightTheme!, defaultThemeName: defaultThemeName})
-    //     } else {
-    //         return await ListComp({list: p as NdList, lng: lng, i18nextProvider: i18nextProvider, listTheme: effectiveTheme.listTheme!})
-    //     }
-    // }));
+    const paragraphs = await Paragraphs({
+        lng: lng,
+        blockParagraphs: block.paragraphs,
+        paragraphStyle: effectiveTheme.paragraphStyle,
+        codeHighlightTheme: effectiveTheme.codeHighlightTheme!,
+        listTheme: effectiveTheme.listTheme!,
+        defaultThemeName: defaultThemeName,
+        i18nextProvider: i18nextProvider
+    })
 
+    const backgrounds = await Backgrounds({
+        lng: lng,
+        defaultThemeName: defaultThemeName,
+        bgColorStyle: effectiveTheme.bgColorStyle,
+        bgImageStyle: effectiveTheme.bgImageStyle,
+        i18nextProvider: i18nextProvider,
+        bgImageUrl: block.bgImageUrl,
+        imageUrlProvider: imageUrlProvider
+    });
 
     return (
 
         <div className={`relative ${effectiveTheme.containerStyle?.base} ${effectiveTheme.containerStyle?.decoration}`}>
-            <div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveTheme.bgImageStyle?.base} ${effectiveTheme.bgImageStyle?.decoration}`} style={bgStyle}></div>
-            <div className={`absolute top-0 left-0 right-0 bottom-0 ${effectiveTheme.bgColorStyle?.base} ${effectiveTheme.bgColorStyle?.decoration}`}></div>
 
+            {backgrounds}
 
             <img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}
                  src={imgUrl} alt={alt && t(alt.key, alt.ns)}></img>
@@ -92,15 +85,7 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
                         dangerouslySetInnerHTML={{__html: t(block.subTitle.key, block.subTitle.ns)}} />
                 }
 
-                {await Paragraphs({
-                    lng: lng,
-                    blockParagraphs: block.paragraphs,
-                    paragraphStyle: effectiveTheme.paragraphStyle,
-                    codeHighlightTheme: effectiveTheme.codeHighlightTheme!,
-                    listTheme: effectiveTheme.listTheme!,
-                    defaultThemeName: defaultThemeName,
-                    i18nextProvider: i18nextProvider
-                })}
+                {paragraphs}
 
             </div>
 

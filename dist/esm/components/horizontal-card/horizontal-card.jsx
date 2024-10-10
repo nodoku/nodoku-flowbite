@@ -39,13 +39,14 @@ import { HorizontalCardTheme } from "./horizontal-card-theme";
 import { mergeTheme } from "nodoku-core";
 import { NodokuComponents } from "nodoku-components";
 var Paragraphs = NodokuComponents.Paragraphs;
+var Backgrounds = NodokuComponents.Backgrounds;
 export function HorizontalCardImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var componentIndex, content, theme, themes, lng, i18nextProvider, imageUrlProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, bgStyle, _b, _c, absZero, _d, _e, _f, _g, _h, imgUrl;
+        var componentIndex, content, theme, themes, lng, i18nextProvider, imageUrlProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, bgStyle, _b, _c, absZero, _d, _e, _f, _g, _h, imgUrl, paragraphs, backgrounds;
         var _j;
-        var _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2;
-        return __generator(this, function (_3) {
-            switch (_3.label) {
+        var _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y;
+        return __generator(this, function (_z) {
+            switch (_z.label) {
                 case 0:
                     componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, imageUrlProvider = props.imageUrlProvider, defaultThemeName = props.defaultThemeName;
                     effectiveTheme = mergeTheme(theme, HorizontalCardTheme.defaultTheme);
@@ -56,18 +57,18 @@ export function HorizontalCardImpl(props) {
                     _a = block.images[0], url = _a.url, alt = _a.alt;
                     return [4 /*yield*/, i18nextProvider(lng)];
                 case 1:
-                    t = (_3.sent()).t;
+                    t = (_z.sent()).t;
                     if (!block.bgImageUrl) return [3 /*break*/, 3];
                     _j = {};
                     _c = "url(".concat;
                     return [4 /*yield*/, imageUrlProvider(t(block.bgImageUrl.key, block.bgImageUrl.ns))];
                 case 2:
-                    _b = (_j.backgroundImage = _c.apply("url(", [_3.sent(), ")"]),
+                    _b = (_j.backgroundImage = _c.apply("url(", [_z.sent(), ")"]),
                         _j);
                     return [3 /*break*/, 4];
                 case 3:
                     _b = {};
-                    _3.label = 4;
+                    _z.label = 4;
                 case 4:
                     bgStyle = _b;
                     absZero = "absolute top-0 left-0 right-0 bottom-0";
@@ -76,24 +77,10 @@ export function HorizontalCardImpl(props) {
                     _h = (_g = JSON).stringify;
                     return [4 /*yield*/, imageUrlProvider(t(url.key, url.ns))];
                 case 5:
-                    _e.apply(_d, _f.concat([_h.apply(_g, [_3.sent()])]));
-                    return [4 /*yield*/, imageUrlProvider(t(url.key, url.ns))
-                        // const paragraphs: JSX.Element[] = await Promise.all(block.paragraphs.map(async (p: NdTranslatedText | NdList | NdCode, ip: number): Promise<JSX.Element> => {
-                        //     if (p instanceof NdTranslatedText) {
-                        //         return (
-                        //             <p key={ip}
-                        //                className={`${effectiveTheme.paragraphStyle?.base} ${effectiveTheme.paragraphStyle?.decoration}`}
-                        //                dangerouslySetInnerHTML={{__html: /*t(p.key, p.ns)*/"kaka lala"}} />
-                        //         )
-                        //     } else if (p instanceof NdCode) {
-                        //         return await HighlightedCode({code: p as NdCode, theme: effectiveTheme.codeHighlightTheme!, defaultThemeName: defaultThemeName})
-                        //     } else {
-                        //         return await ListComp({list: p as NdList, lng: lng, i18nextProvider: i18nextProvider, listTheme: effectiveTheme.listTheme!})
-                        //     }
-                        // }));
-                    ];
+                    _e.apply(_d, _f.concat([_h.apply(_g, [_z.sent()])]));
+                    return [4 /*yield*/, imageUrlProvider(t(url.key, url.ns))];
                 case 6:
-                    imgUrl = _3.sent();
+                    imgUrl = _z.sent();
                     return [4 /*yield*/, Paragraphs({
                             lng: lng,
                             blockParagraphs: block.paragraphs,
@@ -103,42 +90,40 @@ export function HorizontalCardImpl(props) {
                             defaultThemeName: defaultThemeName,
                             i18nextProvider: i18nextProvider
                         })];
-                case 7: 
-                // const paragraphs: JSX.Element[] = await Promise.all(block.paragraphs.map(async (p: NdTranslatedText | NdList | NdCode, ip: number): Promise<JSX.Element> => {
-                //     if (p instanceof NdTranslatedText) {
-                //         return (
-                //             <p key={ip}
-                //                className={`${effectiveTheme.paragraphStyle?.base} ${effectiveTheme.paragraphStyle?.decoration}`}
-                //                dangerouslySetInnerHTML={{__html: /*t(p.key, p.ns)*/"kaka lala"}} />
-                //         )
-                //     } else if (p instanceof NdCode) {
-                //         return await HighlightedCode({code: p as NdCode, theme: effectiveTheme.codeHighlightTheme!, defaultThemeName: defaultThemeName})
-                //     } else {
-                //         return await ListComp({list: p as NdList, lng: lng, i18nextProvider: i18nextProvider, listTheme: effectiveTheme.listTheme!})
-                //     }
-                // }));
-                return [2 /*return*/, (<div className={"relative ".concat((_k = effectiveTheme.containerStyle) === null || _k === void 0 ? void 0 : _k.base, " ").concat((_l = effectiveTheme.containerStyle) === null || _l === void 0 ? void 0 : _l.decoration)}>
-            <div className={"absolute top-0 left-0 right-0 bottom-0 ".concat((_m = effectiveTheme.bgImageStyle) === null || _m === void 0 ? void 0 : _m.base, " ").concat((_o = effectiveTheme.bgImageStyle) === null || _o === void 0 ? void 0 : _o.decoration)} style={bgStyle}></div>
-            <div className={"absolute top-0 left-0 right-0 bottom-0 ".concat((_p = effectiveTheme.bgColorStyle) === null || _p === void 0 ? void 0 : _p.base, " ").concat((_q = effectiveTheme.bgColorStyle) === null || _q === void 0 ? void 0 : _q.decoration)}></div>
+                case 7:
+                    paragraphs = _z.sent();
+                    return [4 /*yield*/, Backgrounds({
+                            lng: lng,
+                            defaultThemeName: defaultThemeName,
+                            bgColorStyle: effectiveTheme.bgColorStyle,
+                            bgImageStyle: effectiveTheme.bgImageStyle,
+                            i18nextProvider: i18nextProvider,
+                            bgImageUrl: block.bgImageUrl,
+                            imageUrlProvider: imageUrlProvider
+                        })];
+                case 8:
+                    backgrounds = _z.sent();
+                    return [2 /*return*/, (<div className={"relative ".concat((_k = effectiveTheme.containerStyle) === null || _k === void 0 ? void 0 : _k.base, " ").concat((_l = effectiveTheme.containerStyle) === null || _l === void 0 ? void 0 : _l.decoration)}>
 
+            {backgrounds}
 
-            <img className={"".concat((_r = effectiveTheme.imageStyle) === null || _r === void 0 ? void 0 : _r.base, " ").concat((_s = effectiveTheme.imageStyle) === null || _s === void 0 ? void 0 : _s.decoration)} src={imgUrl} alt={alt && t(alt.key, alt.ns)}></img>
+            <img className={"".concat((_m = effectiveTheme.imageStyle) === null || _m === void 0 ? void 0 : _m.base, " ").concat((_o = effectiveTheme.imageStyle) === null || _o === void 0 ? void 0 : _o.decoration)} src={imgUrl} alt={alt && t(alt.key, alt.ns)}></img>
 
-            <div className={"".concat((_t = effectiveTheme.innerContainerStyle) === null || _t === void 0 ? void 0 : _t.base, " ").concat((_u = effectiveTheme.innerContainerStyle) === null || _u === void 0 ? void 0 : _u.decoration)}>
+            <div className={"".concat((_p = effectiveTheme.innerContainerStyle) === null || _p === void 0 ? void 0 : _p.base, " ").concat((_q = effectiveTheme.innerContainerStyle) === null || _q === void 0 ? void 0 : _q.decoration)}>
 
                 {block.title &&
-                            <h5 className={"".concat((_v = effectiveTheme.titleStyle) === null || _v === void 0 ? void 0 : _v.base, " ").concat((_w = effectiveTheme.titleStyle) === null || _w === void 0 ? void 0 : _w.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title.key, block.title.ns) }}/>}
+                                <h5 className={"".concat((_r = effectiveTheme.titleStyle) === null || _r === void 0 ? void 0 : _r.base, " ").concat((_s = effectiveTheme.titleStyle) === null || _s === void 0 ? void 0 : _s.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title.key, block.title.ns) }}/>}
                 {block.subTitle &&
-                            <h6 className={"".concat((_x = effectiveTheme.subTitleStyle) === null || _x === void 0 ? void 0 : _x.base, " ").concat((_y = effectiveTheme.subTitleStyle) === null || _y === void 0 ? void 0 : _y.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle.key, block.subTitle.ns) }}/>}
+                                <h6 className={"".concat((_t = effectiveTheme.subTitleStyle) === null || _t === void 0 ? void 0 : _t.base, " ").concat((_u = effectiveTheme.subTitleStyle) === null || _u === void 0 ? void 0 : _u.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle.key, block.subTitle.ns) }}/>}
 
-                {_3.sent()}
+                {paragraphs}
 
             </div>
 
             {block.footer &&
-                            <div className={"".concat((_z = effectiveTheme.footerContainerStyle) === null || _z === void 0 ? void 0 : _z.base, " ").concat((_0 = effectiveTheme.footerContainerStyle) === null || _0 === void 0 ? void 0 : _0.decoration)}>
+                                <div className={"".concat((_v = effectiveTheme.footerContainerStyle) === null || _v === void 0 ? void 0 : _v.base, " ").concat((_w = effectiveTheme.footerContainerStyle) === null || _w === void 0 ? void 0 : _w.decoration)}>
 
-                    <a href="#" className={"".concat((_1 = effectiveTheme.footerButtonStyle) === null || _1 === void 0 ? void 0 : _1.base, " ").concat((_2 = effectiveTheme.footerButtonStyle) === null || _2 === void 0 ? void 0 : _2.decoration)}>
+                    <a href="#" className={"".concat((_x = effectiveTheme.footerButtonStyle) === null || _x === void 0 ? void 0 : _x.base, " ").concat((_y = effectiveTheme.footerButtonStyle) === null || _y === void 0 ? void 0 : _y.decoration)}>
                         {t(block.footer.key, block.footer.ns)}
                         <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
