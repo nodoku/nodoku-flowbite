@@ -91,9 +91,9 @@ export function CarouselImpl(props) {
                 {backgrounds}
 
                 {block.title &&
-                                                    <div className={"".concat((_c = effectiveTheme.titleStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.titleStyle) === null || _d === void 0 ? void 0 : _d.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title.key, block.title.ns) }}/>}
+                                                    <div className={"".concat((_c = effectiveTheme.titleStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.titleStyle) === null || _d === void 0 ? void 0 : _d.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>}
                 {block.subTitle &&
-                                                    <div className={"".concat((_e = effectiveTheme.subTitleStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.subTitleStyle) === null || _f === void 0 ? void 0 : _f.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle.key, block.subTitle.ns) }}/>}
+                                                    <div className={"".concat((_e = effectiveTheme.subTitleStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.subTitleStyle) === null || _f === void 0 ? void 0 : _f.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
 
                 {paragraphs}
 
@@ -101,7 +101,7 @@ export function CarouselImpl(props) {
                 {block.footer &&
                                                     <div className={"".concat((_g = effectiveSlideTheme.footerContainerStyle) === null || _g === void 0 ? void 0 : _g.base, " ").concat((_h = effectiveSlideTheme.footerContainerStyle) === null || _h === void 0 ? void 0 : _h.decoration)}>
                         <a href="#" className={"".concat((_j = effectiveSlideTheme.footerButtonStyle) === null || _j === void 0 ? void 0 : _j.base, " ").concat((_k = effectiveSlideTheme.footerButtonStyle) === null || _k === void 0 ? void 0 : _k.decoration)}>
-                            {t(block.footer.key, block.footer.ns)}
+                            {t(block.footer)}
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                             </svg>

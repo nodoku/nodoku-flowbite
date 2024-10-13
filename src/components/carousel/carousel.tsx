@@ -71,11 +71,11 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
 
                 {block.title &&
                     <div className={`${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}
-                         dangerouslySetInnerHTML={{__html: t(block.title.key, block.title.ns)}} />
+                         dangerouslySetInnerHTML={{__html: t(block.title)}} />
                 }
                 {block.subTitle &&
                     <div className={`${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}
-                         dangerouslySetInnerHTML={{__html: t(block.subTitle.key, block.subTitle.ns)}} />
+                         dangerouslySetInnerHTML={{__html: t(block.subTitle)}} />
                 }
 
                 {paragraphs}
@@ -84,7 +84,7 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
                 {block.footer &&
                     <div className={`${effectiveSlideTheme.footerContainerStyle?.base} ${effectiveSlideTheme.footerContainerStyle?.decoration}`}>
                         <a href="#" className={`${effectiveSlideTheme.footerButtonStyle?.base} ${effectiveSlideTheme.footerButtonStyle?.decoration}`}>
-                            {t(block.footer.key, block.footer.ns)}
+                            {t(block.footer)}
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

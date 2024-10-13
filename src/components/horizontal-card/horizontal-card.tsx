@@ -19,9 +19,6 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
         defaultThemeName
     } = props;
 
-    // const imageUrlProvider = async (url: string) => Promise.resolve(url + "/adsfads")
-    // const imageUrlProvider = (url: string) => url + "/adsfads"
-
     // console.log("content card ", JSON.stringify(content));
     // console.log("visual card ", JSON.stringify(theme));
 
@@ -35,15 +32,9 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
 
     const {t} = await i18nextProvider(lng);
 
-    var bgStyle: React.CSSProperties = block.bgImageUrl ? {
-        backgroundImage: `url(${await imageUrlProvider(t(block.bgImageUrl.key, block.bgImageUrl.ns))})`
-    } : {};
+    // console.log("in horizontal card: ", JSON.stringify(await imageUrlProvider(t(url.key, url.ns))))
 
-    const absZero = "absolute top-0 left-0 right-0 bottom-0";
-
-    console.log("in horizontal card: ", JSON.stringify(await imageUrlProvider(t(url.key, url.ns))))
-
-    const imgUrl = await imageUrlProvider(t(url.key, url.ns))
+    const imgUrl = await imageUrlProvider(t(url))
 
     const paragraphs = await Paragraphs({
         lng: lng,
@@ -72,17 +63,17 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
             {backgrounds}
 
             <img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}
-                 src={imgUrl} alt={alt && t(alt.key, alt.ns)}></img>
+                 src={imgUrl} alt={alt && t(alt)}></img>
 
             <div className={`${effectiveTheme.innerContainerStyle?.base} ${effectiveTheme.innerContainerStyle?.decoration}`}>
 
                 {block.title &&
                     <h5 className={`${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}
-                        dangerouslySetInnerHTML={{__html: t(block.title.key, block.title.ns)}} />
+                        dangerouslySetInnerHTML={{__html: t(block.title)}} />
                 }
                 {block.subTitle &&
                     <h6 className={`${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}
-                        dangerouslySetInnerHTML={{__html: t(block.subTitle.key, block.subTitle.ns)}} />
+                        dangerouslySetInnerHTML={{__html: t(block.subTitle)}} />
                 }
 
                 {paragraphs}
@@ -94,7 +85,7 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
 
                     <a href="#"
                        className={`${effectiveTheme.footerButtonStyle?.base} ${effectiveTheme.footerButtonStyle?.decoration}`}>
-                        {t(block.footer.key, block.footer.ns)}
+                        {t(block.footer)}
                         <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
