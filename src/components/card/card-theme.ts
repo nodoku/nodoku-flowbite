@@ -1,5 +1,5 @@
 import {ThemeStyle} from "nodoku-core";
-import {NodokuComponents} from "../../../../nodoku-components";
+import {NodokuComponents} from "nodoku-components";
 import HighlightedCodeTheme = NodokuComponents.HighlightedCodeTheme;
 import ListCompTheme = NodokuComponents.ListCompTheme;
 

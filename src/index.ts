@@ -8,16 +8,7 @@ import {HorizontalCardImpl} from "./components/horizontal-card/horizontal-card";
 import {HorizontalCardTheme} from "./components/horizontal-card/horizontal-card-theme";
 import {JumbotronTheme} from "./components/jumbotron/jumbotron-theme";
 import {JumbotronImpl} from "./components/jumbotron/jumbotron";
-import {CarouselExtOptions} from "./components/carousel/carousel-ext-options";
-import {register} from "node:module";
 import {CarouselProps} from "flowbite-react";
-
-console.log("import.meta.url", import.meta.url)
-register('./yaml-load-hooks.js', import.meta.url, {
-    parentURL: import.meta.url,
-    data: { name: "yaml" },
-    transferList: [],
-});
 
 export namespace NodokuFlowbite {
 
