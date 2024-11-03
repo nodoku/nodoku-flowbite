@@ -8,6 +8,10 @@
   * [Integration in Nodoku skin Yaml file](#integration-in-nodoku-skin-yaml-file)
 * [Component's default theme](#components-default-theme)
 * [Nodoku skin component customization](#nodoku-skin-component-customization)
+  * [Customization of sequential components](#customization-of-sequential-components)
+* [Applying Flowbite theme](#applying-flowbite-theme)
+* [The nodoku-fowbite components](#the-nodoku-fowbite-components)
+  * [flowbite/card](#flowbitecard)
 <!-- TOC -->
 
 **_nodoku-flowbite_** is a set of visual components to be used with the [Nodoku static site generator](https://github.com/nodoku/nodoku-core).
@@ -307,10 +311,144 @@ rows:
 The sequential customization can be applied on all the 3 levels defined above (where the single theme customization can be applied): _global level_, _component level_ and _individual component level_.
 
 
-# Applying Flowbite theme
+# Applying the Flowbite theme
 
+The flowbite-react library, on top of which the nodoku-flowbite is built, allows the user to provide their own theme, which is a convenient way to customize the appearance of the flowbite-react components.
 
+The flowbite-react theme can also be applied on the Nodoku RenderingPage component, thus customizing all the flowbite-react components, that would be used during the rendering of Nodoku.
 
-# The nodoku-fowbite components
+Consider the following code:
+
+```tsx
+  import {Flowbite, getTheme} from "flowbite-react";
+  ...
+  const customCarousel = {...getTheme()};
+  
+  customCarousel.carousel.scrollContainer.base = "snap-mandatory flex h-full overflow-y-hidden overflow-x-scroll scroll-smooth rounded-none";
+  
+  ...
+  
+  export default async function Home({params}: { params: { lng: string } }): Promise<JSX.Element> {
+    ...  
+    return (
+      <Flowbite theme={{theme: customCarousel}}>
+        <RenderingPage .../>
+      </Flowbite>
+    );
+  }
+
+```
+
+In this example we are customizing the [flowbite-react](https://github.com/themesberg/flowbite-react) component [_Carousel_](https://flowbite-react.com/docs/components/carousel), on top of which the _nodoku-flowbite's_ component **_flowbite/carousel_** is built.
+
+The original (default) theme for the Carousel component has the following predefined value:
+
+```js
+const carouselTheme = createTheme({
+  ...
+  scrollContainer: {
+    base: "flex h-full snap-mandatory overflow-y-hidden overflow-x-scroll scroll-smooth rounded-lg",
+    ...
+  }
+});
+
+```
+
+In order to remove the class rounded-lg, and replace it the class rounded-none, to remove the rounded corners of the Carousel component, one would use the theme customization shown above. 
+
+# The _nodoku-flowbite_ components
+
+The package nodoku-flowbite contains currently the following components.
 
 ## flowbite/card
+
+A Nodoku wrapper around the [Flowbite card](https://flowbite.com/docs/components/card/) component:
+
+<figure>
+  <img
+    src="./docs/nodoku-flowbite-card-appearance.png"
+    alt="Nodoku flowbite/card component"
+    title="Nodoku flowbite/card component"
+  />
+  <figcaption>
+    Nodoku <b>flowbite/card</b> component
+  </figcaption>
+</figure>
+
+## flowbite/horizontal-card
+
+A Nodoku wrapper around the [Flowbite horizontal card](https://flowbite.com/docs/components/card/#horizontal-card) component:
+
+<figure>
+  <img
+    src="./docs/nodoku-flowbite-horizontal-card-appearance.png"
+    alt="Nodoku flowbite/horizontal-card component"
+    title="Nodoku flowbite/horizontal-card component"
+  />
+  <figcaption>
+    Nodoku <b>flowbite/horizontal-card</b> component
+  </figcaption>
+</figure>
+
+## flowbite/jumbotron
+
+A Nodoku wrapper around the [Flowbite jumbotron](https://flowbite.com/docs/components/jumbotron/) component:
+
+<figure>
+  <img
+    src="./docs/nodoku-flowbite-jumbotron-appearance.png"
+    alt="Nodoku flowbite/jumbotron component"
+    title="Nodoku flowbite/jumbotron component"
+  />
+  <figcaption>
+    Nodoku <b>flowbite/jumbotron</b> component
+  </figcaption>
+</figure>
+
+
+## flowbite/carousel
+
+A Nodoku wrapper around the [Flowbite carousel](https://flowbite-react.com/docs/components/carousel) component:
+
+<figure>
+  <img
+    src="./docs/nodoku-flowbite-carousel-appearance.png"
+    alt="Nodoku flowbite/carousel component"
+    title="Nodoku flowbite/carousel component"
+  />
+  <figcaption>
+    Nodoku <b>flowbite/carousel</b> component
+  </figcaption>
+</figure>
+
+The Nodoku skin file can contain also the options for the nodoku/carousel components, which are the options of the underlying flowbite-react Carousel component.
+
+For example, to customize the scroll time use the following piece of yaml code in the skin file:
+
+```yaml
+  - row:
+      components:
+        - flowbite/carousel:
+            options: 
+              slideInterval: 5000
+            selector:
+              attributes:
+                sectionName: nodoku-way
+```
+
+The list of available options can be found in the JSON schema file.
+
+Alternatively, one might want to use the autocompletion option (once the schema file is correctly applied), which should look similar to this:
+
+<figure>
+  <img
+    src="./docs/nodoku-flowbite-carousel-optionsl-autocompletion.png"
+    alt="Nodoku flowbite/carousel options"
+    title="Nodoku flowbite/carousel options"
+  />
+  <figcaption>
+    Nodoku <b>flowbite/carousel</b> options autocompletion
+  </figcaption>
+</figure>
+
+
