@@ -9,9 +9,12 @@
 * [Component's default theme](#components-default-theme)
 * [Nodoku skin component customization](#nodoku-skin-component-customization)
   * [Customization of sequential components](#customization-of-sequential-components)
-* [Applying Flowbite theme](#applying-flowbite-theme)
-* [The nodoku-fowbite components](#the-nodoku-fowbite-components)
+* [Applying the Flowbite theme](#applying-the-flowbite-theme)
+* [The _nodoku-flowbite_ components](#the-_nodoku-flowbite_-components)
   * [flowbite/card](#flowbitecard)
+  * [flowbite/horizontal-card](#flowbitehorizontal-card)
+  * [flowbite/jumbotron](#flowbitejumbotron)
+  * [flowbite/carousel](#flowbitecarousel)
 <!-- TOC -->
 
 **_nodoku-flowbite_** is a set of visual components to be used with the [Nodoku static site generator](https://github.com/nodoku/nodoku-core).
