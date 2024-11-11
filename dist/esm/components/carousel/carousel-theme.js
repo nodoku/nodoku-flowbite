@@ -82,3 +82,4 @@ export { CarouselTheme };
 //     }
 // }
 export default CarouselTheme.defaultTheme;
+//# sourceMappingURL=carousel-theme.js.map

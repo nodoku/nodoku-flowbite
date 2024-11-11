@@ -21,8 +21,8 @@
     "@types/node": "^20.12.11",
     "@types/react": "^18.3.2",
     "@types/react-dom": "18.3.0",
-    "nodoku-core": "file:../nodoku-core",
-    "nodoku-components": "file:../nodoku-components",
+    "nodoku-core": "file:../nodoku-core/dist",
+    "nodoku-components": "file:../nodoku-components/dist",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.9.0",
     "react": ">=18",
@@ -43,7 +43,7 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "dist": "shx rm -rf dist && tsc && shx cp -r schemas ./dist && shx cp nodoku.manifest.json dist",
+    "dist": "shx rm -rf dist && tsc && shx cp -r schemas ./dist && shx cp nodoku.manifest.json dist && shx cp package-dist.json ./dist/package.json",
     "gen-default-theme": "nodoku-gen-component-default-theme"
   }
 }

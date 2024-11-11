@@ -38,13 +38,6 @@ import { CardImpl } from "./components/card/card";
 import { CarouselImpl } from "./components/carousel/carousel";
 import { HorizontalCardImpl } from "./components/horizontal-card/horizontal-card";
 import { JumbotronImpl } from "./components/jumbotron/jumbotron";
-import { register } from "node:module";
-console.log("import.meta.url", import.meta.url);
-register('./yaml-load-hooks.js', import.meta.url, {
-    parentURL: import.meta.url,
-    data: { name: "yaml" },
-    transferList: [],
-});
 export var NodokuFlowbite;
 (function (NodokuFlowbite) {
     function Card(props) {
@@ -80,3 +73,4 @@ export var NodokuFlowbite;
     }
     NodokuFlowbite.Jumbotron = Jumbotron;
 })(NodokuFlowbite || (NodokuFlowbite = {}));
+//# sourceMappingURL=index.js.map

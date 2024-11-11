@@ -14,3 +14,4 @@ var CarouselExtOptions = /** @class */ (function () {
     return CarouselExtOptions;
 }());
 export { CarouselExtOptions };
+//# sourceMappingURL=carousel-ext-options.js.map
