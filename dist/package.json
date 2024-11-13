@@ -1,6 +1,6 @@
 {
   "name": "nodoku-flowbite",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "a collection of visual components, based on React and Flowbite, for Nodoku static site generator",
   "exports": {
     ".": {
@@ -11,9 +11,6 @@
   },
   "module": "./esm/index.js",
   "types": "./types/index.d.ts",
-  "files": [
-    "./"
-  ],
   "type": "module",
   "dependencies": {
   },
@@ -21,8 +18,8 @@
     "@types/node": "^20.12.11",
     "@types/react": "^18.3.2",
     "@types/react-dom": "18.3.0",
-    "nodoku-core": "file:../../nodoku-core/dist",
-    "nodoku-components": "file:../../nodoku-components/dist",
+    "nodoku-core": "0.1.5",
+    "nodoku-components": "0.1.4",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.9.0",
     "react": ">=18",
