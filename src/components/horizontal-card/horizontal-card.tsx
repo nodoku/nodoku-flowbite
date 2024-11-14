@@ -85,7 +85,7 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
 
                     <a href="#"
                        className={`${effectiveTheme.footerButtonStyle?.base} ${effectiveTheme.footerButtonStyle?.decoration}`}>
-                        {t(block.footer)}
+                        <span dangerouslySetInnerHTML={{__html: t(block.footer)}}/>
                         <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

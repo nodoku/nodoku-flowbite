@@ -103,7 +103,7 @@ export function HorizontalCardImpl(props) {
                                 <div className={"".concat((_m = effectiveTheme.footerContainerStyle) === null || _m === void 0 ? void 0 : _m.base, " ").concat((_o = effectiveTheme.footerContainerStyle) === null || _o === void 0 ? void 0 : _o.decoration)}>
 
                     <a href="#" className={"".concat((_p = effectiveTheme.footerButtonStyle) === null || _p === void 0 ? void 0 : _p.base, " ").concat((_q = effectiveTheme.footerButtonStyle) === null || _q === void 0 ? void 0 : _q.decoration)}>
-                        {t(block.footer)}
+                        <span dangerouslySetInnerHTML={{ __html: t(block.footer) }}/>
                         <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>

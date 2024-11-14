@@ -1,6 +1,6 @@
 {
   "name": "nodoku-flowbite",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "a collection of visual components, based on React and Flowbite, for Nodoku static site generator",
   "exports": {
     ".": {

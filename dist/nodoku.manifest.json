@@ -2,27 +2,27 @@
   "namespace": "NodokuFlowbite",
   "components": {
     "flowbite/card": {
-      "schemaFile": "./dist/schemas/components/card/visual-schema.json",
-      "defaultThemeFile": "./dist/schemas/components/card/default-theme.yml",
+      "schemaFile": "./schemas/components/card/visual-schema.json",
+      "defaultThemeFile": "./schemas/components/card/default-theme.yml",
       "implementation": "Card",
       "numBlocks": 1
     },
     "flowbite/horizontal-card": {
-      "schemaFile": "./dist/schemas/components/horizontal-card/visual-schema.json",
-      "defaultThemeFile": "./dist/schemas/components/horizontal-card/default-theme.yml",
+      "schemaFile": "./schemas/components/horizontal-card/visual-schema.json",
+      "defaultThemeFile": "./schemas/components/horizontal-card/default-theme.yml",
       "implementation": "HorizontalCard",
       "numBlocks": 1
     },
     "flowbite/carousel": {
-      "schemaFile": "./dist/schemas/components/carousel/visual-schema.json",
-      "optionsFile": "./dist/schemas/components/carousel/options-schema.json",
-      "defaultThemeFile": "./dist/schemas/components/carousel/default-theme.yml",
+      "schemaFile": "./schemas/components/carousel/visual-schema.json",
+      "optionsFile": "./schemas/components/carousel/options-schema.json",
+      "defaultThemeFile": "./schemas/components/carousel/default-theme.yml",
       "implementation": "Carousel",
       "numBlocks": "unlimited"
     },
     "flowbite/jumbotron": {
-      "schemaFile": "./dist/schemas/components/jumbotron/visual-schema.json",
-      "defaultThemeFile": "./dist/schemas/components/jumbotron/default-theme.yml",
+      "schemaFile": "./schemas/components/jumbotron/visual-schema.json",
+      "defaultThemeFile": "./schemas/components/jumbotron/default-theme.yml",
       "implementation": "Jumbotron",
       "numBlocks": 1
     }
