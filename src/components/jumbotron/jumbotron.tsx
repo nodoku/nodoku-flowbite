@@ -15,7 +15,7 @@ export async function JumbotronImpl(props: NdSkinComponentProps<JumbotronTheme, 
         themes,
         lng,
         i18nextProvider,
-        imageUrlProvider,
+        // imageProvider,
         defaultThemeName
     } = props;
 
@@ -47,8 +47,8 @@ export async function JumbotronImpl(props: NdSkinComponentProps<JumbotronTheme, 
         bgColorStyle: effectiveTheme.bgColorStyle,
         bgImageStyle: effectiveTheme.bgImageStyle,
         i18nextProvider: i18nextProvider,
-        bgImageUrl: block.bgImageUrl,
-        imageUrlProvider: imageUrlProvider
+        // bgImageUrl: block.bgImageUrl,
+        // imageUrlProvider: imageUrlProvider
     });
 
     return (

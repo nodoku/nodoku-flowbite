@@ -15,7 +15,7 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
         themes,
         lng,
         i18nextProvider,
-        imageUrlProvider,
+        imageProvider,
         defaultThemeName
     } = props;
 
@@ -34,7 +34,7 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
 
     // console.log("in horizontal card: ", JSON.stringify(await imageUrlProvider(t(url.key, url.ns))))
 
-    const imgUrl = await imageUrlProvider(t(url))
+    // const imgUrl = await imageUrlProvider(t(url))
 
     const paragraphs = await Paragraphs({
         lng: lng,
@@ -52,8 +52,8 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
         bgColorStyle: effectiveTheme.bgColorStyle,
         bgImageStyle: effectiveTheme.bgImageStyle,
         i18nextProvider: i18nextProvider,
-        bgImageUrl: block.bgImageUrl,
-        imageUrlProvider: imageUrlProvider
+        // bgImageUrl: block.bgImageUrl,
+        // imageUrlProvider: imageUrlProvider
     });
 
     return (
@@ -62,8 +62,11 @@ export async function HorizontalCardImpl(props: NdSkinComponentProps<HorizontalC
 
             {backgrounds}
 
-            <img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}
-                 src={imgUrl} alt={alt && t(alt)}></img>
+            <div className={`${effectiveTheme.imageContainerStyle?.base} ${effectiveTheme.imageContainerStyle?.decoration}`}>
+                {/*<img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}*/}
+                {/*     src={imgUrl} alt={alt && t(alt)}></img>*/}
+                {await imageProvider({url: t(url), alt: alt && t(alt), imageStyle: effectiveTheme.imageStyle })}
+            </div>
 
             <div className={`${effectiveTheme.innerContainerStyle?.base} ${effectiveTheme.innerContainerStyle?.decoration}`}>
 

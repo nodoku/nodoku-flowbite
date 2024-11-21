@@ -42,12 +42,12 @@ var Paragraphs = NodokuComponents.Paragraphs;
 var Backgrounds = NodokuComponents.Backgrounds;
 export function CardImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var componentIndex, content, theme, themes, lng, i18nextProvider, imageUrlProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, paragraphs, backgrounds, _b;
+        var componentIndex, content, theme, themes, lng, i18nextProvider, imageProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, paragraphs, backgrounds, _b;
         var _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
         return __generator(this, function (_s) {
             switch (_s.label) {
                 case 0:
-                    componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, imageUrlProvider = props.imageUrlProvider, defaultThemeName = props.defaultThemeName;
+                    componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, imageProvider = props.imageProvider, defaultThemeName = props.defaultThemeName;
                     effectiveTheme = mergeTheme(theme, CardTheme.defaultTheme);
                     if (themes.length > 0) {
                         effectiveTheme = mergeTheme(themes[componentIndex % themes.length], effectiveTheme);
@@ -74,18 +74,22 @@ export function CardImpl(props) {
                             bgColorStyle: effectiveTheme.bgColorStyle,
                             bgImageStyle: effectiveTheme.bgImageStyle,
                             i18nextProvider: i18nextProvider,
-                            bgImageUrl: block.bgImageUrl,
-                            imageUrlProvider: imageUrlProvider
+                            // bgImageUrl: block.bgImageUrl//,
+                            // imageUrlProvider: imageUrlProvider
                         })];
                 case 3:
                     backgrounds = _s.sent();
                     _b = url;
                     if (!_b) return [3 /*break*/, 5];
-                    return [4 /*yield*/, imageUrlProvider(t(url))];
+                    return [4 /*yield*/, imageProvider({ url: t(url), alt: alt && t(alt), imageStyle: effectiveTheme.imageStyle })];
                 case 4:
-                    _b = <a href="#" className={"inline-block"}>
-                    <img className={"".concat((_e = effectiveTheme.imageStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.imageStyle) === null || _f === void 0 ? void 0 : _f.decoration)} src={_s.sent()} alt={alt && t(alt)}/>
-                </a>;
+                    _b = <div className={"".concat((_e = effectiveTheme.imageContainerStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.imageContainerStyle) === null || _f === void 0 ? void 0 : _f.decoration)}>
+                    <a href="#" className={"inline-block"}>
+                        {/*<img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}*/}
+                        {/*     src={await imageUrlProvider(t(url))} alt={alt && t(alt)}/>*/}
+                        {_s.sent()}
+                    </a>
+                </div>;
                     _s.label = 5;
                 case 5: return [2 /*return*/, (<div className={"relative ".concat((_c = effectiveTheme.containerStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.containerStyle) === null || _d === void 0 ? void 0 : _d.decoration)}>
 
@@ -93,6 +97,7 @@ export function CardImpl(props) {
 
             {_b}
             <div className={"".concat((_g = effectiveTheme.innerContainerStyle) === null || _g === void 0 ? void 0 : _g.base, " ").concat((_h = effectiveTheme.innerContainerStyle) === null || _h === void 0 ? void 0 : _h.decoration)}>
+
                 {block.title &&
                             <a href="#">
                         <h3 className={"".concat((_j = effectiveTheme.titleStyle) === null || _j === void 0 ? void 0 : _j.base, " ").concat((_k = effectiveTheme.titleStyle) === null || _k === void 0 ? void 0 : _k.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>

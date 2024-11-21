@@ -42,12 +42,14 @@ var Paragraphs = NodokuComponents.Paragraphs;
 var Backgrounds = NodokuComponents.Backgrounds;
 export function JumbotronImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var componentIndex, content, theme, themes, lng, i18nextProvider, imageUrlProvider, defaultThemeName, effectiveTheme, block, t, paragraphs, backgrounds;
+        var componentIndex, content, theme, themes, lng, i18nextProvider, 
+        // imageProvider,
+        defaultThemeName, effectiveTheme, block, t, paragraphs, backgrounds;
         var _a, _b, _c, _d, _e, _f;
         return __generator(this, function (_g) {
             switch (_g.label) {
                 case 0:
-                    componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, imageUrlProvider = props.imageUrlProvider, defaultThemeName = props.defaultThemeName;
+                    componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, defaultThemeName = props.defaultThemeName;
                     effectiveTheme = mergeTheme(theme, JumbotronTheme.defaultTheme);
                     if (themes.length > 0) {
                         effectiveTheme = mergeTheme(themes[componentIndex % themes.length], effectiveTheme);
@@ -73,8 +75,8 @@ export function JumbotronImpl(props) {
                             bgColorStyle: effectiveTheme.bgColorStyle,
                             bgImageStyle: effectiveTheme.bgImageStyle,
                             i18nextProvider: i18nextProvider,
-                            bgImageUrl: block.bgImageUrl,
-                            imageUrlProvider: imageUrlProvider
+                            // bgImageUrl: block.bgImageUrl,
+                            // imageUrlProvider: imageUrlProvider
                         })];
                 case 3:
                     backgrounds = _g.sent();

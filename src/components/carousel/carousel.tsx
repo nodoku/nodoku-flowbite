@@ -9,7 +9,7 @@ import Backgrounds = NodokuComponents.Backgrounds;
 
 export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
 
-    const {lng, i18nextProvider, imageUrlProvider} = props;
+    const {lng, i18nextProvider, imageProvider} = props;
 
     const {t} = await i18nextProvider(lng);
 
@@ -58,8 +58,8 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
             bgColorStyle: effectiveSlideTheme.bgColorStyle,
             bgImageStyle: effectiveSlideTheme.bgImageStyle,
             i18nextProvider: i18nextProvider,
-            bgImageUrl: block.bgImageUrl,
-            imageUrlProvider: imageUrlProvider
+            // bgImageUrl: block.bgImageUrl//,
+            // imageUrlProvider: imageUrlProvider
         });
 
 

@@ -14,7 +14,7 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
         themes,
         lng,
         i18nextProvider,
-        imageUrlProvider,
+        imageProvider,
         defaultThemeName
     } = props;
 
@@ -49,8 +49,8 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
         bgColorStyle: effectiveTheme.bgColorStyle,
         bgImageStyle: effectiveTheme.bgImageStyle,
         i18nextProvider: i18nextProvider,
-        bgImageUrl: block.bgImageUrl,
-        imageUrlProvider: imageUrlProvider
+        // bgImageUrl: block.bgImageUrl//,
+        // imageUrlProvider: imageUrlProvider
     });
 
     return (
@@ -60,12 +60,16 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
             {backgrounds}
 
             {url &&
-                <a href="#" className={"inline-block"}>
-                    <img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}
-                         src={await imageUrlProvider(t(url))} alt={alt && t(alt)}/>
-                </a>
+                <div className={`${effectiveTheme.imageContainerStyle?.base} ${effectiveTheme.imageContainerStyle?.decoration}`}>
+                    <a href="#" className={"inline-block"}>
+                        {/*<img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}*/}
+                        {/*     src={await imageUrlProvider(t(url))} alt={alt && t(alt)}/>*/}
+                        {await imageProvider({url: t(url), alt: alt && t(alt), imageStyle: effectiveTheme.imageStyle })}
+                    </a>
+                </div>
             }
             <div className={`${effectiveTheme.innerContainerStyle?.base} ${effectiveTheme.innerContainerStyle?.decoration}`}>
+
                 {block.title &&
                     <a href="#">
                         <h3 className={`${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}

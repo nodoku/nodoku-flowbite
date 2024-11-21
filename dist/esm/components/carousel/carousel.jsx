@@ -43,13 +43,13 @@ var Paragraphs = NodokuComponents.Paragraphs;
 var Backgrounds = NodokuComponents.Backgrounds;
 export function CarouselImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var lng, i18nextProvider, imageUrlProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides;
+        var lng, i18nextProvider, imageProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides;
         var _this = this;
         var _a, _b;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
-                    lng = props.lng, i18nextProvider = props.i18nextProvider, imageUrlProvider = props.imageUrlProvider;
+                    lng = props.lng, i18nextProvider = props.i18nextProvider, imageProvider = props.imageProvider;
                     return [4 /*yield*/, i18nextProvider(lng)];
                 case 1:
                     t = (_c.sent()).t;
@@ -81,8 +81,8 @@ export function CarouselImpl(props) {
                                                 bgColorStyle: effectiveSlideTheme.bgColorStyle,
                                                 bgImageStyle: effectiveSlideTheme.bgImageStyle,
                                                 i18nextProvider: i18nextProvider,
-                                                bgImageUrl: block.bgImageUrl,
-                                                imageUrlProvider: imageUrlProvider
+                                                // bgImageUrl: block.bgImageUrl//,
+                                                // imageUrlProvider: imageUrlProvider
                                             })];
                                     case 2:
                                         backgrounds = _l.sent();
