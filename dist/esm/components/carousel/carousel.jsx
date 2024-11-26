@@ -41,6 +41,10 @@ import { CarouselTheme } from "./carousel-theme";
 import { NodokuComponents } from "nodoku-components";
 var Paragraphs = NodokuComponents.Paragraphs;
 var Backgrounds = NodokuComponents.Backgrounds;
+import { ts } from "nodoku-core";
+var paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
+var highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
+var listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
 export function CarouselImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
         var lng, i18nextProvider, imageProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides;
@@ -67,9 +71,9 @@ export function CarouselImpl(props) {
                                         return [4 /*yield*/, Paragraphs({
                                                 lng: lng,
                                                 blockParagraphs: block.paragraphs,
-                                                paragraphStyle: effectiveSlideTheme.paragraphStyle,
-                                                codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme,
-                                                listTheme: effectiveSlideTheme.listTheme,
+                                                paragraphTheme: effectiveSlideTheme.paragraphStyle || paragraphDefaultTheme,
+                                                codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
+                                                listTheme: effectiveSlideTheme.listTheme || listCompDefaultTheme,
                                                 defaultThemeName: defaultThemeName,
                                                 i18nextProvider: i18nextProvider
                                             })];
@@ -86,21 +90,21 @@ export function CarouselImpl(props) {
                                             })];
                                     case 2:
                                         backgrounds = _l.sent();
-                                        return [2 /*return*/, (<div key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"".concat((_a = effectiveSlideTheme.slideContainerStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveSlideTheme.slideContainerStyle) === null || _b === void 0 ? void 0 : _b.decoration)}>
+                                        return [2 /*return*/, (<div key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"".concat(ts(effectiveSlideTheme, "slideContainerStyle"), " ").concat((_a = effectiveSlideTheme.slideContainerStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveSlideTheme.slideContainerStyle) === null || _b === void 0 ? void 0 : _b.decoration)}>
 
                 {backgrounds}
 
                 {block.title &&
-                                                    <div className={"".concat((_c = effectiveTheme.titleStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.titleStyle) === null || _d === void 0 ? void 0 : _d.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>}
+                                                    <div className={"".concat(ts(effectiveTheme, "titleStyle"), " ").concat((_c = effectiveTheme.titleStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.titleStyle) === null || _d === void 0 ? void 0 : _d.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>}
                 {block.subTitle &&
-                                                    <div className={"".concat((_e = effectiveTheme.subTitleStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.subTitleStyle) === null || _f === void 0 ? void 0 : _f.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
+                                                    <div className={"".concat(ts(effectiveTheme, "subTitleStyle"), " ").concat((_e = effectiveTheme.subTitleStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.subTitleStyle) === null || _f === void 0 ? void 0 : _f.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
 
                 {paragraphs}
 
 
                 {block.footer &&
-                                                    <div className={"".concat((_g = effectiveSlideTheme.footerContainerStyle) === null || _g === void 0 ? void 0 : _g.base, " ").concat((_h = effectiveSlideTheme.footerContainerStyle) === null || _h === void 0 ? void 0 : _h.decoration)}>
-                        <a href="#" className={"".concat((_j = effectiveSlideTheme.footerButtonStyle) === null || _j === void 0 ? void 0 : _j.base, " ").concat((_k = effectiveSlideTheme.footerButtonStyle) === null || _k === void 0 ? void 0 : _k.decoration)}>
+                                                    <div className={"".concat(ts(effectiveSlideTheme, "footerContainerStyle"), " ").concat((_g = effectiveSlideTheme.footerContainerStyle) === null || _g === void 0 ? void 0 : _g.base, " ").concat((_h = effectiveSlideTheme.footerContainerStyle) === null || _h === void 0 ? void 0 : _h.decoration)}>
+                        <a href="#" className={"".concat(ts(effectiveSlideTheme, "footerButtonStyle"), " ").concat((_j = effectiveSlideTheme.footerButtonStyle) === null || _j === void 0 ? void 0 : _j.base, " ").concat((_k = effectiveSlideTheme.footerButtonStyle) === null || _k === void 0 ? void 0 : _k.decoration)}>
                             <span dangerouslySetInnerHTML={{ __html: t(block.footer) }}/>
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

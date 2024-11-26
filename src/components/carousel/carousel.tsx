@@ -5,6 +5,10 @@ import {CarouselTheme} from "./carousel-theme";
 import {NodokuComponents} from "nodoku-components";
 import Paragraphs = NodokuComponents.Paragraphs;
 import Backgrounds = NodokuComponents.Backgrounds;
+import {ts} from "nodoku-core";
+import paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
+import highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
+import listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
 
 
 export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
@@ -45,9 +49,9 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
         const paragraphs = await Paragraphs({
             lng: lng,
             blockParagraphs: block.paragraphs,
-            paragraphStyle: effectiveSlideTheme.paragraphStyle,
-            codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme!,
-            listTheme: effectiveSlideTheme.listTheme!,
+            paragraphTheme: effectiveSlideTheme.paragraphStyle || paragraphDefaultTheme,
+            codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
+            listTheme: effectiveSlideTheme.listTheme || listCompDefaultTheme,
             defaultThemeName: defaultThemeName,
             i18nextProvider: i18nextProvider
         });
@@ -65,16 +69,16 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
 
         return (
             <div key={`row-${rowIndex}-component-${componentIndex}-slide-${slideIndex}`}
-                 className={`${effectiveSlideTheme.slideContainerStyle?.base} ${effectiveSlideTheme.slideContainerStyle?.decoration}`} >
+                 className={`${ts(effectiveSlideTheme, "slideContainerStyle")} ${effectiveSlideTheme.slideContainerStyle?.base} ${effectiveSlideTheme.slideContainerStyle?.decoration}`} >
 
                 {backgrounds}
 
                 {block.title &&
-                    <div className={`${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}
+                    <div className={`${ts(effectiveTheme, "titleStyle")} ${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}
                          dangerouslySetInnerHTML={{__html: t(block.title)}} />
                 }
                 {block.subTitle &&
-                    <div className={`${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}
+                    <div className={`${ts(effectiveTheme, "subTitleStyle")} ${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}
                          dangerouslySetInnerHTML={{__html: t(block.subTitle)}} />
                 }
 
@@ -82,9 +86,9 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
 
 
                 {block.footer &&
-                    <div className={`${effectiveSlideTheme.footerContainerStyle?.base} ${effectiveSlideTheme.footerContainerStyle?.decoration}`}>
+                    <div className={`${ts(effectiveSlideTheme, "footerContainerStyle")} ${effectiveSlideTheme.footerContainerStyle?.base} ${effectiveSlideTheme.footerContainerStyle?.decoration}`}>
                         <a href="#"
-                           className={`${effectiveSlideTheme.footerButtonStyle?.base} ${effectiveSlideTheme.footerButtonStyle?.decoration}`}>
+                           className={`${ts(effectiveSlideTheme, "footerButtonStyle")} ${effectiveSlideTheme.footerButtonStyle?.base} ${effectiveSlideTheme.footerButtonStyle?.decoration}`}>
                             <span dangerouslySetInnerHTML={{__html: t(block.footer)}}/>
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">

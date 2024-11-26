@@ -2,6 +2,7 @@ import { ThemeStyle } from "nodoku-core";
 import { NodokuComponents } from "nodoku-components";
 import ListCompTheme = NodokuComponents.ListCompTheme;
 import HighlightedCodeTheme = NodokuComponents.HighlightedCodeTheme;
+import ParagraphTheme = NodokuComponents.ParagraphTheme;
 export declare class JumbotronTheme {
     className?: string;
     bgImageStyle?: ThemeStyle;
@@ -9,7 +10,7 @@ export declare class JumbotronTheme {
     containerStyle?: ThemeStyle;
     titleStyle?: ThemeStyle;
     subTitleStyle?: ThemeStyle;
-    paragraphStyle?: ThemeStyle;
+    paragraphStyle?: ParagraphTheme;
     footerStyle?: ThemeStyle;
     footerButtonStyle?: ThemeStyle;
     codeHighlightTheme?: HighlightedCodeTheme;

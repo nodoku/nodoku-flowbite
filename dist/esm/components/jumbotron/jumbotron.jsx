@@ -40,6 +40,10 @@ import { mergeTheme } from "nodoku-core";
 import { NodokuComponents } from "nodoku-components";
 var Paragraphs = NodokuComponents.Paragraphs;
 var Backgrounds = NodokuComponents.Backgrounds;
+import { ts } from "nodoku-core";
+var paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
+var highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
+var listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
 export function JumbotronImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
         var componentIndex, content, theme, themes, lng, i18nextProvider, 
@@ -61,9 +65,9 @@ export function JumbotronImpl(props) {
                     return [4 /*yield*/, Paragraphs({
                             lng: lng,
                             blockParagraphs: block.paragraphs,
-                            paragraphStyle: effectiveTheme.paragraphStyle,
-                            codeHighlightTheme: effectiveTheme.codeHighlightTheme,
-                            listTheme: effectiveTheme.listTheme,
+                            paragraphTheme: effectiveTheme.paragraphStyle || paragraphDefaultTheme,
+                            codeHighlightTheme: effectiveTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
+                            listTheme: effectiveTheme.listTheme || listCompDefaultTheme,
                             defaultThemeName: defaultThemeName,
                             i18nextProvider: i18nextProvider
                         })];
@@ -80,14 +84,14 @@ export function JumbotronImpl(props) {
                         })];
                 case 3:
                     backgrounds = _g.sent();
-                    return [2 /*return*/, (<section className={"relative ".concat((_a = effectiveTheme.containerStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveTheme.containerStyle) === null || _b === void 0 ? void 0 : _b.decoration)}>
+                    return [2 /*return*/, (<section className={"relative ".concat(ts(effectiveTheme, "containerStyle"), " ").concat((_a = effectiveTheme.containerStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveTheme.containerStyle) === null || _b === void 0 ? void 0 : _b.decoration)}>
 
             {backgrounds}
 
             {block.title &&
-                                <h1 className={"".concat((_c = effectiveTheme.titleStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.titleStyle) === null || _d === void 0 ? void 0 : _d.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>}
+                                <h1 className={"".concat(ts(effectiveTheme, "titleStyle"), " ").concat((_c = effectiveTheme.titleStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.titleStyle) === null || _d === void 0 ? void 0 : _d.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>}
             {block.subTitle &&
-                                <h2 className={"".concat((_e = effectiveTheme.subTitleStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.subTitleStyle) === null || _f === void 0 ? void 0 : _f.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
+                                <h2 className={"".concat(ts(effectiveTheme, "subTitleStyle"), " ").concat((_e = effectiveTheme.subTitleStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.subTitleStyle) === null || _f === void 0 ? void 0 : _f.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
 
             {paragraphs}
 

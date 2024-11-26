@@ -2,6 +2,7 @@ import { ThemeStyle } from "nodoku-core";
 import { NodokuComponents } from "nodoku-components";
 import HighlightedCodeTheme = NodokuComponents.HighlightedCodeTheme;
 import ListCompTheme = NodokuComponents.ListCompTheme;
+import ParagraphTheme = NodokuComponents.ParagraphTheme;
 export declare class CarouselTheme {
     containerStyle?: ThemeStyle;
     bgImageStyle?: ThemeStyle;
@@ -9,7 +10,7 @@ export declare class CarouselTheme {
     slideContainerStyle?: ThemeStyle;
     titleStyle?: ThemeStyle;
     subTitleStyle?: ThemeStyle;
-    paragraphStyle?: ThemeStyle;
+    paragraphStyle?: ParagraphTheme;
     footerContainerStyle?: ThemeStyle;
     footerButtonStyle?: ThemeStyle;
     codeHighlightTheme?: HighlightedCodeTheme;
