@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import React from "react";
 import { Carousel } from "flowbite-react";
 import { mergeTheme } from "nodoku-core";
-import { CarouselTheme } from "./carousel-theme";
 import { NodokuComponents } from "nodoku-components";
 var Paragraphs = NodokuComponents.Paragraphs;
 var Backgrounds = NodokuComponents.Backgrounds;
@@ -45,25 +44,24 @@ import { ts } from "nodoku-core";
 var paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
 var highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
 var listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
+import { defaultTheme } from "./carousel-theme";
 export function CarouselImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
         var lng, i18nextProvider, imageProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides;
         var _this = this;
-        var _a, _b;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
                     lng = props.lng, i18nextProvider = props.i18nextProvider, imageProvider = props.imageProvider;
                     return [4 /*yield*/, i18nextProvider(lng)];
                 case 1:
-                    t = (_c.sent()).t;
+                    t = (_a.sent()).t;
                     rowIndex = props.rowIndex, componentIndex = props.componentIndex, content = props.content, options = props.options, theme = props.theme, themes = props.themes, defaultThemeName = props.defaultThemeName;
-                    effectiveTheme = mergeTheme(theme, CarouselTheme.defaultTheme);
+                    effectiveTheme = mergeTheme(theme, defaultTheme);
                     return [4 /*yield*/, Promise.all(content.map(function (b, slideIndex) { return __awaiter(_this, void 0, void 0, function () {
                             var slideTheme, effectiveSlideTheme, block, paragraphs, backgrounds;
-                            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
-                            return __generator(this, function (_l) {
-                                switch (_l.label) {
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
                                     case 0:
                                         slideTheme = themes.length > 0 ? themes[slideIndex % themes.length] : {};
                                         effectiveSlideTheme = mergeTheme(slideTheme, effectiveTheme);
@@ -78,46 +76,43 @@ export function CarouselImpl(props) {
                                                 i18nextProvider: i18nextProvider
                                             })];
                                     case 1:
-                                        paragraphs = _l.sent();
+                                        paragraphs = _a.sent();
                                         return [4 /*yield*/, Backgrounds({
                                                 lng: lng,
                                                 defaultThemeName: defaultThemeName,
                                                 bgColorStyle: effectiveSlideTheme.bgColorStyle,
                                                 bgImageStyle: effectiveSlideTheme.bgImageStyle,
-                                                i18nextProvider: i18nextProvider,
-                                                // bgImageUrl: block.bgImageUrl//,
-                                                // imageUrlProvider: imageUrlProvider
+                                                i18nextProvider: i18nextProvider
                                             })];
                                     case 2:
-                                        backgrounds = _l.sent();
-                                        return [2 /*return*/, (<div key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"".concat(ts(effectiveSlideTheme, "slideContainerStyle"), " ").concat((_a = effectiveSlideTheme.slideContainerStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveSlideTheme.slideContainerStyle) === null || _b === void 0 ? void 0 : _b.decoration)}>
+                                        backgrounds = _a.sent();
+                                        return [2 /*return*/, (<div key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"".concat(ts(effectiveSlideTheme, "slideContainerStyle"))}>
 
                 {backgrounds}
 
                 {block.title &&
-                                                    <div className={"".concat(ts(effectiveTheme, "titleStyle"), " ").concat((_c = effectiveTheme.titleStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.titleStyle) === null || _d === void 0 ? void 0 : _d.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>}
+                                                    <div className={"".concat(ts(effectiveTheme, "titleStyle"))} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>}
                 {block.subTitle &&
-                                                    <div className={"".concat(ts(effectiveTheme, "subTitleStyle"), " ").concat((_e = effectiveTheme.subTitleStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.subTitleStyle) === null || _f === void 0 ? void 0 : _f.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
+                                                    <div className={"".concat(ts(effectiveTheme, "subTitleStyle"))} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
 
                 {paragraphs}
 
 
-                {block.footer &&
-                                                    <div className={"".concat(ts(effectiveSlideTheme, "footerContainerStyle"), " ").concat((_g = effectiveSlideTheme.footerContainerStyle) === null || _g === void 0 ? void 0 : _g.base, " ").concat((_h = effectiveSlideTheme.footerContainerStyle) === null || _h === void 0 ? void 0 : _h.decoration)}>
-                        <a href="#" className={"".concat(ts(effectiveSlideTheme, "footerButtonStyle"), " ").concat((_j = effectiveSlideTheme.footerButtonStyle) === null || _j === void 0 ? void 0 : _j.base, " ").concat((_k = effectiveSlideTheme.footerButtonStyle) === null || _k === void 0 ? void 0 : _k.decoration)}>
-                            <span dangerouslySetInnerHTML={{ __html: t(block.footer) }}/>
+                {block.callToActions.map(function (cta, i) { return (<div key={"slide-".concat(slideIndex, "-cta-").concat(i)} className={"".concat(ts(effectiveSlideTheme, "ctaContainerStyle"))}>
+                        <a href={t(cta.ctaUrl)} className={"".concat(ts(effectiveSlideTheme, "ctaButtonStyle"))}>
+                            <span dangerouslySetInnerHTML={{ __html: t(cta.ctaTitle || cta.ctaUrl) }}/>
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                             </svg>
                         </a>
-                    </div>}
+                    </div>); })}
             </div>)];
                                 }
                             });
                         }); }))];
                 case 2:
-                    slides = _c.sent();
-                    return [2 /*return*/, (<div className={"relative ".concat((_a = effectiveTheme.containerStyle) === null || _a === void 0 ? void 0 : _a.base, " ").concat((_b = effectiveTheme.containerStyle) === null || _b === void 0 ? void 0 : _b.decoration, " carousel-container-main")}>
+                    slides = _a.sent();
+                    return [2 /*return*/, (<div className={"relative ".concat(ts(effectiveTheme, "containerStyle"), " carousel-container-main")}>
             <Carousel {...options}>
                 {slides}
             </Carousel>

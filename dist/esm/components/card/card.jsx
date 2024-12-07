@@ -35,7 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import React from "react";
-import { CardTheme } from "./card-theme";
 import { mergeTheme } from "nodoku-core";
 import { NodokuComponents } from "nodoku-components";
 var Paragraphs = NodokuComponents.Paragraphs;
@@ -44,15 +43,15 @@ import { ts } from "nodoku-core";
 var paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
 var highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
 var listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
+import { defaultTheme } from "./card-theme";
 export function CardImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var componentIndex, content, theme, themes, lng, i18nextProvider, imageProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, paragraphs, backgrounds, _b;
-        var _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
-        return __generator(this, function (_s) {
-            switch (_s.label) {
+        var rowIndex, componentIndex, content, theme, themes, lng, i18nextProvider, imageProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, paragraphs, backgrounds, _b;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
                 case 0:
-                    componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, imageProvider = props.imageProvider, defaultThemeName = props.defaultThemeName;
-                    effectiveTheme = mergeTheme(theme, CardTheme.defaultTheme);
+                    rowIndex = props.rowIndex, componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, imageProvider = props.imageProvider, defaultThemeName = props.defaultThemeName;
+                    effectiveTheme = mergeTheme(theme, defaultTheme);
                     if (themes.length > 0) {
                         effectiveTheme = mergeTheme(themes[componentIndex % themes.length], effectiveTheme);
                     }
@@ -60,7 +59,7 @@ export function CardImpl(props) {
                     _a = block.images[0], url = _a.url, alt = _a.alt;
                     return [4 /*yield*/, i18nextProvider(lng)];
                 case 1:
-                    t = (_s.sent()).t;
+                    t = (_c.sent()).t;
                     return [4 /*yield*/, Paragraphs({
                             lng: lng,
                             blockParagraphs: block.paragraphs,
@@ -71,58 +70,51 @@ export function CardImpl(props) {
                             i18nextProvider: i18nextProvider
                         })];
                 case 2:
-                    paragraphs = _s.sent();
+                    paragraphs = _c.sent();
                     return [4 /*yield*/, Backgrounds({
                             lng: lng,
                             defaultThemeName: defaultThemeName,
                             bgColorStyle: effectiveTheme.bgColorStyle,
                             bgImageStyle: effectiveTheme.bgImageStyle,
-                            i18nextProvider: i18nextProvider,
-                            // bgImageUrl: block.bgImageUrl//,
-                            // imageUrlProvider: imageUrlProvider
+                            i18nextProvider: i18nextProvider
                         })];
                 case 3:
-                    backgrounds = _s.sent();
+                    backgrounds = _c.sent();
                     _b = url;
                     if (!_b) return [3 /*break*/, 5];
                     return [4 /*yield*/, imageProvider({ url: t(url), alt: alt && t(alt), imageStyle: effectiveTheme.imageStyle })];
                 case 4:
-                    _b = <div className={"".concat(ts(effectiveTheme, "imageContainerStyle"), " ").concat((_e = effectiveTheme.imageContainerStyle) === null || _e === void 0 ? void 0 : _e.base, " ").concat((_f = effectiveTheme.imageContainerStyle) === null || _f === void 0 ? void 0 : _f.decoration)}>
-                    <a href="#" className={"inline-block"}>
-                        {/*<img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}*/}
-                        {/*     src={await imageUrlProvider(t(url))} alt={alt && t(alt)}/>*/}
-                        {_s.sent()}
-                    </a>
+                    _b = <div className={"".concat(ts(effectiveTheme, "imageContainerStyle"))}>
+                    {_c.sent()}
                 </div>;
-                    _s.label = 5;
-                case 5: return [2 /*return*/, (<div className={"relative ".concat(ts(effectiveTheme, "containerStyle"), " ").concat((_c = effectiveTheme.containerStyle) === null || _c === void 0 ? void 0 : _c.base, " ").concat((_d = effectiveTheme.containerStyle) === null || _d === void 0 ? void 0 : _d.decoration)}>
+                    _c.label = 5;
+                case 5: return [2 /*return*/, (<div key={"card-".concat(rowIndex, "-").concat(componentIndex)} className={"relative ".concat(ts(effectiveTheme, "containerStyle"))}>
 
             {backgrounds}
 
             {_b}
-            <div className={"".concat(ts(effectiveTheme, "innerContainerStyle"), " ").concat((_g = effectiveTheme.innerContainerStyle) === null || _g === void 0 ? void 0 : _g.base, " ").concat((_h = effectiveTheme.innerContainerStyle) === null || _h === void 0 ? void 0 : _h.decoration)}>
+            <div className={"".concat(ts(effectiveTheme, "innerContainerStyle"))}>
 
                 {block.title &&
                             <a href="#">
-                        <h3 className={"".concat(ts(effectiveTheme, "titleStyle"), " ").concat((_j = effectiveTheme.titleStyle) === null || _j === void 0 ? void 0 : _j.base, " ").concat((_k = effectiveTheme.titleStyle) === null || _k === void 0 ? void 0 : _k.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>
+                        <h3 className={"".concat(ts(effectiveTheme, "titleStyle"))} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>
                     </a>}
                 {block.subTitle &&
-                            <h4 className={"".concat(ts(effectiveTheme, "subTitleStyle"), " ").concat((_l = effectiveTheme.subTitleStyle) === null || _l === void 0 ? void 0 : _l.base, " ").concat((_m = effectiveTheme.subTitleStyle) === null || _m === void 0 ? void 0 : _m.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
+                            <h4 className={"".concat(ts(effectiveTheme, "subTitleStyle"))} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
 
                 {paragraphs}
 
             </div>
 
-            {block.footer &&
-                            <div className={"".concat(ts(effectiveTheme, "footerContainerStyle"), " ").concat((_o = effectiveTheme.footerContainerStyle) === null || _o === void 0 ? void 0 : _o.base, " ").concat((_p = effectiveTheme.footerContainerStyle) === null || _p === void 0 ? void 0 : _p.decoration)}>
+            {block.callToActions.map(function (cta, i) { return (<div key={"horizontal-card-".concat(rowIndex, "-").concat(componentIndex, "-cta-").concat(i)} className={"".concat(ts(effectiveTheme, "ctaContainerStyle"))}>
 
-                    <a href="#" className={"".concat(ts(effectiveTheme, "footerButtonStyle"), " ").concat((_q = effectiveTheme.footerButtonStyle) === null || _q === void 0 ? void 0 : _q.base, " ").concat((_r = effectiveTheme.footerButtonStyle) === null || _r === void 0 ? void 0 : _r.decoration)}>
-                        <span dangerouslySetInnerHTML={{ __html: t(block.footer) }}/>
+                    <a href={t(cta.ctaUrl)} className={"".concat(ts(effectiveTheme, "ctaButtonStyle"))}>
+                        <span dangerouslySetInnerHTML={{ __html: t(cta.ctaTitle || cta.ctaUrl) }}/>
                         <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>
                     </a>
-                </div>}
+                </div>); })}
 
         </div>)];
             }

@@ -9,6 +9,8 @@ import {ts} from "nodoku-core";
 import paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
 import highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
 import listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
+import {NdCallToAction} from "nodoku-core";
+import {defaultTheme} from "./carousel-theme";
 
 
 export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
@@ -28,17 +30,13 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
     } = props;
 
 
-    const effectiveTheme: CarouselTheme = mergeTheme(theme, CarouselTheme.defaultTheme);
+    const effectiveTheme: CarouselTheme = mergeTheme(theme, defaultTheme);
     // const effectiveOptions: CarouselExtOptions = mergeTheme(options, CarouselExtOptions.defaultOptions)
 
 
     // console.log("carousel effectiveTheme", effectiveTheme);
 
-    // const slideClassNames: { className: string }[] = theme?.slides ? theme.slides : [];
-
     const slides: JSX.Element[] = await Promise.all(content.map(async (b: NdContentBlock, slideIndex: number) => {
-
-        // const themeClassName = slideClassNames[slideIndex].className
 
         const slideTheme: CarouselTheme = themes.length > 0 ? themes[slideIndex % themes.length] : {};
 
@@ -61,43 +59,40 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
             defaultThemeName: defaultThemeName,
             bgColorStyle: effectiveSlideTheme.bgColorStyle,
             bgImageStyle: effectiveSlideTheme.bgImageStyle,
-            i18nextProvider: i18nextProvider,
-            // bgImageUrl: block.bgImageUrl//,
-            // imageUrlProvider: imageUrlProvider
+            i18nextProvider: i18nextProvider
         });
 
 
         return (
             <div key={`row-${rowIndex}-component-${componentIndex}-slide-${slideIndex}`}
-                 className={`${ts(effectiveSlideTheme, "slideContainerStyle")} ${effectiveSlideTheme.slideContainerStyle?.base} ${effectiveSlideTheme.slideContainerStyle?.decoration}`} >
+                 className={`${ts(effectiveSlideTheme, "slideContainerStyle")}`} >
 
                 {backgrounds}
 
                 {block.title &&
-                    <div className={`${ts(effectiveTheme, "titleStyle")} ${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}
+                    <div className={`${ts(effectiveTheme, "titleStyle")}`}
                          dangerouslySetInnerHTML={{__html: t(block.title)}} />
                 }
                 {block.subTitle &&
-                    <div className={`${ts(effectiveTheme, "subTitleStyle")} ${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}
+                    <div className={`${ts(effectiveTheme, "subTitleStyle")}`}
                          dangerouslySetInnerHTML={{__html: t(block.subTitle)}} />
                 }
 
                 {paragraphs}
 
 
-                {block.footer &&
-                    <div className={`${ts(effectiveSlideTheme, "footerContainerStyle")} ${effectiveSlideTheme.footerContainerStyle?.base} ${effectiveSlideTheme.footerContainerStyle?.decoration}`}>
-                        <a href="#"
-                           className={`${ts(effectiveSlideTheme, "footerButtonStyle")} ${effectiveSlideTheme.footerButtonStyle?.base} ${effectiveSlideTheme.footerButtonStyle?.decoration}`}>
-                            <span dangerouslySetInnerHTML={{__html: t(block.footer)}}/>
+                {block.callToActions.map((cta: NdCallToAction, i: number) => (
+                    <div key={`slide-${slideIndex}-cta-${i}`} className={`${ts(effectiveSlideTheme, "ctaContainerStyle")}`}>
+                        <a href={t(cta.ctaUrl)}
+                           className={`${ts(effectiveSlideTheme, "ctaButtonStyle")}`}>
+                            <span dangerouslySetInnerHTML={{__html: t(cta.ctaTitle || cta.ctaUrl)}}/>
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                       d="M1 5h12m0 0L9 1m4 4L9 9"/>
                             </svg>
                         </a>
-                    </div>
-
+                    </div>))
                 }
             </div>
 
@@ -107,7 +102,7 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
 
     return (
 
-        <div className={`relative ${effectiveTheme.containerStyle?.base} ${effectiveTheme.containerStyle?.decoration} carousel-container-main`}>
+        <div className={`relative ${ts(effectiveTheme, "containerStyle")} carousel-container-main`}>
             <Carousel  {...options}>
                 {slides}
             </Carousel>

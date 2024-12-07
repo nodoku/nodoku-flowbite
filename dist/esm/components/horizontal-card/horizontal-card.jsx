@@ -35,7 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import React from "react";
-import { HorizontalCardTheme } from "./horizontal-card-theme";
 import { mergeTheme } from "nodoku-core";
 import { NodokuComponents } from "nodoku-components";
 var Paragraphs = NodokuComponents.Paragraphs;
@@ -44,15 +43,15 @@ import { ts } from "nodoku-core";
 var paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
 var highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
 var listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
+import { defaultTheme } from "./horizontal-card-theme";
 export function HorizontalCardImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var componentIndex, content, theme, themes, lng, i18nextProvider, imageProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, paragraphs, backgrounds;
-        var _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
-        return __generator(this, function (_r) {
-            switch (_r.label) {
+        var rowIndex, componentIndex, content, theme, themes, lng, i18nextProvider, imageProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, paragraphs, backgrounds;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, imageProvider = props.imageProvider, defaultThemeName = props.defaultThemeName;
-                    effectiveTheme = mergeTheme(theme, HorizontalCardTheme.defaultTheme);
+                    rowIndex = props.rowIndex, componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, imageProvider = props.imageProvider, defaultThemeName = props.defaultThemeName;
+                    effectiveTheme = mergeTheme(theme, defaultTheme);
                     if (themes.length > 0) {
                         effectiveTheme = mergeTheme(themes[componentIndex % themes.length], effectiveTheme);
                     }
@@ -60,7 +59,7 @@ export function HorizontalCardImpl(props) {
                     _a = block.images[0], url = _a.url, alt = _a.alt;
                     return [4 /*yield*/, i18nextProvider(lng)];
                 case 1:
-                    t = (_r.sent()).t;
+                    t = (_b.sent()).t;
                     return [4 /*yield*/, Paragraphs({
                             lng: lng,
                             blockParagraphs: block.paragraphs,
@@ -71,50 +70,45 @@ export function HorizontalCardImpl(props) {
                             i18nextProvider: i18nextProvider
                         })];
                 case 2:
-                    paragraphs = _r.sent();
+                    paragraphs = _b.sent();
                     return [4 /*yield*/, Backgrounds({
                             lng: lng,
                             defaultThemeName: defaultThemeName,
                             bgColorStyle: effectiveTheme.bgColorStyle,
                             bgImageStyle: effectiveTheme.bgImageStyle,
-                            i18nextProvider: i18nextProvider,
-                            // bgImageUrl: block.bgImageUrl,
-                            // imageUrlProvider: imageUrlProvider
+                            i18nextProvider: i18nextProvider
                         })];
                 case 3:
-                    backgrounds = _r.sent();
+                    backgrounds = _b.sent();
                     return [4 /*yield*/, imageProvider({ url: t(url), alt: alt && t(alt), imageStyle: effectiveTheme.imageStyle })];
-                case 4: return [2 /*return*/, (<div className={"relative ".concat(ts(effectiveTheme, "containerStyle"), " ").concat((_b = effectiveTheme.containerStyle) === null || _b === void 0 ? void 0 : _b.base, " ").concat((_c = effectiveTheme.containerStyle) === null || _c === void 0 ? void 0 : _c.decoration)}>
+                case 4: return [2 /*return*/, (<div key={"horizontal-card-".concat(rowIndex, "-").concat(componentIndex)} className={"card-".concat(rowIndex, "-").concat(componentIndex, " relative ").concat(ts(effectiveTheme, "containerStyle"))}>
 
             {backgrounds}
 
-            <div className={"".concat(ts(effectiveTheme, "imageContainerStyle"), " ").concat((_d = effectiveTheme.imageContainerStyle) === null || _d === void 0 ? void 0 : _d.base, " ").concat((_e = effectiveTheme.imageContainerStyle) === null || _e === void 0 ? void 0 : _e.decoration)}>
-                {/*<img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}*/}
-                {/*     src={imgUrl} alt={alt && t(alt)}></img>*/}
-                {_r.sent()}
+            <div className={"".concat(ts(effectiveTheme, "imageContainerStyle"))}>
+                {_b.sent()}
             </div>
 
-            <div className={"".concat(ts(effectiveTheme, "innerContainerStyle"), " ").concat((_f = effectiveTheme.innerContainerStyle) === null || _f === void 0 ? void 0 : _f.base, " ").concat((_g = effectiveTheme.innerContainerStyle) === null || _g === void 0 ? void 0 : _g.decoration)}>
+            <div className={"".concat(ts(effectiveTheme, "innerContainerStyle"))}>
 
                 {block.title &&
-                            <h5 className={"".concat(ts(effectiveTheme, "titleStyle"), " ").concat((_h = effectiveTheme.titleStyle) === null || _h === void 0 ? void 0 : _h.base, " ").concat((_j = effectiveTheme.titleStyle) === null || _j === void 0 ? void 0 : _j.decoration)} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>}
+                            <h5 className={"".concat(ts(effectiveTheme, "titleStyle"))} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>}
                 {block.subTitle &&
-                            <h6 className={"".concat(ts(effectiveTheme, "subTitleStyle"), " ").concat((_k = effectiveTheme.subTitleStyle) === null || _k === void 0 ? void 0 : _k.base, " ").concat((_l = effectiveTheme.subTitleStyle) === null || _l === void 0 ? void 0 : _l.decoration)} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
+                            <h6 className={"".concat(ts(effectiveTheme, "subTitleStyle"))} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
 
                 {paragraphs}
 
             </div>
 
-            {block.footer &&
-                            <div className={"".concat(ts(effectiveTheme, "footerContainerStyle"), " ").concat((_m = effectiveTheme.footerContainerStyle) === null || _m === void 0 ? void 0 : _m.base, " ").concat((_o = effectiveTheme.footerContainerStyle) === null || _o === void 0 ? void 0 : _o.decoration)}>
+            {block.callToActions.map(function (cta, i) { return (<div key={"horizontal-card-".concat(rowIndex, "-").concat(componentIndex, "-cta-").concat(i)} className={"".concat(ts(effectiveTheme, "ctaContainerStyle"))}>
 
-                    <a href="#" className={"".concat(ts(effectiveTheme, "footerButtonStyle"), " ").concat((_p = effectiveTheme.footerButtonStyle) === null || _p === void 0 ? void 0 : _p.base, " ").concat((_q = effectiveTheme.footerButtonStyle) === null || _q === void 0 ? void 0 : _q.decoration)}>
-                        <span dangerouslySetInnerHTML={{ __html: t(block.footer) }}/>
+                    <a href={t(cta.ctaUrl)} className={"".concat(ts(effectiveTheme, "ctaButtonStyle"))}>
+                        <span dangerouslySetInnerHTML={{ __html: t(cta.ctaTitle || cta.ctaUrl) }}/>
                         <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>
                     </a>
-                </div>}
+                </div>); })}
 
         </div>)];
             }

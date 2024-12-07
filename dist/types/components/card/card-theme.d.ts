@@ -4,7 +4,7 @@ import HighlightedCodeTheme = NodokuComponents.HighlightedCodeTheme;
 import ListCompTheme = NodokuComponents.ListCompTheme;
 import { ImageStyle } from "nodoku-core";
 import ParagraphTheme = NodokuComponents.ParagraphTheme;
-export declare class CardTheme {
+export type CardTheme = {
     className?: string;
     containerStyle?: ThemeStyle;
     imageContainerStyle?: ThemeStyle;
@@ -15,11 +15,9 @@ export declare class CardTheme {
     titleStyle?: ThemeStyle;
     subTitleStyle?: ThemeStyle;
     paragraphStyle?: ParagraphTheme;
-    footerContainerStyle?: ThemeStyle;
-    footerButtonStyle?: ThemeStyle;
+    ctaContainerStyle?: ThemeStyle;
+    ctaButtonStyle?: ThemeStyle;
     codeHighlightTheme?: HighlightedCodeTheme;
     listTheme?: ListCompTheme;
-    static defaultTheme: CardTheme;
-}
-declare const _default: CardTheme;
-export default _default;
+};
+export declare const defaultTheme: CardTheme;

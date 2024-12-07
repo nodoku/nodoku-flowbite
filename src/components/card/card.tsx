@@ -8,10 +8,14 @@ import {ts} from "nodoku-core";
 import paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
 import highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
 import listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
+import {NdCallToAction} from "nodoku-core";
+import {defaultTheme} from "./card-theme";
+
 
 export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Promise<JSX.Element> {
 
     const {
+        rowIndex,
         componentIndex,
         content,
         theme,
@@ -27,7 +31,7 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
     // console.log("visual card themess", JSON.stringify(themes));
 
 
-    let effectiveTheme: CardTheme = mergeTheme(theme, CardTheme.defaultTheme);
+    let effectiveTheme: CardTheme = mergeTheme(theme, defaultTheme);
     if (themes.length > 0) {
         effectiveTheme = mergeTheme(themes[componentIndex % themes.length], effectiveTheme)
     }
@@ -37,7 +41,7 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
 
     const {t} = await i18nextProvider(lng);
 
-    const paragraphs = await Paragraphs({
+    const paragraphs: JSX.Element = await Paragraphs({
         lng: lng,
         blockParagraphs: block.paragraphs,
         paragraphTheme: effectiveTheme.paragraphStyle || paragraphDefaultTheme,
@@ -47,41 +51,35 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
         i18nextProvider: i18nextProvider
     })
 
-    const backgrounds = await Backgrounds({
+    const backgrounds: JSX.Element = await Backgrounds({
         lng: lng,
         defaultThemeName: defaultThemeName,
         bgColorStyle: effectiveTheme.bgColorStyle,
         bgImageStyle: effectiveTheme.bgImageStyle,
-        i18nextProvider: i18nextProvider,
-        // bgImageUrl: block.bgImageUrl//,
-        // imageUrlProvider: imageUrlProvider
+        i18nextProvider: i18nextProvider
     });
 
     return (
 
-        <div className={`relative ${ts(effectiveTheme, "containerStyle")} ${effectiveTheme.containerStyle?.base} ${effectiveTheme.containerStyle?.decoration}`}>
+        <div key={`card-${rowIndex}-${componentIndex}`} className={`relative ${ts(effectiveTheme, "containerStyle")}`}>
 
             {backgrounds}
 
             {url &&
-                <div className={`${ts(effectiveTheme, "imageContainerStyle")} ${effectiveTheme.imageContainerStyle?.base} ${effectiveTheme.imageContainerStyle?.decoration}`}>
-                    <a href="#" className={"inline-block"}>
-                        {/*<img className={`${effectiveTheme.imageStyle?.base} ${effectiveTheme.imageStyle?.decoration}`}*/}
-                        {/*     src={await imageUrlProvider(t(url))} alt={alt && t(alt)}/>*/}
-                        {await imageProvider({url: t(url), alt: alt && t(alt), imageStyle: effectiveTheme.imageStyle })}
-                    </a>
+                <div className={`${ts(effectiveTheme, "imageContainerStyle")}`}>
+                    {await imageProvider({url: t(url), alt: alt && t(alt), imageStyle: effectiveTheme.imageStyle })}
                 </div>
             }
-            <div className={`${ts(effectiveTheme, "innerContainerStyle")} ${effectiveTheme.innerContainerStyle?.base} ${effectiveTheme.innerContainerStyle?.decoration}`}>
+            <div className={`${ts(effectiveTheme, "innerContainerStyle")}`}>
 
                 {block.title &&
                     <a href="#">
-                        <h3 className={`${ts(effectiveTheme, "titleStyle")} ${effectiveTheme.titleStyle?.base} ${effectiveTheme.titleStyle?.decoration}`}
+                        <h3 className={`${ts(effectiveTheme, "titleStyle")}`}
                              dangerouslySetInnerHTML={{__html: t(block.title)}} />
                     </a>
                 }
                 {block.subTitle &&
-                    <h4 className={`${ts(effectiveTheme, "subTitleStyle")} ${effectiveTheme.subTitleStyle?.base} ${effectiveTheme.subTitleStyle?.decoration}`}
+                    <h4 className={`${ts(effectiveTheme, "subTitleStyle")}`}
                         dangerouslySetInnerHTML={{__html: t(block.subTitle)}} />
                 }
 
@@ -89,19 +87,20 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
 
             </div>
 
-            {block.footer &&
-                <div className={`${ts(effectiveTheme, "footerContainerStyle")} ${effectiveTheme.footerContainerStyle?.base} ${effectiveTheme.footerContainerStyle?.decoration}`}>
+            {block.callToActions.map((cta: NdCallToAction, i) => (
+                <div key={`horizontal-card-${rowIndex}-${componentIndex}-cta-${i}`} className={`${ts(effectiveTheme, "ctaContainerStyle")}`}>
 
-                    <a href="#"
-                       className={`${ts(effectiveTheme, "footerButtonStyle")} ${effectiveTheme.footerButtonStyle?.base} ${effectiveTheme.footerButtonStyle?.decoration}`}>
-                        <span dangerouslySetInnerHTML={{__html: t(block.footer)}} />
+                    <a href={t(cta.ctaUrl)}
+
+                       className={`${ts(effectiveTheme, "ctaButtonStyle")}`}>
+                        <span dangerouslySetInnerHTML={{__html: t(cta.ctaTitle || cta.ctaUrl)}} />
                         <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                   d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>
                     </a>
-                </div>
+                </div>))
             }
 
         </div>

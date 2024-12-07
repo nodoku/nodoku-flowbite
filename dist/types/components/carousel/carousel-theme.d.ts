@@ -3,7 +3,7 @@ import { NodokuComponents } from "nodoku-components";
 import HighlightedCodeTheme = NodokuComponents.HighlightedCodeTheme;
 import ListCompTheme = NodokuComponents.ListCompTheme;
 import ParagraphTheme = NodokuComponents.ParagraphTheme;
-export declare class CarouselTheme {
+export type CarouselTheme = {
     containerStyle?: ThemeStyle;
     bgImageStyle?: ThemeStyle;
     bgColorStyle?: ThemeStyle;
@@ -11,11 +11,9 @@ export declare class CarouselTheme {
     titleStyle?: ThemeStyle;
     subTitleStyle?: ThemeStyle;
     paragraphStyle?: ParagraphTheme;
-    footerContainerStyle?: ThemeStyle;
-    footerButtonStyle?: ThemeStyle;
+    ctaContainerStyle?: ThemeStyle;
+    ctaButtonStyle?: ThemeStyle;
     codeHighlightTheme?: HighlightedCodeTheme;
     listTheme?: ListCompTheme;
-    static defaultTheme: CarouselTheme;
-}
-declare const _default: CarouselTheme;
-export default _default;
+};
+export declare const defaultTheme: CarouselTheme;

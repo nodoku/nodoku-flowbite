@@ -3,7 +3,7 @@ import { NodokuComponents } from "nodoku-components";
 import ListCompTheme = NodokuComponents.ListCompTheme;
 import HighlightedCodeTheme = NodokuComponents.HighlightedCodeTheme;
 import ParagraphTheme = NodokuComponents.ParagraphTheme;
-export declare class JumbotronTheme {
+export type JumbotronTheme = {
     className?: string;
     bgImageStyle?: ThemeStyle;
     bgColorStyle?: ThemeStyle;
@@ -11,11 +11,9 @@ export declare class JumbotronTheme {
     titleStyle?: ThemeStyle;
     subTitleStyle?: ThemeStyle;
     paragraphStyle?: ParagraphTheme;
-    footerStyle?: ThemeStyle;
-    footerButtonStyle?: ThemeStyle;
+    ctaContainerStyle?: ThemeStyle;
+    ctaButtonStyle?: ThemeStyle;
     codeHighlightTheme?: HighlightedCodeTheme;
     listTheme?: ListCompTheme;
-    static defaultTheme: JumbotronTheme;
-}
-declare const _default: JumbotronTheme;
-export default _default;
+};
+export declare const defaultTheme: JumbotronTheme;
