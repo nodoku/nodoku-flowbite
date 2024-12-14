@@ -15,9 +15,9 @@ import {defaultTheme} from "./carousel-theme";
 
 export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
 
-    const {lng, i18nextProvider, imageProvider} = props;
+    const {lng, i18nextTrustedHtmlProvider, imageProvider} = props;
 
-    const {t} = await i18nextProvider(lng);
+    const {t} = await i18nextTrustedHtmlProvider(lng);
 
     const {
         rowIndex,
@@ -51,15 +51,14 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
             codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
             listTheme: effectiveSlideTheme.listTheme || listCompDefaultTheme,
             defaultThemeName: defaultThemeName,
-            i18nextProvider: i18nextProvider
+            i18nextTrustedHtmlProvider: i18nextTrustedHtmlProvider
         });
 
         const backgrounds = await Backgrounds({
             lng: lng,
             defaultThemeName: defaultThemeName,
             bgColorStyle: effectiveSlideTheme.bgColorStyle,
-            bgImageStyle: effectiveSlideTheme.bgImageStyle,
-            i18nextProvider: i18nextProvider
+            bgImageStyle: effectiveSlideTheme.bgImageStyle
         });
 
 
@@ -71,11 +70,11 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
 
                 {block.title &&
                     <div className={`${ts(effectiveTheme, "titleStyle")}`}
-                         dangerouslySetInnerHTML={{__html: t(block.title)}} />
+                         dangerouslySetInnerHTML={t(block.title)} />
                 }
                 {block.subTitle &&
                     <div className={`${ts(effectiveTheme, "subTitleStyle")}`}
-                         dangerouslySetInnerHTML={{__html: t(block.subTitle)}} />
+                         dangerouslySetInnerHTML={t(block.subTitle)} />
                 }
 
                 {paragraphs}
@@ -83,9 +82,9 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
 
                 {block.callToActions.map((cta: NdCallToAction, i: number) => (
                     <div key={`slide-${slideIndex}-cta-${i}`} className={`${ts(effectiveSlideTheme, "ctaContainerStyle")}`}>
-                        <a href={t(cta.ctaUrl)}
+                        <a href={t(cta.ctaUrl).__html as string}
                            className={`${ts(effectiveSlideTheme, "ctaButtonStyle")}`}>
-                            <span dangerouslySetInnerHTML={{__html: t(cta.ctaTitle || cta.ctaUrl)}}/>
+                            <span dangerouslySetInnerHTML={t(cta.ctaTitle || cta.ctaUrl)}/>
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

@@ -39,25 +39,25 @@ import { mergeTheme } from "nodoku-core";
 import { NodokuComponents } from "nodoku-components";
 var Paragraphs = NodokuComponents.Paragraphs;
 var Backgrounds = NodokuComponents.Backgrounds;
-import { ts } from "nodoku-core";
+import { ts, tsi } from "nodoku-core";
 var paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
 var highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
 var listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
 import { defaultTheme } from "./card-theme";
 export function CardImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var rowIndex, componentIndex, content, theme, themes, lng, i18nextProvider, imageProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, paragraphs, backgrounds, _b;
+        var rowIndex, componentIndex, content, theme, themes, lng, i18nextTrustedHtmlProvider, imageProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, paragraphs, backgrounds, _b;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
-                    rowIndex = props.rowIndex, componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextProvider = props.i18nextProvider, imageProvider = props.imageProvider, defaultThemeName = props.defaultThemeName;
+                    rowIndex = props.rowIndex, componentIndex = props.componentIndex, content = props.content, theme = props.theme, themes = props.themes, lng = props.lng, i18nextTrustedHtmlProvider = props.i18nextTrustedHtmlProvider, imageProvider = props.imageProvider, defaultThemeName = props.defaultThemeName;
                     effectiveTheme = mergeTheme(theme, defaultTheme);
                     if (themes.length > 0) {
                         effectiveTheme = mergeTheme(themes[componentIndex % themes.length], effectiveTheme);
                     }
                     block = content[0];
                     _a = block.images[0], url = _a.url, alt = _a.alt;
-                    return [4 /*yield*/, i18nextProvider(lng)];
+                    return [4 /*yield*/, i18nextTrustedHtmlProvider(lng)];
                 case 1:
                     t = (_c.sent()).t;
                     return [4 /*yield*/, Paragraphs({
@@ -67,7 +67,7 @@ export function CardImpl(props) {
                             codeHighlightTheme: effectiveTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
                             listTheme: effectiveTheme.listTheme || listCompDefaultTheme,
                             defaultThemeName: defaultThemeName,
-                            i18nextProvider: i18nextProvider
+                            i18nextTrustedHtmlProvider: i18nextTrustedHtmlProvider
                         })];
                 case 2:
                     paragraphs = _c.sent();
@@ -75,14 +75,13 @@ export function CardImpl(props) {
                             lng: lng,
                             defaultThemeName: defaultThemeName,
                             bgColorStyle: effectiveTheme.bgColorStyle,
-                            bgImageStyle: effectiveTheme.bgImageStyle,
-                            i18nextProvider: i18nextProvider
+                            bgImageStyle: effectiveTheme.bgImageStyle
                         })];
                 case 3:
                     backgrounds = _c.sent();
                     _b = url;
                     if (!_b) return [3 /*break*/, 5];
-                    return [4 /*yield*/, imageProvider({ url: t(url), alt: alt && t(alt), imageStyle: effectiveTheme.imageStyle })];
+                    return [4 /*yield*/, imageProvider({ url: t(url).__html, alt: alt && t(alt).__html, imageStyle: effectiveTheme.imageStyle })];
                 case 4:
                     _b = <div className={"".concat(ts(effectiveTheme, "imageContainerStyle"))}>
                     {_c.sent()}
@@ -97,24 +96,23 @@ export function CardImpl(props) {
 
                 {block.title &&
                             <a href="#">
-                        <h3 className={"".concat(ts(effectiveTheme, "titleStyle"))} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>
+                        <h3 className={"".concat(ts(effectiveTheme, "titleStyle"))} dangerouslySetInnerHTML={t(block.title)}/>
                     </a>}
                 {block.subTitle &&
-                            <h4 className={"".concat(ts(effectiveTheme, "subTitleStyle"))} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
+                            <h4 className={"".concat(ts(effectiveTheme, "subTitleStyle"))} dangerouslySetInnerHTML={t(block.subTitle)}/>}
 
                 {paragraphs}
 
             </div>
 
-            {block.callToActions.map(function (cta, i) { return (<div key={"horizontal-card-".concat(rowIndex, "-").concat(componentIndex, "-cta-").concat(i)} className={"".concat(ts(effectiveTheme, "ctaContainerStyle"))}>
-
-                    <a href={t(cta.ctaUrl)} className={"".concat(ts(effectiveTheme, "ctaButtonStyle"))}>
-                        <span dangerouslySetInnerHTML={{ __html: t(cta.ctaTitle || cta.ctaUrl) }}/>
-                        <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>); })}
+            <div className={"".concat(ts(effectiveTheme, "ctaContainerStyle"))}>
+                {block.callToActions.map(function (cta, i) { return (<a key={"horizontal-card-".concat(rowIndex, "-").concat(componentIndex, "-cta-").concat(i)} href={t(cta.ctaUrl).__html} className={"".concat(tsi(effectiveTheme, "ctaButtonStyle", i))}>
+                            <span dangerouslySetInnerHTML={t(cta.ctaTitle || cta.ctaUrl)}/>
+                            <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </a>); })}
+            </div>
 
         </div>)];
             }

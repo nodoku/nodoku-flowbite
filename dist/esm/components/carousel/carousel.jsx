@@ -47,13 +47,13 @@ var listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
 import { defaultTheme } from "./carousel-theme";
 export function CarouselImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var lng, i18nextProvider, imageProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides;
+        var lng, i18nextTrustedHtmlProvider, imageProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    lng = props.lng, i18nextProvider = props.i18nextProvider, imageProvider = props.imageProvider;
-                    return [4 /*yield*/, i18nextProvider(lng)];
+                    lng = props.lng, i18nextTrustedHtmlProvider = props.i18nextTrustedHtmlProvider, imageProvider = props.imageProvider;
+                    return [4 /*yield*/, i18nextTrustedHtmlProvider(lng)];
                 case 1:
                     t = (_a.sent()).t;
                     rowIndex = props.rowIndex, componentIndex = props.componentIndex, content = props.content, options = props.options, theme = props.theme, themes = props.themes, defaultThemeName = props.defaultThemeName;
@@ -73,7 +73,7 @@ export function CarouselImpl(props) {
                                                 codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
                                                 listTheme: effectiveSlideTheme.listTheme || listCompDefaultTheme,
                                                 defaultThemeName: defaultThemeName,
-                                                i18nextProvider: i18nextProvider
+                                                i18nextTrustedHtmlProvider: i18nextTrustedHtmlProvider
                                             })];
                                     case 1:
                                         paragraphs = _a.sent();
@@ -81,8 +81,7 @@ export function CarouselImpl(props) {
                                                 lng: lng,
                                                 defaultThemeName: defaultThemeName,
                                                 bgColorStyle: effectiveSlideTheme.bgColorStyle,
-                                                bgImageStyle: effectiveSlideTheme.bgImageStyle,
-                                                i18nextProvider: i18nextProvider
+                                                bgImageStyle: effectiveSlideTheme.bgImageStyle
                                             })];
                                     case 2:
                                         backgrounds = _a.sent();
@@ -91,16 +90,16 @@ export function CarouselImpl(props) {
                 {backgrounds}
 
                 {block.title &&
-                                                    <div className={"".concat(ts(effectiveTheme, "titleStyle"))} dangerouslySetInnerHTML={{ __html: t(block.title) }}/>}
+                                                    <div className={"".concat(ts(effectiveTheme, "titleStyle"))} dangerouslySetInnerHTML={t(block.title)}/>}
                 {block.subTitle &&
-                                                    <div className={"".concat(ts(effectiveTheme, "subTitleStyle"))} dangerouslySetInnerHTML={{ __html: t(block.subTitle) }}/>}
+                                                    <div className={"".concat(ts(effectiveTheme, "subTitleStyle"))} dangerouslySetInnerHTML={t(block.subTitle)}/>}
 
                 {paragraphs}
 
 
                 {block.callToActions.map(function (cta, i) { return (<div key={"slide-".concat(slideIndex, "-cta-").concat(i)} className={"".concat(ts(effectiveSlideTheme, "ctaContainerStyle"))}>
-                        <a href={t(cta.ctaUrl)} className={"".concat(ts(effectiveSlideTheme, "ctaButtonStyle"))}>
-                            <span dangerouslySetInnerHTML={{ __html: t(cta.ctaTitle || cta.ctaUrl) }}/>
+                        <a href={t(cta.ctaUrl).__html} className={"".concat(ts(effectiveSlideTheme, "ctaButtonStyle"))}>
+                            <span dangerouslySetInnerHTML={t(cta.ctaTitle || cta.ctaUrl)}/>
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                             </svg>

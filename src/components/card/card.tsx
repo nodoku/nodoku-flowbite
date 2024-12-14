@@ -4,7 +4,7 @@ import {mergeTheme, NdContentBlock, NdSkinComponentProps} from "nodoku-core";
 import {NodokuComponents} from "nodoku-components";
 import Paragraphs = NodokuComponents.Paragraphs;
 import Backgrounds = NodokuComponents.Backgrounds;
-import {ts} from "nodoku-core";
+import {ts, tsi} from "nodoku-core";
 import paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
 import highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
 import listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
@@ -21,7 +21,7 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
         theme,
         themes,
         lng,
-        i18nextProvider,
+        i18nextTrustedHtmlProvider,
         imageProvider,
         defaultThemeName
     } = props;
@@ -39,7 +39,7 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
     const block: NdContentBlock = content[0];
     const {url, alt} = block.images[0];
 
-    const {t} = await i18nextProvider(lng);
+    const {t} = await i18nextTrustedHtmlProvider(lng);
 
     const paragraphs: JSX.Element = await Paragraphs({
         lng: lng,
@@ -48,15 +48,14 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
         codeHighlightTheme: effectiveTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
         listTheme: effectiveTheme.listTheme || listCompDefaultTheme,
         defaultThemeName: defaultThemeName,
-        i18nextProvider: i18nextProvider
+        i18nextTrustedHtmlProvider: i18nextTrustedHtmlProvider
     })
 
     const backgrounds: JSX.Element = await Backgrounds({
         lng: lng,
         defaultThemeName: defaultThemeName,
         bgColorStyle: effectiveTheme.bgColorStyle,
-        bgImageStyle: effectiveTheme.bgImageStyle,
-        i18nextProvider: i18nextProvider
+        bgImageStyle: effectiveTheme.bgImageStyle
     });
 
     return (
@@ -67,7 +66,7 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
 
             {url &&
                 <div className={`${ts(effectiveTheme, "imageContainerStyle")}`}>
-                    {await imageProvider({url: t(url), alt: alt && t(alt), imageStyle: effectiveTheme.imageStyle })}
+                    {await imageProvider({url: t(url).__html as string, alt: alt && t(alt).__html as string, imageStyle: effectiveTheme.imageStyle })}
                 </div>
             }
             <div className={`${ts(effectiveTheme, "innerContainerStyle")}`}>
@@ -75,33 +74,31 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
                 {block.title &&
                     <a href="#">
                         <h3 className={`${ts(effectiveTheme, "titleStyle")}`}
-                             dangerouslySetInnerHTML={{__html: t(block.title)}} />
+                             dangerouslySetInnerHTML={t(block.title)} />
                     </a>
                 }
                 {block.subTitle &&
                     <h4 className={`${ts(effectiveTheme, "subTitleStyle")}`}
-                        dangerouslySetInnerHTML={{__html: t(block.subTitle)}} />
+                        dangerouslySetInnerHTML={t(block.subTitle)} />
                 }
 
                 {paragraphs}
 
             </div>
 
-            {block.callToActions.map((cta: NdCallToAction, i) => (
-                <div key={`horizontal-card-${rowIndex}-${componentIndex}-cta-${i}`} className={`${ts(effectiveTheme, "ctaContainerStyle")}`}>
+            <div className={`${ts(effectiveTheme, "ctaContainerStyle")}`}>
+                {block.callToActions.map((cta: NdCallToAction, i) => (
 
-                    <a href={t(cta.ctaUrl)}
-
-                       className={`${ts(effectiveTheme, "ctaButtonStyle")}`}>
-                        <span dangerouslySetInnerHTML={{__html: t(cta.ctaTitle || cta.ctaUrl)}} />
-                        <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                  d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>))
-            }
+                        <a key={`horizontal-card-${rowIndex}-${componentIndex}-cta-${i}`} href={t(cta.ctaUrl).__html as string} className={`${tsi(effectiveTheme, "ctaButtonStyle", i)}`}>
+                            <span dangerouslySetInnerHTML={t(cta.ctaTitle || cta.ctaUrl)} />
+                            <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                      d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </a>
+                ))}
+            </div>
 
         </div>
 

@@ -21,7 +21,7 @@ export async function JumbotronImpl(props: NdSkinComponentProps<JumbotronTheme, 
         theme,
         themes,
         lng,
-        i18nextProvider,
+        i18nextTrustedHtmlProvider,
         defaultThemeName
     } = props;
 
@@ -35,7 +35,7 @@ export async function JumbotronImpl(props: NdSkinComponentProps<JumbotronTheme, 
 
     const block: NdContentBlock = content[0];
 
-    const {t} = await i18nextProvider(lng);
+    const {t} = await i18nextTrustedHtmlProvider(lng);
 
     const paragraphs = await Paragraphs({
         lng: lng,
@@ -44,15 +44,14 @@ export async function JumbotronImpl(props: NdSkinComponentProps<JumbotronTheme, 
         codeHighlightTheme: effectiveTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
         listTheme: effectiveTheme.listTheme || listCompDefaultTheme,
         defaultThemeName: defaultThemeName,
-        i18nextProvider: i18nextProvider
+        i18nextTrustedHtmlProvider: i18nextTrustedHtmlProvider
     });
 
     const backgrounds = await Backgrounds({
         lng: lng,
         defaultThemeName: defaultThemeName,
         bgColorStyle: effectiveTheme.bgColorStyle,
-        bgImageStyle: effectiveTheme.bgImageStyle,
-        i18nextProvider: i18nextProvider
+        bgImageStyle: effectiveTheme.bgImageStyle
     });
 
     return (
@@ -62,20 +61,20 @@ export async function JumbotronImpl(props: NdSkinComponentProps<JumbotronTheme, 
 
             {block.title &&
                 <h1 className={`${ts(effectiveTheme, "titleStyle")}`}
-                    dangerouslySetInnerHTML={{__html: t(block.title)}} />
+                    dangerouslySetInnerHTML={t(block.title)} />
             }
             {block.subTitle &&
                 <h2 className={`${ts(effectiveTheme, "subTitleStyle")}`}
-                    dangerouslySetInnerHTML={{__html: t(block.subTitle)}} />
+                    dangerouslySetInnerHTML={t(block.subTitle)} />
             }
 
             {paragraphs}
 
             {block.callToActions.map((cta: NdCallToAction, i) => (
                 <div key={`horizontal-card-${rowIndex}-${componentIndex}-cta-${i}`} className={`${ts(effectiveTheme, "ctaContainerStyle")}`}>
-                    <a href={t(cta.ctaUrl)}
+                    <a href={t(cta.ctaUrl).__html as string}
                        className={`${ts(effectiveTheme, "ctaButtonStyle")}`}>
-                        <span dangerouslySetInnerHTML={{__html: t(cta.ctaTitle || cta.ctaUrl)}}/>
+                        <span dangerouslySetInnerHTML={t(cta.ctaTitle || cta.ctaUrl)}/>
                         <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
