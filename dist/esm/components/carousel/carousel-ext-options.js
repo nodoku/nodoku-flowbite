@@ -7,8 +7,10 @@ var CarouselExtOptions = /** @class */ (function () {
         //     decoration: ""
         // },
         props: {
-            slide: false,
-            slideInterval: 10000
+            // slide: false,
+            // slideInterval: 10000
+            interval: 10000
+            // prop: 456
         }
     };
     return CarouselExtOptions;

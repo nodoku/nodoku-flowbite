@@ -1,10 +1,11 @@
-import {CarouselProps} from "flowbite-react";
+// import {CarouselProps} from "flowbite-react";
 import {ThemeStyle} from "nodoku-core";
+import {CarouselOptions} from "flowbite";
 
 export class CarouselExtOptions {
 
 
-    props?: CarouselProps;
+    props?: CarouselOptions;
 
     public static defaultOptions: CarouselExtOptions = {
 
@@ -14,8 +15,10 @@ export class CarouselExtOptions {
         // },
 
         props: {
-            slide: false,
-            slideInterval: 10000
+            // slide: false,
+            // slideInterval: 10000
+            interval: 10000
+            // prop: 456
         }
 
     }

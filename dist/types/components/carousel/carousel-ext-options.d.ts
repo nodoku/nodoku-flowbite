@@ -1,5 +1,5 @@
-import { CarouselProps } from "flowbite-react";
+import { CarouselOptions } from "flowbite";
 export declare class CarouselExtOptions {
-    props?: CarouselProps;
+    props?: CarouselOptions;
     static defaultOptions: CarouselExtOptions;
 }

@@ -8,7 +8,8 @@ import {HorizontalCardImpl} from "./components/horizontal-card/horizontal-card";
 import {HorizontalCardTheme} from "./components/horizontal-card/horizontal-card-theme";
 import {JumbotronTheme} from "./components/jumbotron/jumbotron-theme";
 import {JumbotronImpl} from "./components/jumbotron/jumbotron";
-import {CarouselProps} from "flowbite-react";
+import {CarouselOptions} from "flowbite";
+// import {CarouselProps} from "flowbite-react";
 
 export namespace NodokuFlowbite {
 
@@ -20,7 +21,7 @@ export namespace NodokuFlowbite {
         return HorizontalCardImpl(props)
     }
 
-    export async function Carousel(props: NdSkinComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
+    export async function Carousel(props: NdSkinComponentProps<CarouselTheme, CarouselOptions>): Promise<JSX.Element> {
         return CarouselImpl(props)
     }
 

@@ -38,6 +38,7 @@ import { CardImpl } from "./components/card/card";
 import { CarouselImpl } from "./components/carousel/carousel";
 import { HorizontalCardImpl } from "./components/horizontal-card/horizontal-card";
 import { JumbotronImpl } from "./components/jumbotron/jumbotron";
+// import {CarouselProps} from "flowbite-react";
 export var NodokuFlowbite;
 (function (NodokuFlowbite) {
     function Card(props) {
