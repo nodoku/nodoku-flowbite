@@ -1,6 +1,6 @@
-// import {CarouselProps} from "flowbite-react";
-import {ThemeStyle} from "nodoku-core";
-import {CarouselOptions} from "flowbite";
+// import {CarouselProps} from "flowbite-react/components/Carousel";
+// import {ThemeStyle} from "nodoku-core";
+import {CarouselOptions} from "flowbite/lib/esm/components/carousel/types";
 
 export class CarouselExtOptions {
 
