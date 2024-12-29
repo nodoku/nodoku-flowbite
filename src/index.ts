@@ -9,7 +9,8 @@ import {HorizontalCardTheme} from "./components/horizontal-card/horizontal-card-
 import {JumbotronTheme} from "./components/jumbotron/jumbotron-theme";
 import {JumbotronImpl} from "./components/jumbotron/jumbotron";
 import {CarouselOptions} from "flowbite/lib/esm/components/carousel/types";
-// import {CarouselProps} from "flowbite-react";
+import {NavHeaderTheme} from "./components/nav-header/nav-header-theme";
+import {NavHeaderImpl} from "./components/nav-header/nav-header";
 
 export namespace NodokuFlowbite {
 
@@ -27,5 +28,9 @@ export namespace NodokuFlowbite {
 
     export async function Jumbotron(props: NdSkinComponentProps<JumbotronTheme, void>): Promise<JSX.Element> {
         return JumbotronImpl(props)
+    }
+
+    export async function NavHeader(props: NdSkinComponentProps<NavHeaderTheme, void>): Promise<JSX.Element> {
+        return NavHeaderImpl(props)
     }
 }

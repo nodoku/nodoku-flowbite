@@ -1,6 +1,6 @@
 "use client";
 import Carousel from "flowbite/lib/esm/components/carousel/index";
-export function CarouselClientImpl() {
+export function CarouselClientSide() {
     if (typeof window !== 'undefined') {
         setTimeout(function () {
             var carouselElement = document.getElementById('default-carousel');
@@ -50,13 +50,13 @@ export function CarouselClientImpl() {
                 },
                 // callback functions
                 onNext: function () {
-                    console.log('next slider item is shown');
+                    // console.log('next slider item is shown');
                 },
                 onPrev: function () {
-                    console.log('previous slider item is shown');
+                    // console.log('previous slider item is shown');
                 },
                 onChange: function () {
-                    console.log('new slider item has been shown');
+                    // console.log('new slider item has been shown');
                 },
             };
             // instance options object
@@ -79,4 +79,4 @@ export function CarouselClientImpl() {
     }
     return <div className={"hidden"}>carousel initialized</div>;
 }
-//# sourceMappingURL=carousel-client.jsx.map
+//# sourceMappingURL=carousel-client-side.jsx.map

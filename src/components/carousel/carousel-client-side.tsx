@@ -11,7 +11,7 @@ import Carousel from "flowbite/lib/esm/components/carousel/index";
 import {JSX} from "react";
 
 
-export function CarouselClientImpl(): JSX.Element {
+export function CarouselClientSide(): JSX.Element {
 
     if (typeof window !== 'undefined') {
 
@@ -69,13 +69,13 @@ export function CarouselClientImpl(): JSX.Element {
 
                 // callback functions
                 onNext: () => {
-                    console.log('next slider item is shown');
+                    // console.log('next slider item is shown');
                 },
                 onPrev: () => {
-                    console.log('previous slider item is shown');
+                    // console.log('previous slider item is shown');
                 },
                 onChange: () => {
-                    console.log('new slider item has been shown');
+                    // console.log('new slider item has been shown');
                 },
             };
 

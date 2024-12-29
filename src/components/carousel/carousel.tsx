@@ -1,5 +1,4 @@
 import React, {JSX} from "react";
-// import {Carousel, CarouselProps} from "flowbite-react";
 import {mergeTheme, NdContentBlock, NdSkinComponentProps} from "nodoku-core";
 import {CarouselTheme} from "./carousel-theme";
 import {NodokuComponents} from "nodoku-components";
@@ -12,7 +11,7 @@ import listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
 import {NdCallToAction} from "nodoku-core";
 import {defaultTheme} from "./carousel-theme";
 import {CarouselOptions} from "flowbite/lib/esm/components/carousel/types";
-import {CarouselClientImpl} from "./carousel-client";
+import {CarouselClientSide} from "./carousel-client-side";
 
 
 export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselOptions>): Promise<JSX.Element> {
@@ -165,7 +164,7 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Ca
                 </button>
             </div>
 
-            <CarouselClientImpl />
+            <CarouselClientSide />
 
         </div>
 

@@ -35,7 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import React from "react";
-// import {Carousel, CarouselProps} from "flowbite-react";
 import { mergeTheme } from "nodoku-core";
 import { NodokuComponents } from "nodoku-components";
 var Paragraphs = NodokuComponents.Paragraphs;
@@ -45,7 +44,7 @@ var paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
 var highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
 var listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
 import { defaultTheme } from "./carousel-theme";
-import { CarouselClientImpl } from "./carousel-client";
+import { CarouselClientSide } from "./carousel-client-side";
 export function CarouselImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
         var lng, i18nextTrustedHtmlProvider, imageProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides;
@@ -156,7 +155,7 @@ export function CarouselImpl(props) {
                 </button>
             </div>
 
-            <CarouselClientImpl />
+            <CarouselClientSide />
 
         </div>)];
             }

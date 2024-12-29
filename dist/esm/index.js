@@ -38,7 +38,7 @@ import { CardImpl } from "./components/card/card";
 import { CarouselImpl } from "./components/carousel/carousel";
 import { HorizontalCardImpl } from "./components/horizontal-card/horizontal-card";
 import { JumbotronImpl } from "./components/jumbotron/jumbotron";
-// import {CarouselProps} from "flowbite-react";
+import { NavHeaderImpl } from "./components/nav-header/nav-header";
 export var NodokuFlowbite;
 (function (NodokuFlowbite) {
     function Card(props) {
@@ -73,5 +73,13 @@ export var NodokuFlowbite;
         });
     }
     NodokuFlowbite.Jumbotron = Jumbotron;
+    function NavHeader(props) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, NavHeaderImpl(props)];
+            });
+        });
+    }
+    NodokuFlowbite.NavHeader = NavHeader;
 })(NodokuFlowbite || (NodokuFlowbite = {}));
 //# sourceMappingURL=index.js.map

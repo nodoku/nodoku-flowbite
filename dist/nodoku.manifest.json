@@ -25,6 +25,16 @@
       "defaultThemeFile": "./schemas/components/jumbotron/default-theme.yml",
       "implementation": "Jumbotron",
       "numBlocks": 1
+    },
+    "flowbite/nav-header": {
+      "schemaFile": "./schemas/components/nav-header/visual-schema.json",
+      "defaultThemeFile": "./schemas/components/nav-header/default-theme.yml",
+      "implementation": "NavHeader",
+      "numBlocks": 1,
+      "clientSideComps": [
+        "language-switcher",
+        "user-account"
+      ]
     }
   }
 }
