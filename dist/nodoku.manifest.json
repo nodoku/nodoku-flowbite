@@ -20,6 +20,13 @@
       "implementation": "Carousel",
       "numBlocks": "unlimited"
     },
+    "flowbite-react/carousel": {
+      "schemaFile": "./schemas/components/flowbite-react-carousel/visual-schema.json",
+      "optionsFile": "./schemas/components/flowbite-react-carousel/options-schema.json",
+      "defaultThemeFile": "./schemas/components/flowbite-react-carousel/default-theme.yml",
+      "implementation": "FlowbiteReactCarousel",
+      "numBlocks": "unlimited"
+    },
     "flowbite/jumbotron": {
       "schemaFile": "./schemas/components/jumbotron/visual-schema.json",
       "defaultThemeFile": "./schemas/components/jumbotron/default-theme.yml",

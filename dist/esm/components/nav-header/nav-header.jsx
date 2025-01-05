@@ -37,16 +37,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import React from "react";
 import { defaultTheme } from "./nav-header-theme";
 import { mergeTheme } from "nodoku-core";
-import { NodokuComponents } from "nodoku-components";
-var Backgrounds = NodokuComponents.Backgrounds;
 import { NavHeaderClientSide } from "./nav-header-client-side";
 import { NdList } from "nodoku-core";
 import { NdLink } from "nodoku-core";
 import { NdTranslatableText } from "nodoku-core";
 import { extractValueFromText } from "nodoku-core";
+import { ts } from "nodoku-core";
 export function NavHeaderImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var rowIndex, componentIndex, content, theme, themes, lng, i18nextTrustedHtmlProvider, defaultThemeName, clientSideComponentProvider, imageProvider, clpv, effectiveTheme, block, t, backgrounds, menuContent, menuItems, brand, sections, _i, content_1, b, brandLogo, companyName, companyNameText;
+        var rowIndex, componentIndex, content, theme, themes, lng, i18nextTrustedHtmlProvider, defaultThemeName, clientSideComponentProvider, imageProvider, clpv, effectiveTheme, block, t, menuContent, menuItems, brand, _i, content_1, b, brandLogo, companyName, companyNameText;
         var _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
@@ -63,76 +62,65 @@ export function NavHeaderImpl(props) {
                     return [4 /*yield*/, i18nextTrustedHtmlProvider(lng)];
                 case 1:
                     t = (_b.sent()).t;
-                    return [4 /*yield*/, Backgrounds({
-                            lng: lng,
-                            defaultThemeName: defaultThemeName,
-                            bgColorStyle: effectiveTheme.bgColorStyle,
-                            bgImageStyle: effectiveTheme.bgImageStyle
-                        })];
-                case 2:
-                    backgrounds = _b.sent();
                     menuContent = block.paragraphs.find(function (p) { return p instanceof NdList; });
                     menuItems = menuContent ? menuContent.items.map(function (m, itemIndex) {
                         if (m.subList && m.subList instanceof NdList && m.subList.items.length > 0) {
                             var title = m.text instanceof NdTranslatableText ? m.text : (m.text.urlText ? m.text.urlText : m.text.url);
-                            return (<li>
+                            var key = m.text instanceof NdTranslatableText ? m.text.key : m.text.url.text;
+                            return (<li key={key} className={"key-".concat(key)}>
                     <button id={"dropdownNavbar-button-".concat(itemIndex)} data-dropdown-toggle={"dropdownNavbar-dropdown-".concat(itemIndex)} className="dropdownNavbar-button flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                         <span dangerouslySetInnerHTML={t(title)}/>
                         <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
                         </svg>
                     </button>
-                    <div id={"dropdownNavbar-dropdown-".concat(itemIndex)} className="dropdownNavbar-dropdown absolute z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                    <div id={"dropdownNavbar-dropdown-".concat(itemIndex)} className={"dropdownNavbar-dropdown ".concat(ts(effectiveTheme, "mainMenuDropdownContainer"))}>
+                        <ul className={ts(effectiveTheme, "mainMenuDropdownList")} aria-labelledby="dropdownLargeButton">
                             {m.subList.items
-                                    .map(function (si) { return drawListItem(si, t, "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"); })}
+                                    .map(function (si) { return drawListItem(si, t, ts(effectiveTheme, "mainMenuSecondLevelItemStyle")); })}
                         </ul>
                     </div>
                 </li>);
                         }
                         else {
-                            return drawListItem(m, t, "block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent");
+                            return drawListItem(m, t, ts(effectiveTheme, "mainMenuFirstLevelItemStyle"));
                         }
                     }) : [];
                     brand = undefined;
-                    sections = [];
+                    // const sections: NdContentBlock[] = [];
                     for (_i = 0, content_1 = content; _i < content_1.length; _i++) {
                         b = content_1[_i];
                         if (((_a = b.title) === null || _a === void 0 ? void 0 : _a.text) && b.title.text === "{Brand}") {
                             brand = b;
-                        }
-                        else {
-                            sections.push(b);
-                        }
+                        } /*else {
+                            sections.push(b)
+                        }*/
                     }
-                    brandLogo = (brand && brand.images.length > 0) ? t(brand.images[0].url).__html : "icon:react-icons/ci:CiCircleMinus";
+                    brandLogo = (brand && brand.images.length > 0) ? t(brand.images[0].url).__html : "icon:nd-react-icons/ci:CiCircleMinus";
                     companyName = brand === null || brand === void 0 ? void 0 : brand.paragraphs.find(function (p) { return (p instanceof NdTranslatableText) &&
                         p.text.startsWith("{companyName}"); });
                     companyNameText = extractValueFromText(companyName ? t(companyName) : undefined, "companyName");
                     return [4 /*yield*/, imageProvider({
                             url: brandLogo,
                             alt: (companyNameText === null || companyNameText === void 0 ? void 0 : companyNameText.__html) + "logo",
-                            imageStyle: {
-                                base: "h-8", decoration: ""
-                            }
+                            imageStyle: effectiveTheme.logoImageStyle
                         })];
-                case 3: return [2 /*return*/, (<nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-            <div className="flex flex-wrap items-center justify-between mx-auto p-4">
-                <div className={"w-20"}>
-                    <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                        {/*<img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo"/>*/}
+                case 2: return [2 /*return*/, (<nav className={ts(effectiveTheme, "navStyle")}>
+            <div className={ts(effectiveTheme, "navInnerContainer")}>
+                <div className={ts(effectiveTheme, "logoBlockStyle")}>
+                    <a href="https://nodoku.io/" className={ts(effectiveTheme, "logoLinkStyle")}>
                         {_b.sent()}
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white" dangerouslySetInnerHTML={companyNameText}/>
+                        <span className={ts(effectiveTheme, "logoCompanyNameStyle")} dangerouslySetInnerHTML={companyNameText}/>
                     </a>
                 </div>
-                <div className="w-20 justify-end flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
+                <div className={ts(effectiveTheme, "rightButtonsBlock")}>
                     {themeSwitcherButton()}
                     {clpv("flowbite/nav-header:language-switcher")}
                     {clpv("flowbite/nav-header:user-account")}
                     {hamburgerButton()}
                 </div>
-                <div className="hidden w-full md:block md:w-auto" id="navbar-main-menu">
-                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <div className={ts(effectiveTheme, "mainMenuBlock")} id="navbar-main-menu">
+                    <ul className={ts(effectiveTheme, "mainMenuListStyle")}>
                         {menuItems}
                     </ul>
                 </div>
@@ -165,7 +153,7 @@ var hamburgerButton = function () {
 var drawListItem = function (m, t, itemClassName) {
     if (m.text instanceof NdLink) {
         var link = m.text;
-        return (<li>
+        return (<li key={link.url.key} className={"key-".concat(link.url.key)}>
                 <a href={t(link.url).__html} className={itemClassName} aria-current="page" dangerouslySetInnerHTML={link.urlText ? t(link.urlText) : t(link.url)}/>
             </li>);
     }

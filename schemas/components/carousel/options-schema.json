@@ -1,29 +1,27 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
-    "CarouselProps": {
+    "CarouselOptions": {
       "type": "object",
       "properties": {
-        "slide": {
-          "type": "boolean"
-        },
         "slideInterval": {
           "type": "number"
         },
-        "indicators": {
+        "showIndicators": {
           "type": "boolean"
         },
-        "draggable": {
-          "type": "boolean"
-        },
-        "pauseOnHover": {
-          "type": "boolean"
+        "animationType": {
+          "type": "string",
+          "enum": [
+            "slide",
+            "fade-in-fade-out"
+          ]
         }
       },
       "additionalProperties": false
     }
   },
   "type": "object",
-  "$ref": "#/definitions/CarouselProps",
+  "$ref": "#/definitions/CarouselOptions",
   "additionalProperties": false
 }

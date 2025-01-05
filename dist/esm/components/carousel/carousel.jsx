@@ -36,18 +36,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import React from "react";
 import { mergeTheme } from "nodoku-core";
+import { ts } from "nodoku-core";
+import { tsi } from "nodoku-core";
+import { defaultTheme } from "./carousel-theme";
+import { defaultOptions } from "./carousel-theme";
+import { animationSlide } from "./carousel-theme";
+import { animationFadeInFadeOut } from "./carousel-theme";
 import { NodokuComponents } from "nodoku-components";
+import { CarouselClientSide } from "./carousel-client-side";
 var Paragraphs = NodokuComponents.Paragraphs;
 var Backgrounds = NodokuComponents.Backgrounds;
-import { ts } from "nodoku-core";
 var paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
 var highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
 var listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
-import { defaultTheme } from "./carousel-theme";
-import { CarouselClientSide } from "./carousel-client-side";
 export function CarouselImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var lng, i18nextTrustedHtmlProvider, imageProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides;
+        var lng, i18nextTrustedHtmlProvider, imageProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, effectiveOptions, indicatorButtons, carouselElementId, slides, animation;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -58,6 +62,13 @@ export function CarouselImpl(props) {
                     t = (_a.sent()).t;
                     rowIndex = props.rowIndex, componentIndex = props.componentIndex, content = props.content, options = props.options, theme = props.theme, themes = props.themes, defaultThemeName = props.defaultThemeName;
                     effectiveTheme = mergeTheme(theme, defaultTheme);
+                    effectiveOptions = mergeTheme(options, defaultOptions);
+                    indicatorButtons = content.map(function (b, slideIndex) {
+                        var indicatorButtonId = "carousel-indicator-".concat(slideIndex);
+                        return (<button id={indicatorButtonId} key={indicatorButtonId} type="button" className="carousel-indicator w-3 h-3 rounded-full" aria-current="true" aria-label={"Slide ".concat(slideIndex)} data-carousel-slide-to={"".concat(slideIndex)}>
+            </button>);
+                    });
+                    carouselElementId = "carousel-".concat(10000 * Math.random());
                     return [4 /*yield*/, Promise.all(content.map(function (b, slideIndex) { return __awaiter(_this, void 0, void 0, function () {
                             var slideTheme, effectiveSlideTheme, block, paragraphs, backgrounds;
                             return __generator(this, function (_a) {
@@ -69,7 +80,10 @@ export function CarouselImpl(props) {
                                         return [4 /*yield*/, Paragraphs({
                                                 lng: lng,
                                                 blockParagraphs: block.paragraphs,
-                                                paragraphTheme: effectiveSlideTheme.paragraphStyle || paragraphDefaultTheme,
+                                                paragraphTheme: {
+                                                    paragraphStyle: effectiveSlideTheme.paragraphStyle,
+                                                    paragraphContainer: effectiveTheme.paragraphContainerStyle
+                                                } || paragraphDefaultTheme,
                                                 codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
                                                 listTheme: effectiveSlideTheme.listTheme || listCompDefaultTheme,
                                                 defaultThemeName: defaultThemeName,
@@ -85,7 +99,7 @@ export function CarouselImpl(props) {
                                             })];
                                     case 2:
                                         backgrounds = _a.sent();
-                                        return [2 /*return*/, (<div key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"".concat(ts(effectiveSlideTheme, "slideContainerStyle"))} data-carousel-item>
+                                        return [2 /*return*/, (<div id={"carousel-".concat(carouselElementId, "-item-").concat(slideIndex)} key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"carousel-item ".concat(slideIndex === 0 ? "" : "hidden", " ").concat(ts(effectiveSlideTheme, "slideAnimation"), " ").concat(ts(effectiveSlideTheme, "containerStyle"))} data-carousel-item={""}>
 
                 {backgrounds}
 
@@ -97,47 +111,33 @@ export function CarouselImpl(props) {
                 {paragraphs}
 
 
-                {block.callToActions.map(function (cta, i) { return (<div key={"slide-".concat(slideIndex, "-cta-").concat(i)} className={"".concat(ts(effectiveSlideTheme, "ctaContainerStyle"))}>
-                        <a href={t(cta.ctaUrl).__html} className={"".concat(ts(effectiveSlideTheme, "ctaButtonStyle"))}>
+                <div className={"".concat(ts(effectiveSlideTheme, "ctaContainerStyle"))}>
+                    {block.callToActions.map(function (cta, i) { return (<a key={"slide-".concat(slideIndex, "-cta-").concat(i)} href={t(cta.ctaUrl).__html} className={"".concat(tsi(effectiveSlideTheme, "ctaButtonStyle", i))}>
+
                             <span dangerouslySetInnerHTML={t(cta.ctaTitle || cta.ctaUrl)}/>
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                             </svg>
-                        </a>
-                    </div>); })}
+                        </a>); })}
+                </div>
             </div>)];
                                 }
                             });
                         }); }))];
                 case 2:
                     slides = _a.sent();
-                    return [2 /*return*/, (<div className={"relative ".concat(ts(effectiveTheme, "containerStyle"), " carousel-container-main")}>
-            {/*<Carousel  {...options}>*/}
-            {/*    {slides}*/}
-            {/*</Carousel>*/}
+                    animation = effectiveOptions.animationType === "slide" ? animationSlide : animationFadeInFadeOut;
+                    return [2 /*return*/, (<div className={"relative ".concat(ts(effectiveTheme, "carouselContainerStyle"), " carousel-container-main")}>
 
-            <div id="default-carousel" className="relative w-full" data-carousel="static">
-                <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-                    <div id={"carousel-item-1"} className="duration-700 ease-in-out" data-carousel-item={""}>
-                        <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-                    </div>
-                    <div id={"carousel-item-2"} className="hidden duration-700 ease-in-out" data-carousel-item={""}>
-                        <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-                    </div>
-                    <div id={"carousel-item-3"} className="hidden duration-700 ease-in-out" data-carousel-item={""}>
-                        <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-                    </div>
-                    <div id={"carousel-item-4"} className="hidden duration-700 ease-in-out" data-carousel-item={""}>
-                        <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-                    </div>
+            <div id={carouselElementId} className="relative w-full aspect-[2/4] md:aspect-square lg:aspect-[4/1.61]" data-carousel="static">
+                <div className="absolute inset-0">
+                    {slides}
                 </div>
-                <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                    <button id={"carousel-indicator-1"} type="button" className="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="1"></button>
-                    <button id={"carousel-indicator-2"} type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="2"></button>
-                    <button id={"carousel-indicator-3"} type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="3"></button>
-                    <button id={"carousel-indicator-4"} type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="4"></button>
-                </div>
-                <button id={"data-carousel-prev"} type="button" className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev={""}>
+                {effectiveOptions.showIndicators &&
+                                <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                        {indicatorButtons}
+                    </div>}
+                <button id={"data-carousel-prev"} type="button" className="data-carousel-prev absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev={""}>
                     <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                         <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4"/>
@@ -145,7 +145,7 @@ export function CarouselImpl(props) {
                         <span className="sr-only">Previous</span>
                     </span>
                 </button>
-                <button id={"data-carousel-next"} type="button" className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next={""}>
+                <button id={"data-carousel-next"} type="button" className="data-carousel-next absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next={""}>
                     <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                         <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
@@ -155,7 +155,10 @@ export function CarouselImpl(props) {
                 </button>
             </div>
 
-            <CarouselClientSide />
+            <CarouselClientSide options={effectiveOptions} carouselElementId={carouselElementId} animation={animation} indicators={{
+                                activeClasses: ts(effectiveTheme, "indicatorActiveClasses"),
+                                inactiveClasses: ts(effectiveTheme, "indicatorInactiveClasses")
+                            }}/>
 
         </div>)];
             }

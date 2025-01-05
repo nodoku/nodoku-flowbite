@@ -65,6 +65,16 @@ export var NodokuFlowbite;
         });
     }
     NodokuFlowbite.Carousel = Carousel;
+    function FlowbiteReactCarousel(props) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                // const FlowbiteReactCarouselImpl = (await import("./components/flowbite-react-carousel/carousel")).FlowbiteReactCarouselImpl;
+                // return FlowbiteReactCarouselImpl(props)
+                return [2 /*return*/, CarouselImpl(props)];
+            });
+        });
+    }
+    NodokuFlowbite.FlowbiteReactCarousel = FlowbiteReactCarousel;
     function Jumbotron(props) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

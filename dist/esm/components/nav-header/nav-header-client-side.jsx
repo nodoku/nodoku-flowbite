@@ -6,7 +6,8 @@ var init = function () {
     var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
     if (!themeToggleDarkIcon || !themeToggleLightIcon) {
-        throw new Error("buttons are not yet loaded !!!");
+        // throw new Error("buttons are not yet loaded !!!")
+        return;
     }
     // Change the icons inside the button based on previous settings
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {

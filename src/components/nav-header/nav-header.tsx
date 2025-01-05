@@ -12,6 +12,7 @@ import {NdListItem} from "nodoku-core";
 import {NdParagraph} from "nodoku-core";
 import {NdTrustedHtml} from "nodoku-core";
 import {extractValueFromText} from "nodoku-core";
+import {ts} from "nodoku-core";
 
 
 type ClientSideComponentNameType =
@@ -50,14 +51,6 @@ export async function NavHeaderImpl(props: NdSkinComponentProps<NavHeaderTheme, 
     const {t} = await i18nextTrustedHtmlProvider(lng);
 
 
-    const backgrounds = await Backgrounds({
-        lng: lng,
-        defaultThemeName: defaultThemeName,
-        bgColorStyle: effectiveTheme.bgColorStyle,
-        bgImageStyle: effectiveTheme.bgImageStyle
-    });
-
-
     const menuContent: NdList | undefined = block.paragraphs.find((p: NdParagraph) => p instanceof NdList)
 
     const menuItems = menuContent ? menuContent.items.map((m: NdListItem, itemIndex: number) => {
@@ -65,9 +58,10 @@ export async function NavHeaderImpl(props: NdSkinComponentProps<NavHeaderTheme, 
         if (m.subList && m.subList instanceof NdList && m.subList.items.length > 0) {
 
             const title = m.text instanceof NdTranslatableText ? m.text : (m.text.urlText ? m.text.urlText : m.text.url);
+            const key = m.text instanceof NdTranslatableText ? m.text.key : m.text.url.text;
 
             return (
-                <li>
+                <li key={key} className={`key-${key}`}>
                     <button  id={`dropdownNavbar-button-${itemIndex}`} data-dropdown-toggle={`dropdownNavbar-dropdown-${itemIndex}`}
                             className="dropdownNavbar-button flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                         <span dangerouslySetInnerHTML={t(title)}/>
@@ -79,12 +73,11 @@ export async function NavHeaderImpl(props: NdSkinComponentProps<NavHeaderTheme, 
                         </svg>
                     </button>
                     <div id={`dropdownNavbar-dropdown-${itemIndex}`}
-                         className="dropdownNavbar-dropdown absolute z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul className="py-2 text-sm text-gray-700 dark:text-gray-400"
+                         className={`dropdownNavbar-dropdown ${ts(effectiveTheme, "mainMenuDropdownContainer")}`}>
+                        <ul className={ts(effectiveTheme, "mainMenuDropdownList")}
                             aria-labelledby="dropdownLargeButton">
                             {m.subList.items
-                                .map((si: NdListItem) => drawListItem(si, t,
-                                    "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"))}
+                                .map((si: NdListItem) => drawListItem(si, t, ts(effectiveTheme, "mainMenuSecondLevelItemStyle")))}
                         </ul>
                     </div>
                 </li>
@@ -92,20 +85,20 @@ export async function NavHeaderImpl(props: NdSkinComponentProps<NavHeaderTheme, 
 
 
         } else {
-            return drawListItem(m, t, "block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent")
+            return drawListItem(m, t, ts(effectiveTheme, "mainMenuFirstLevelItemStyle"))
         }
     }) : [];
 
     let brand: NdContentBlock | undefined = undefined;
-    const sections: NdContentBlock[] = [];
+    // const sections: NdContentBlock[] = [];
     for (const b of content) {
         if (b.title?.text && b.title.text === "{Brand}") {
             brand = b;
-        } else {
+        } /*else {
             sections.push(b)
-        }
+        }*/
     }
-    const brandLogo: string = (brand && brand.images.length > 0) ? t(brand.images[0].url).__html as string : "icon:react-icons/ci:CiCircleMinus";
+    const brandLogo: string = (brand && brand.images.length > 0) ? t(brand.images[0].url).__html as string : "icon:nd-react-icons/ci:CiCircleMinus";
     const companyName: NdTranslatableText | undefined = brand?.paragraphs
         .find((p: NdParagraph) => (p instanceof NdTranslatableText) &&
             (p as NdTranslatableText).text.startsWith("{companyName}")) as NdTranslatableText | undefined;
@@ -113,30 +106,27 @@ export async function NavHeaderImpl(props: NdSkinComponentProps<NavHeaderTheme, 
 
     return (
 
-        <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-            <div className="flex flex-wrap items-center justify-between mx-auto p-4">
-                <div className={"w-20"}>
-                    <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                        {/*<img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo"/>*/}
+        <nav className={ts(effectiveTheme, "navStyle")}>
+            <div className={ts(effectiveTheme, "navInnerContainer")}>
+                <div className={ts(effectiveTheme, "logoBlockStyle")}>
+                    <a href="https://nodoku.io/" className={ts(effectiveTheme, "logoLinkStyle")}>
                         {await imageProvider({
                                 url: brandLogo,
                                 alt: (companyNameText?.__html as string) + "logo",
-                                imageStyle: {
-                                    base: "h-8", decoration: ""
-                                }
+                                imageStyle: effectiveTheme.logoImageStyle
                             }
                         )}
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white" dangerouslySetInnerHTML={companyNameText} />
+                        <span className={ts(effectiveTheme, "logoCompanyNameStyle")} dangerouslySetInnerHTML={companyNameText} />
                     </a>
                 </div>
-                <div className="w-20 justify-end flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
+                <div className={ts(effectiveTheme, "rightButtonsBlock")}>
                     {themeSwitcherButton()}
                     {clpv("flowbite/nav-header:language-switcher")}
                     {clpv("flowbite/nav-header:user-account")}
                     {hamburgerButton()}
                 </div>
-                <div className="hidden w-full md:block md:w-auto" id="navbar-main-menu">
-                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <div className={ts(effectiveTheme, "mainMenuBlock")} id="navbar-main-menu">
+                    <ul className={ts(effectiveTheme, "mainMenuListStyle")}>
                         {menuItems}
                     </ul>
                 </div>
@@ -187,7 +177,7 @@ const drawListItem = function (m: NdListItem, t: (text: NdTranslatableText) => N
     if (m.text instanceof NdLink) {
         const link = m.text as NdLink;
         return (
-            <li>
+            <li key={link.url.key} className={`key-${link.url.key}`}>
                 <a href={t(link.url).__html as string}
                    className={itemClassName}
                    aria-current="page" dangerouslySetInnerHTML={link.urlText ? t(link.urlText) : t(link.url)}/>

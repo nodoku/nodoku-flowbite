@@ -1,6 +1,6 @@
 {
   "name": "nodoku-flowbite",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "a collection of visual components, based on React and Flowbite, for Nodoku static site generator",
   "exports": {
     ".": {
@@ -24,6 +24,7 @@
     "nodoku-core": "file:../nodoku-core/dist",
     "nodoku-components": "file:../nodoku-components/dist",
     "flowbite": "^2.3.0",
+    "flowbite-react": "^0.9.0",
     "react": ">=18",
     "react-dom": ">=18",
     "tailwindcss": "^3"
@@ -39,7 +40,7 @@
     "typescript": "^5"
   },
   "scripts": {
-    "dist": "shx rm -rf dist && tsc && shx cp -r schemas ./dist && shx cp nodoku.manifest.json dist && shx cp package-dist.json ./dist/package.json && shx cp -r ./docs ./dist && shx cp ./README.md ./dist",
+    "dist": "shx rm -rf dist && tsc && tsc --project tsconfig.tailwind.json && shx cp -r schemas ./dist && shx cp nodoku.manifest.json dist && shx cp package-dist.json ./dist/package.json && shx cp -r ./docs ./dist && shx cp ./README.md ./dist",
     "gen-default-theme": "nodoku-gen-component-default-theme"
   }
 }

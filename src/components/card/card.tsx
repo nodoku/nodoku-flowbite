@@ -87,9 +87,11 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
             </div>
 
             <div className={`${ts(effectiveTheme, "ctaContainerStyle")}`}>
-                {block.callToActions.map((cta: NdCallToAction, i) => (
+                {block.callToActions.map((cta: NdCallToAction, i: number) => (
+                        <a key={`horizontal-card-${rowIndex}-${componentIndex}-cta-${i}`}
+                           href={t(cta.ctaUrl).__html as string}
+                           className={`${tsi(effectiveTheme, "ctaButtonStyle", i)}`}>
 
-                        <a key={`horizontal-card-${rowIndex}-${componentIndex}-cta-${i}`} href={t(cta.ctaUrl).__html as string} className={`${tsi(effectiveTheme, "ctaButtonStyle", i)}`}>
                             <span dangerouslySetInnerHTML={t(cta.ctaTitle || cta.ctaUrl)} />
                             <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">

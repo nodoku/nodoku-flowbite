@@ -15,7 +15,8 @@ const init = (): void => {
     var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
     if (!themeToggleDarkIcon || !themeToggleLightIcon) {
-        throw new Error("buttons are not yet loaded !!!")
+        // throw new Error("buttons are not yet loaded !!!")
+        return;
     }
 
 // Change the icons inside the button based on previous settings

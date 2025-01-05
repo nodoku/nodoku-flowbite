@@ -1,2 +1,3 @@
 import { JSX } from "react";
-export declare function CarouselClientSide(): JSX.Element;
+import { NdCarouselProps } from "./carousel-theme";
+export declare function CarouselClientSide(props: NdCarouselProps): JSX.Element;
