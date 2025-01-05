@@ -46,7 +46,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import React from "react";
-import { Carousel } from "flowbite-react";
+// import {Carousel, CarouselProps} from "flowbite-react";
 import { mergeTheme } from "nodoku-core";
 import { NodokuComponents } from "nodoku-components";
 var Paragraphs = NodokuComponents.Paragraphs;
@@ -59,7 +59,7 @@ import { defaultTheme } from "./carousel-theme";
 import { getTheme } from "flowbite-react";
 export function FlowbiteReactCarouselImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var lng, i18nextTrustedHtmlProvider, imageProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides, myOptions, origCarouselTheme, customCarouselTheme;
+        var lng, i18nextTrustedHtmlProvider, imageProvider, t, rowIndex, componentIndex, content, options, theme, themes, defaultThemeName, effectiveTheme, slides, origCarouselTheme, customCarouselTheme;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -123,18 +123,14 @@ export function FlowbiteReactCarouselImpl(props) {
                         }); }))];
                 case 2:
                     slides = _a.sent();
-                    myOptions = {
-                        slide: false,
-                        // slideInterval: 100000
-                    };
                     origCarouselTheme = getTheme().carousel;
                     customCarouselTheme = __assign({}, origCarouselTheme);
                     customCarouselTheme.item.base = "block w-full";
                     customCarouselTheme.scrollContainer.base = "snap-mandatory flex h-full overflow-y-hidden overflow-x-scroll scroll-smooth rounded-none";
                     return [2 /*return*/, (<div className={"relative ".concat(ts(effectiveTheme, "containerStyle"), " carousel-container-main")}>
-            <Carousel theme={customCarouselTheme} slide={true} slideInterval={3000}>
-                {slides}
-            </Carousel>
+            {/*<Carousel theme={customCarouselTheme} slide={true} slideInterval={3000}>*/}
+            {/*    {slides}*/}
+            {/*</Carousel>*/}
         </div>)];
             }
         });

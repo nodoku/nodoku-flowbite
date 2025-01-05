@@ -1,5 +1,5 @@
 import React, {JSX} from "react";
-import {Carousel, CarouselProps, Flowbite} from "flowbite-react";
+// import {Carousel, CarouselProps} from "flowbite-react";
 import {mergeTheme, NdContentBlock, NdSkinComponentProps} from "nodoku-core";
 import {CarouselTheme} from "./carousel-theme";
 import {NodokuComponents} from "nodoku-components";
@@ -14,7 +14,7 @@ import {defaultTheme} from "./carousel-theme";
 import {getTheme} from "flowbite-react";
 
 
-export async function FlowbiteReactCarouselImpl(props: NdSkinComponentProps<CarouselTheme, CarouselProps>): Promise<JSX.Element> {
+export async function FlowbiteReactCarouselImpl(props: NdSkinComponentProps<CarouselTheme, /*CarouselProps*/void>): Promise<JSX.Element> {
 
     const {lng, i18nextTrustedHtmlProvider, imageProvider} = props;
 
@@ -100,10 +100,10 @@ export async function FlowbiteReactCarouselImpl(props: NdSkinComponentProps<Caro
     }));
 
     // options = options || options.slide = false;
-    const myOptions: CarouselProps = {
-        slide: false,
-        // slideInterval: 100000
-    }
+    // const myOptions: CarouselProps = {
+    //     slide: false,
+    //     // slideInterval: 100000
+    // }
 
     const origCarouselTheme = getTheme().carousel
     const customCarouselTheme = {...origCarouselTheme};
@@ -114,9 +114,9 @@ export async function FlowbiteReactCarouselImpl(props: NdSkinComponentProps<Caro
     return (
 
         <div className={`relative ${ts(effectiveTheme, "containerStyle")} carousel-container-main`}>
-            <Carousel theme={customCarouselTheme} slide={true} slideInterval={3000}>
-                {slides}
-            </Carousel>
+            {/*<Carousel theme={customCarouselTheme} slide={true} slideInterval={3000}>*/}
+            {/*    {slides}*/}
+            {/*</Carousel>*/}
         </div>
 
     );

@@ -6,7 +6,7 @@ export namespace NodokuFlowbiteTailwind {
             `./${nodeModules}/nodoku-flowbite/esm/**/*.jsx`,
             `./${nodeModules}/nodoku-flowbite/schemas/**/*.yml`,
             `./${nodeModules}/flowbite/lib/esm/components/carousel/*.js`,
-            `./${nodeModules}/flowbite-react/dist/esm/**/*.mjs`,
+            // `./${nodeModules}/flowbite-react/dist/esm/**/*.mjs`,
         ]
     }
 }

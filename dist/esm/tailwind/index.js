@@ -7,7 +7,7 @@ export var NodokuFlowbiteTailwind;
             "./".concat(nodeModules, "/nodoku-flowbite/esm/**/*.jsx"),
             "./".concat(nodeModules, "/nodoku-flowbite/schemas/**/*.yml"),
             "./".concat(nodeModules, "/flowbite/lib/esm/components/carousel/*.js"),
-            "./".concat(nodeModules, "/flowbite-react/dist/esm/**/*.mjs"),
+            // `./${nodeModules}/flowbite-react/dist/esm/**/*.mjs`,
         ];
     }
     NodokuFlowbiteTailwind.tailwindConfig = tailwindConfig;

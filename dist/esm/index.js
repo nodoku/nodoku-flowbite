@@ -36,6 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { CardImpl } from "./components/card/card";
 import { CarouselImpl } from "./components/carousel/carousel";
+// import {CarouselTheme as FlowbiteCarouselTheme} from "./components/flowbite-react-carousel/carousel-theme";
+// import {FlowbiteCarouselOptions} from "./components/flowbite-react-carousel/carousel-theme";
 import { HorizontalCardImpl } from "./components/horizontal-card/horizontal-card";
 import { JumbotronImpl } from "./components/jumbotron/jumbotron";
 import { NavHeaderImpl } from "./components/nav-header/nav-header";
@@ -65,16 +67,10 @@ export var NodokuFlowbite;
         });
     }
     NodokuFlowbite.Carousel = Carousel;
-    function FlowbiteReactCarousel(props) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                // const FlowbiteReactCarouselImpl = (await import("./components/flowbite-react-carousel/carousel")).FlowbiteReactCarouselImpl;
-                // return FlowbiteReactCarouselImpl(props)
-                return [2 /*return*/, CarouselImpl(props)];
-            });
-        });
-    }
-    NodokuFlowbite.FlowbiteReactCarousel = FlowbiteReactCarousel;
+    // export async function FlowbiteReactCarousel(props: NdSkinComponentProps<FlowbiteCarouselTheme, FlowbiteCarouselOptions>): Promise<JSX.Element> {
+    //     const FlowbiteReactCarouselImpl = (await import("./components/flowbite-react-carousel/carousel")).FlowbiteReactCarouselImpl;
+    //     return FlowbiteReactCarouselImpl(props)
+    // }
     function Jumbotron(props) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
