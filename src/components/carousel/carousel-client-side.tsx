@@ -7,7 +7,8 @@ import type {
     IndicatorItem
 } from "flowbite/lib/esm/components/carousel/types";
 import type { InstanceOptions } from "flowbite/lib/esm/dom/types";
-import Carousel from "flowbite/lib/esm/components/carousel/index";
+// import Carousel from "flowbite/lib/esm/components/carousel/index";
+import Carousel from "./flowbite-carousel-client-side"
 import {NdCarouselProps} from "./carousel-theme";
 import {SlideAnimation} from "./carousel-theme";
 
@@ -16,89 +17,86 @@ export function CarouselClientSide(props: NdCarouselProps): JSX.Element {
 
     const {options, carouselElementId, indicators, animation} = props;
 
-    if (typeof window !== 'undefined') {
-
-        // setTimeout(() => {
-
-        Carousel.prototype.init = function () {
-            if (this._items.length && !this._initialized) {
-                this._items.map((item: CarouselItem) => {
-                    item.el.classList.add(
-                        'absolute',
-                        'inset-0',
-                        'transition-transform',
-                        'transform'
-                    );
-                });
-
-                /*
-                 * removed this initial sliding for performance reasons (was causing initial Thread Blocking Time (TBT) to increase)
-                 */
-
-                // // if no active item is set then first position is default
-                // if (this.getActiveItem()) {
-                //     this.slideTo(this.getActiveItem().position);
-                // } else {
-                //     this.slideTo(0);
-                // }
-
-                this._indicators.map((indicator, position) => {
-                    indicator.el.addEventListener('click', () => {
-                        this.slideTo(position);
-                    });
-                });
-
-                this._initialized = true;
-            }
-
-        }
-
-        Carousel.prototype._rotate = function (rotationItems) {
-
-
-            // @ts-ignore
-            const animation: SlideAnimation = this._options.animation;
-
-            const classesToRemove: string[] = animation.left.concat(animation.middle).concat(animation.right);
-            // classesToRemove = classesToRemove.concat(["hidden", "z-10", "z-20", "z-30"])
-
-            // reset
-            this._items.map(function (item) {
-                item.el.classList.add('hidden');
-            });
-            // Handling the case when there is only one item
-            if (this._items.length === 1) {
-                rotationItems.middle.el.classList.remove('-translate-x-full', 'translate-x-full', 'translate-x-0', 'hidden', 'z-10');
-                rotationItems.middle.el.classList.add('translate-x-0', 'z-20');
-                return;
-            }
-            // // left item (previously active)
-            // rotationItems.left.el.classList  .remove('-translate-x-full', 'translate-x-full', 'translate-x-0', 'hidden', 'z-20', 'opacity-100', 'opacity-0');
-            // rotationItems.left.el.classList.add('-translate-x-full', 'z-10', 'opacity-0');
-            // // currently active item
-            // rotationItems.middle.el.classList.remove('-translate-x-full', 'translate-x-full', 'translate-x-0', 'hidden', 'z-10', 'opacity-100', 'opacity-0');
-            // rotationItems.middle.el.classList.add('translate-x-0', 'z-30', 'opacity-100');
-            // // right item (upcoming active)
-            // rotationItems.right.el.classList .remove('-translate-x-full', 'translate-x-full', 'translate-x-0', 'hidden', 'z-30', 'opacity-100', 'opacity-0');
-            // rotationItems.right.el.classList.add('translate-x-full', 'z-20', 'opacity-0');
-
-            classesToRemove.forEach(cl => {
-                rotationItems.left.el.classList.remove(cl);
-                rotationItems.middle.el.classList.remove(cl);
-                rotationItems.right.el.classList.remove(cl);
-            })
-            animation.left.forEach(cl => rotationItems.left.el.classList.add(cl));
-            animation.middle.forEach(cl => rotationItems.middle.el.classList.add(cl));
-            animation.right.forEach(cl => rotationItems.right.el.classList.add(cl));
-
-
-            rotationItems.left.el.classList.remove('hidden', 'z-20');
-            rotationItems.left.el.classList.add("z-10")
-            rotationItems.middle.el.classList.remove('hidden', 'z-10');
-            rotationItems.middle.el.classList.add("z-30")
-            rotationItems.right.el.classList.remove('hidden', 'z-30');
-            rotationItems.right.el.classList.add("z-20")
-        };
+    function initMe() {
+        // Carousel.prototype.init = function () {
+        //     if (this._items.length && !this._initialized) {
+        //         this._items.map((item: CarouselItem) => {
+        //             item.el.classList.add(
+        //                 'absolute',
+        //                 'inset-0',
+        //                 'transition-transform',
+        //                 'transform'
+        //             );
+        //         });
+        //
+        //         /*
+        //          * removed this initial sliding for performance reasons (was causing initial Thread Blocking Time (TBT) to increase)
+        //          */
+        //
+        //         // // if no active item is set then first position is default
+        //         // if (this.getActiveItem()) {
+        //         //     this.slideTo(this.getActiveItem().position);
+        //         // } else {
+        //         //     this.slideTo(0);
+        //         // }
+        //
+        //         this._indicators.map((indicator, position) => {
+        //             indicator.el.addEventListener('click', () => {
+        //                 this.slideTo(position);
+        //             });
+        //         });
+        //
+        //         this._initialized = true;
+        //     }
+        //
+        // }
+        //
+        // Carousel.prototype._rotate = function (rotationItems) {
+        //
+        //
+        //     // @ts-ignore
+        //     const animation: SlideAnimation = this._options.animation;
+        //
+        //     const classesToRemove: string[] = animation.left.concat(animation.middle).concat(animation.right);
+        //     // classesToRemove = classesToRemove.concat(["hidden", "z-10", "z-20", "z-30"])
+        //
+        //     // reset
+        //     this._items.map(function (item) {
+        //         item.el.classList.add('hidden');
+        //     });
+        //     // Handling the case when there is only one item
+        //     if (this._items.length === 1) {
+        //         rotationItems.middle.el.classList.remove('-translate-x-full', 'translate-x-full', 'translate-x-0', 'hidden', 'z-10');
+        //         rotationItems.middle.el.classList.add('translate-x-0', 'z-20');
+        //         return;
+        //     }
+        //     // // left item (previously active)
+        //     // rotationItems.left.el.classList  .remove('-translate-x-full', 'translate-x-full', 'translate-x-0', 'hidden', 'z-20', 'opacity-100', 'opacity-0');
+        //     // rotationItems.left.el.classList.add('-translate-x-full', 'z-10', 'opacity-0');
+        //     // // currently active item
+        //     // rotationItems.middle.el.classList.remove('-translate-x-full', 'translate-x-full', 'translate-x-0', 'hidden', 'z-10', 'opacity-100', 'opacity-0');
+        //     // rotationItems.middle.el.classList.add('translate-x-0', 'z-30', 'opacity-100');
+        //     // // right item (upcoming active)
+        //     // rotationItems.right.el.classList .remove('-translate-x-full', 'translate-x-full', 'translate-x-0', 'hidden', 'z-30', 'opacity-100', 'opacity-0');
+        //     // rotationItems.right.el.classList.add('translate-x-full', 'z-20', 'opacity-0');
+        //
+        //     classesToRemove.forEach(cl => {
+        //         rotationItems.left.el.classList.remove(cl);
+        //         rotationItems.middle.el.classList.remove(cl);
+        //         rotationItems.right.el.classList.remove(cl);
+        //     })
+        //     animation.left.forEach(cl => rotationItems.left.el.classList.add(cl));
+        //     animation.middle.forEach(cl => rotationItems.middle.el.classList.add(cl));
+        //     animation.right.forEach(cl => rotationItems.right.el.classList.add(cl));
+        //
+        //
+        //     rotationItems.left.el.classList.remove('hidden', 'z-20');
+        //     rotationItems.left.el.classList.add("z-10")
+        //     rotationItems.middle.el.classList.remove('hidden', 'z-10');
+        //     rotationItems.middle.el.classList.add("z-30")
+        //     rotationItems.right.el.classList.remove('hidden', 'z-30');
+        //     rotationItems.right.el.classList.add("z-20")
+        // };
 
         const carouselElement: HTMLElement = document.getElementById(carouselElementId)!;
 
@@ -127,9 +125,8 @@ export function CarouselClientSide(props: NdCarouselProps): JSX.Element {
             })
         }
 
-        // object options with default values
         const flowbiteOptions: CarouselOptions & {animation: SlideAnimation}= {
-            defaultPosition: 0,
+            // defaultPosition: 0,
             interval: options.slideInterval,
             animation: animation,
 
@@ -151,7 +148,6 @@ export function CarouselClientSide(props: NdCarouselProps): JSX.Element {
             },
         };
 
-        // instance options object
         const instanceOptions: InstanceOptions = {
             id: /*'default-carousel'*/carouselElement.id,
             override: true
@@ -179,10 +175,16 @@ export function CarouselClientSide(props: NdCarouselProps): JSX.Element {
         $nextButton.addEventListener('click', () => {
             carousel.next();
         });
+    }
 
 
+    if (typeof window !== 'undefined') {
 
-        // },100);
+        setTimeout(() => {
+
+            initMe();
+
+        },1);
 
 
     }
