@@ -5,7 +5,7 @@ import ListCompTheme = NodokuComponents.ListCompTheme;
 export type NdCarouselOptions = {
     slideInterval: number;
     showIndicators: boolean;
-    animationType: "slide" | "fade-in-fade-out";
+    animationType: "slide-x" | "slide-y" | "fade-in-fade-out";
 };
 export type SlideAnimation = {
     transition: readonly string[];
@@ -40,6 +40,7 @@ export type CarouselTheme = {
     codeHighlightTheme?: HighlightedCodeTheme;
     listTheme?: ListCompTheme;
 };
-export declare const animationSlide: SlideAnimation;
+export declare const animationSlideX: SlideAnimation;
+export declare const animationSlideY: SlideAnimation;
 export declare const animationFadeInFadeOut: SlideAnimation;
 export declare const defaultTheme: CarouselTheme;

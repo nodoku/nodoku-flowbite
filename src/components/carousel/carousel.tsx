@@ -7,8 +7,7 @@ import {CarouselTheme} from "./carousel-theme";
 import {defaultTheme} from "./carousel-theme";
 import {NdCarouselOptions} from "./carousel-theme";
 import {defaultOptions} from "./carousel-theme";
-import {animationSlide} from "./carousel-theme";
-import {animationFadeInFadeOut} from "./carousel-theme";
+import {SlideAnimation, animationSlideX, animationSlideY, animationFadeInFadeOut} from "./carousel-theme";
 import {NodokuComponents} from "nodoku-components";
 import {CarouselClientSide} from "./carousel-client-side";
 import Paragraphs = NodokuComponents.Paragraphs;
@@ -126,7 +125,18 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Nd
     }));
 
 
-    const animation = effectiveOptions.animationType === "slide" ? animationSlide : animationFadeInFadeOut
+    let animation: SlideAnimation;
+    switch(effectiveOptions.animationType) {
+        case "slide-x":
+            animation = animationSlideX;
+            break;
+        case "slide-y":
+            animation = animationSlideY;
+            break;
+        case "fade-in-fade-out":
+            animation = animationFadeInFadeOut;
+            break;
+    }
 
     return (
 

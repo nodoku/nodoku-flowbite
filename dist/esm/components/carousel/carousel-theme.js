@@ -1,13 +1,19 @@
 export var defaultOptions = {
     slideInterval: 3000,
     showIndicators: true,
-    animationType: "slide",
+    animationType: "slide-x",
 };
-export var animationSlide = {
+export var animationSlideX = {
     transition: ["transition-transform"],
     left: ["-translate-x-full"],
     middle: ["translate-x-0"],
     right: ["translate-x-full"],
+};
+export var animationSlideY = {
+    transition: ["transition-transform"],
+    left: ["-translate-y-full"],
+    middle: ["translate-y-0"],
+    right: ["translate-y-full"],
 };
 export var animationFadeInFadeOut = {
     transition: ["transition-opacity"],

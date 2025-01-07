@@ -40,8 +40,7 @@ import { ts } from "nodoku-core";
 import { tsi } from "nodoku-core";
 import { defaultTheme } from "./carousel-theme";
 import { defaultOptions } from "./carousel-theme";
-import { animationSlide } from "./carousel-theme";
-import { animationFadeInFadeOut } from "./carousel-theme";
+import { animationSlideX, animationSlideY, animationFadeInFadeOut } from "./carousel-theme";
 import { NodokuComponents } from "nodoku-components";
 import { CarouselClientSide } from "./carousel-client-side";
 var Paragraphs = NodokuComponents.Paragraphs;
@@ -126,7 +125,17 @@ export function CarouselImpl(props) {
                         }); }))];
                 case 2:
                     slides = _a.sent();
-                    animation = effectiveOptions.animationType === "slide" ? animationSlide : animationFadeInFadeOut;
+                    switch (effectiveOptions.animationType) {
+                        case "slide-x":
+                            animation = animationSlideX;
+                            break;
+                        case "slide-y":
+                            animation = animationSlideY;
+                            break;
+                        case "fade-in-fade-out":
+                            animation = animationFadeInFadeOut;
+                            break;
+                    }
                     return [2 /*return*/, (<div className={"relative ".concat(ts(effectiveTheme, "carouselContainerStyle"), " carousel-container-main")}>
 
             <div id={carouselElementId} className="relative w-full aspect-[2/4] md:aspect-square lg:aspect-[4/1.61]" data-carousel="static">

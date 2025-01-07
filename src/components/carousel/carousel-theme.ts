@@ -9,7 +9,7 @@ export type NdCarouselOptions = {
 
     slideInterval: number,
     showIndicators: boolean,
-    animationType: "slide" | "fade-in-fade-out"
+    animationType: "slide-x" | "slide-y" | "fade-in-fade-out"
 }
 
 export type SlideAnimation = {
@@ -32,7 +32,7 @@ export type NdCarouselProps = {
 export const defaultOptions: NdCarouselOptions = {
     slideInterval: 3000,
     showIndicators: true,
-    animationType: "slide",
+    animationType: "slide-x",
 }
 
 export type CarouselTheme = {
@@ -54,11 +54,18 @@ export type CarouselTheme = {
 }
 
 
-export const animationSlide: SlideAnimation = {
+export const animationSlideX: SlideAnimation = {
     transition: ["transition-transform"],
     left: ["-translate-x-full"],
     middle: ["translate-x-0"],
     right: ["translate-x-full"],
+}
+
+export const animationSlideY: SlideAnimation = {
+    transition: ["transition-transform"],
+    left: ["-translate-y-full"],
+    middle: ["translate-y-0"],
+    right: ["translate-y-full"],
 }
 
 export const animationFadeInFadeOut: SlideAnimation = {
