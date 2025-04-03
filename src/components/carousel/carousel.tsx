@@ -45,7 +45,7 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Nd
         const indicatorButtonId = `carousel-indicator-${slideIndex}`;
         return (
             <button id={indicatorButtonId} key={indicatorButtonId} type="button"
-                    className="carousel-indicator w-3 h-3 rounded-full" aria-current="true"
+                    className="carousel-indicator w-3 h-3 rounded-full" aria-current={slideIndex === 0}
                     aria-label={`Slide ${slideIndex}`}
                     data-carousel-slide-to={`${slideIndex}`}>
             </button>
@@ -66,10 +66,10 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Nd
         const paragraphs = await Paragraphs({
             lng: lng,
             blockParagraphs: block.paragraphs,
-            paragraphTheme: {
+            paragraphTheme: effectiveSlideTheme ? {
                 paragraphStyle: effectiveSlideTheme.paragraphStyle,
-                paragraphContainer: effectiveTheme.paragraphContainerStyle
-            } || paragraphDefaultTheme,
+                paragraphContainer: effectiveSlideTheme.paragraphContainerStyle
+            } : paragraphDefaultTheme,
             codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
             listTheme: effectiveSlideTheme.listTheme || listCompDefaultTheme,
             defaultThemeName: defaultThemeName,
@@ -83,14 +83,25 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Nd
             bgImageStyle: effectiveSlideTheme.bgImageStyle
         });
 
+        let url = undefined, alt = undefined;
+        if (block.images && block.images.length > 0) {
+            url = block.images[0].url;
+            alt = block.images[0].alt;
+        }
 
         return (
             <div id={`carousel-${carouselElementId}-item-${slideIndex}`}
                  key={`row-${rowIndex}-component-${componentIndex}-slide-${slideIndex}`}
                  className={`carousel-item ${slideIndex === 0 ? "" : "hidden"} ${ts(effectiveSlideTheme, "slideAnimation")} ${ts(effectiveSlideTheme, "containerStyle")}`}
-                 data-carousel-item={""}>
+                 data-carousel-item={`slide-${slideIndex}`}>
 
                 {backgrounds}
+
+                {url &&
+                    <div className={`${ts(effectiveTheme, "imageContainerStyle")}`}>
+                        {await imageProvider({url: t(url).__html as string, alt: alt && t(alt).__html as string, imageStyle: effectiveTheme.imageStyle })}
+                    </div>
+                }
 
                 {block.title &&
                     <div className={`${ts(effectiveTheme, "titleStyle")}`}
@@ -140,10 +151,9 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Nd
 
     return (
 
-        <div className={`relative ${ts(effectiveTheme, "carouselContainerStyle")} carousel-container-main`}>
+        <div className={`relative ${effectiveTheme.className} ${ts(effectiveTheme, "carouselContainerStyle")} carousel-container-main`}>
 
-            <div id={carouselElementId} className="relative w-full aspect-[2/4] md:aspect-square lg:aspect-[4/1.61]"
-                 data-carousel="static">
+            <div id={carouselElementId} data-carousel="static" className="relative w-full aspect-[2/4] md:aspect-square lg:aspect-[4/1.61]">
                 <div className="absolute inset-0">
                     {slides}
                 </div>
@@ -186,6 +196,8 @@ export async function CarouselImpl(props: NdSkinComponentProps<CarouselTheme, Nd
                     activeClasses: ts(effectiveTheme, "indicatorActiveClasses"),
                     inactiveClasses: ts(effectiveTheme, "indicatorInactiveClasses")
                 }}/>
+
+            {/*<CarouselClientSide />*/}
 
         </div>
 

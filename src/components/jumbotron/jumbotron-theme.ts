@@ -7,6 +7,7 @@ import ParagraphTheme = NodokuComponents.ParagraphTheme;
 export type JumbotronTheme = {
 
     className?: string;
+
     bgImageStyle?: ThemeStyle;
     bgColorStyle?: ThemeStyle;
     containerStyle?: ThemeStyle;

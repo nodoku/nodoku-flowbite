@@ -7,9 +7,9 @@ import ParagraphTheme = NodokuComponents.ParagraphTheme;
 export type CardTheme = {
     className?: string;
     containerStyle?: ThemeStyle;
-    imageContainerStyle?: ThemeStyle;
     bgImageStyle?: ThemeStyle;
     bgColorStyle?: ThemeStyle;
+    imageContainerStyle?: ThemeStyle;
     imageStyle?: ImageStyle;
     innerContainerStyle?: ThemeStyle;
     titleStyle?: ThemeStyle;

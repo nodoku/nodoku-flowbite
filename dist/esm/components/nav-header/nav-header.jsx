@@ -8,8 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -39,13 +39,13 @@ import { defaultTheme } from "./nav-header-theme";
 import { mergeTheme } from "nodoku-core";
 import { NavHeaderClientSide } from "./nav-header-client-side";
 import { NdList } from "nodoku-core";
-import { NdLink } from "nodoku-core";
+// import {NdLink} from "nodoku-core";
 import { NdTranslatableText } from "nodoku-core";
 import { extractValueFromText } from "nodoku-core";
 import { ts } from "nodoku-core";
 export function NavHeaderImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
-        var rowIndex, componentIndex, content, theme, themes, lng, i18nextTrustedHtmlProvider, defaultThemeName, clientSideComponentProvider, imageProvider, clpv, effectiveTheme, block, t, menuContent, menuItems, brand, _i, content_1, b, brandLogo, companyName, companyNameText;
+        var rowIndex, componentIndex, content, theme, themes, lng, i18nextTrustedHtmlProvider, defaultThemeName, clientSideComponentProvider, imageProvider, clpv, effectiveTheme, block, t, randomSuffix, mainMenuId, themeSwitchBtnId, menuContent, menuItems, brand, _i, content_1, b, brandLogo, companyName, companyNameText;
         var _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
@@ -62,28 +62,31 @@ export function NavHeaderImpl(props) {
                     return [4 /*yield*/, i18nextTrustedHtmlProvider(lng)];
                 case 1:
                     t = (_b.sent()).t;
+                    randomSuffix = Math.random().toString(36).substring(2, 9);
+                    mainMenuId = "navbar-main-menu-" + randomSuffix;
+                    themeSwitchBtnId = "theme-toggle-" + randomSuffix;
                     menuContent = block.paragraphs.find(function (p) { return p instanceof NdList; });
                     menuItems = menuContent ? menuContent.items.map(function (m, itemIndex) {
+                        var title = /*m.text instanceof NdTranslatableText ? */ m.text /* : (m.text.urlText ? m.text.urlText : m.text.url)*/;
+                        var key = /*m.text instanceof NdTranslatableText ? */ m.text.key /* : m.text.url.text*/;
                         if (m.subList && m.subList instanceof NdList && m.subList.items.length > 0) {
-                            var title = m.text instanceof NdTranslatableText ? m.text : (m.text.urlText ? m.text.urlText : m.text.url);
-                            var key = m.text instanceof NdTranslatableText ? m.text.key : m.text.url.text;
                             return (<li key={key} className={"key-".concat(key)}>
-                    <button id={"dropdownNavbar-button-".concat(itemIndex)} data-dropdown-toggle={"dropdownNavbar-dropdown-".concat(itemIndex)} className="dropdownNavbar-button flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                    <button id={"btn-".concat(mainMenuId, "-dropdown-").concat(itemIndex)} data-collapse-toggle={"".concat(mainMenuId, "-dropdown-").concat(itemIndex)} className="dropdownNavbar-button flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                         <span dangerouslySetInnerHTML={t(title)}/>
                         <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
                         </svg>
                     </button>
-                    <div id={"dropdownNavbar-dropdown-".concat(itemIndex)} className={"dropdownNavbar-dropdown ".concat(ts(effectiveTheme, "mainMenuDropdownContainer"))}>
+                    <div id={"".concat(mainMenuId, "-dropdown-").concat(itemIndex)} className={"dropdownNavbar-dropdown ".concat(ts(effectiveTheme, "mainMenuDropdownContainer"))}>
                         <ul className={ts(effectiveTheme, "mainMenuDropdownList")} aria-labelledby="dropdownLargeButton">
                             {m.subList.items
-                                    .map(function (si) { return drawListItem(si, t, ts(effectiveTheme, "mainMenuSecondLevelItemStyle")); })}
+                                    .map(function (si, ii) { return drawListItem(si, t, ts(effectiveTheme, "mainMenuSecondLevelItemStyle"), "".concat(key, "-sublist-").concat(ii)); })}
                         </ul>
                     </div>
                 </li>);
                         }
                         else {
-                            return drawListItem(m, t, ts(effectiveTheme, "mainMenuFirstLevelItemStyle"));
+                            return drawListItem(m, t, ts(effectiveTheme, "mainMenuFirstLevelItemStyle"), key);
                         }
                     }) : [];
                     brand = undefined;
@@ -105,8 +108,8 @@ export function NavHeaderImpl(props) {
                             alt: (companyNameText === null || companyNameText === void 0 ? void 0 : companyNameText.__html) + "logo",
                             imageStyle: effectiveTheme.logoImageStyle
                         })];
-                case 2: return [2 /*return*/, (<nav className={ts(effectiveTheme, "navStyle")}>
-            <div className={ts(effectiveTheme, "navInnerContainer")}>
+                case 2: return [2 /*return*/, (<nav className={"".concat(effectiveTheme.className, " ").concat(ts(effectiveTheme, "navStyle"))}>
+            <div className={"relative ".concat(ts(effectiveTheme, "navInnerContainer"))}>
                 <div className={ts(effectiveTheme, "logoBlockStyle")}>
                     <a href="https://nodoku.io/" className={ts(effectiveTheme, "logoLinkStyle")}>
                         {_b.sent()}
@@ -114,54 +117,57 @@ export function NavHeaderImpl(props) {
                     </a>
                 </div>
                 <div className={ts(effectiveTheme, "rightButtonsBlock")}>
-                    {themeSwitcherButton()}
+                    {themeSwitcherButton(themeSwitchBtnId)}
                     {clpv("flowbite/nav-header:language-switcher")}
                     {clpv("flowbite/nav-header:user-account")}
-                    {hamburgerButton()}
+                    {hamburgerButton(mainMenuId)}
                 </div>
-                <div className={ts(effectiveTheme, "mainMenuBlock")} id="navbar-main-menu">
+                <div className={"hidden absolute md:static top-16 right-0 z-20 ".concat(ts(effectiveTheme, "mainMenuBlock"))} id={mainMenuId}>
                     <ul className={ts(effectiveTheme, "mainMenuListStyle")}>
                         {menuItems}
                     </ul>
                 </div>
             </div>
 
-            <NavHeaderClientSide />
+            <NavHeaderClientSide themeSwitchBtnId={themeSwitchBtnId}/>
         </nav>)];
             }
         });
     });
 }
-var themeSwitcherButton = function () {
-    return (<button id="theme-toggle" type="button" className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
-            <svg id="theme-toggle-dark-icon" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+var themeSwitcherButton = function (themeSwitchBtnId) {
+    return (<button id={themeSwitchBtnId} type="button" className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+            <svg className="theme-toggle-dark-icon w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
             </svg>
-            <svg id="theme-toggle-light-icon" className="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <svg className="theme-toggle-light-icon hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fillRule="evenodd" clipRule="evenodd"></path>
             </svg>
         </button>);
 };
-var hamburgerButton = function () {
-    return (<button id={"hamburger-button"} data-collapse-toggle="navbar-main-menu" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-main-menu" aria-expanded="false">
+var hamburgerButton = function (mainMenuId) {
+    return (<button id={"btn-".concat(mainMenuId)} data-collapse-toggle={mainMenuId} type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls={mainMenuId} aria-expanded="false">
             <span className="sr-only">Open main menu</span>
             <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
             </svg>
         </button>);
 };
-var drawListItem = function (m, t, itemClassName) {
-    if (m.text instanceof NdLink) {
-        var link = m.text;
-        return (<li key={link.url.key} className={"key-".concat(link.url.key)}>
-                <a href={t(link.url).__html} className={itemClassName} aria-current="page" dangerouslySetInnerHTML={link.urlText ? t(link.urlText) : t(link.url)}/>
+var drawListItem = function (m, t, itemClassName, key) {
+    // if (m.text instanceof NdLink) {
+    //     const link = m.text as NdLink;
+    //     return (
+    //         <li key={link.url.key} className={`key-${link.url.key}`}>
+    //             <a href={t(link.url).__html as string}
+    //                className={itemClassName}
+    //                aria-current="page" dangerouslySetInnerHTML={link.urlText ? t(link.urlText) : t(link.url)}/>
+    //         </li>
+    //     )
+    // } else {
+    var mText = m.text;
+    return (<li key={key}>
+                <span className={itemClassName} aria-current="page" dangerouslySetInnerHTML={t(mText)}/>
             </li>);
-    }
-    else {
-        var mText = m.text;
-        return (<li>
-                    <span className={itemClassName} aria-current="page" dangerouslySetInnerHTML={t(mText)}/>
-            </li>);
-    }
+    // }
 };
 //# sourceMappingURL=nav-header.jsx.map

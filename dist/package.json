@@ -1,6 +1,7 @@
 {
   "name": "nodoku-flowbite",
-  "version": "0.2.12",
+  "version": "0.3.0",
+  "license": "MIT for the use not related to website builders, commercial otherwise, contact for details",
   "description": "a collection of visual components, based on React and Flowbite, for Nodoku static site generator",
   "exports": {
     ".": {
@@ -22,8 +23,8 @@
     "@types/node": "^20.12.11",
     "@types/react": "^18.3.2",
     "@types/react-dom": "18.3.0",
-    "nodoku-core": "^0.2.5",
-    "nodoku-components": "^0.2.7",
+    "nodoku-core": "^0.3",
+    "nodoku-components": "^0.3",
     "flowbite": "^2.3.0",
     "react": ">=18",
     "react-dom": ">=18",

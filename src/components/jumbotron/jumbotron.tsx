@@ -10,6 +10,7 @@ import highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultThem
 import listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
 import {NdCallToAction} from "nodoku-core";
 import {defaultTheme} from "./jumbotron-theme";
+import {tsi} from "nodoku-core";
 
 
 export async function JumbotronImpl(props: NdSkinComponentProps<JumbotronTheme, void>): Promise<JSX.Element> {
@@ -55,34 +56,36 @@ export async function JumbotronImpl(props: NdSkinComponentProps<JumbotronTheme, 
     });
 
     return (
-        <section className={`relative ${ts(effectiveTheme, "containerStyle")}`}>
+        <section className={`relative ${effectiveTheme.className} ${ts(effectiveTheme, "containerStyle")}`}>
 
             {backgrounds}
 
             {block.title &&
                 <h1 className={`${ts(effectiveTheme, "titleStyle")}`}
-                    dangerouslySetInnerHTML={t(block.title)} />
+                    dangerouslySetInnerHTML={t(block.title)}/>
             }
             {block.subTitle &&
                 <h2 className={`${ts(effectiveTheme, "subTitleStyle")}`}
-                    dangerouslySetInnerHTML={t(block.subTitle)} />
+                    dangerouslySetInnerHTML={t(block.subTitle)}/>
             }
 
             {paragraphs}
 
-            {block.callToActions.map((cta: NdCallToAction, i) => (
-                <div key={`horizontal-card-${rowIndex}-${componentIndex}-cta-${i}`} className={`${ts(effectiveTheme, "ctaContainerStyle")}`}>
-                    <a href={t(cta.ctaUrl).__html as string}
-                       className={`${ts(effectiveTheme, "ctaButtonStyle")}`}>
+            <div className={`${ts(effectiveTheme, "ctaContainerStyle")}`}>
+                {block.callToActions.map((cta: NdCallToAction, i: number) => (
+                    <a key={`slide-cta-${i}`}
+                       href={t(cta.ctaUrl).__html as string}
+                       className={`${tsi(effectiveTheme, "ctaButtonStyle", i)}`}>
+
                         <span dangerouslySetInnerHTML={t(cta.ctaTitle || cta.ctaUrl)}/>
-                        <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                        <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                   d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>
                     </a>
-                </div>))
-            }
+                ))}
+            </div>
 
         </section>
 

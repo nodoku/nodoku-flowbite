@@ -60,7 +60,7 @@ export async function CardImpl(props: NdSkinComponentProps<CardTheme, void>): Pr
 
     return (
 
-        <div key={`card-${rowIndex}-${componentIndex}`} className={`relative ${ts(effectiveTheme, "containerStyle")}`}>
+        <div key={`card-${rowIndex}-${componentIndex}`} className={`relative ${effectiveTheme.className} ${ts(effectiveTheme, "containerStyle")}`}>
 
             {backgrounds}
 

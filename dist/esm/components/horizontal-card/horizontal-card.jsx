@@ -8,8 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -44,6 +44,7 @@ var paragraphDefaultTheme = NodokuComponents.paragraphDefaultTheme;
 var highlightedCodeDefaultTheme = NodokuComponents.highlightedCodeDefaultTheme;
 var listCompDefaultTheme = NodokuComponents.listCompDefaultTheme;
 import { defaultTheme } from "./horizontal-card-theme";
+import { tsi } from "nodoku-core";
 export function HorizontalCardImpl(props) {
     return __awaiter(this, void 0, void 0, function () {
         var rowIndex, componentIndex, content, theme, themes, lng, i18nextTrustedHtmlProvider, imageProvider, defaultThemeName, effectiveTheme, block, _a, url, alt, t, paragraphs, backgrounds;
@@ -79,8 +80,12 @@ export function HorizontalCardImpl(props) {
                         })];
                 case 3:
                     backgrounds = _b.sent();
-                    return [4 /*yield*/, imageProvider({ url: t(url).__html, alt: alt && t(alt).__html, imageStyle: effectiveTheme.imageStyle })];
-                case 4: return [2 /*return*/, (<div key={"horizontal-card-".concat(rowIndex, "-").concat(componentIndex)} className={"card-".concat(rowIndex, "-").concat(componentIndex, " relative ").concat(ts(effectiveTheme, "containerStyle"))}>
+                    return [4 /*yield*/, imageProvider({
+                            url: t(url).__html,
+                            alt: alt && t(alt).__html,
+                            imageStyle: effectiveTheme.imageStyle
+                        })];
+                case 4: return [2 /*return*/, (<div key={"horizontal-card-".concat(rowIndex, "-").concat(componentIndex)} className={"horizontal-card-".concat(rowIndex, "-").concat(componentIndex, " relative ").concat(effectiveTheme.className, " ").concat(ts(effectiveTheme, "containerStyle"))}>
 
             {backgrounds}
 
@@ -99,15 +104,15 @@ export function HorizontalCardImpl(props) {
 
             </div>
 
-            {block.callToActions.map(function (cta, i) { return (<div key={"horizontal-card-".concat(rowIndex, "-").concat(componentIndex, "-cta-").concat(i)} className={"".concat(ts(effectiveTheme, "ctaContainerStyle"))}>
+            <div className={"".concat(ts(effectiveTheme, "ctaContainerStyle"))}>
+                {block.callToActions.map(function (cta, i) { return (<a key={"horizontal-card-".concat(rowIndex, "-").concat(componentIndex, "-cta-").concat(i)} href={t(cta.ctaUrl).__html} className={"".concat(tsi(effectiveTheme, "ctaButtonStyle", i))}>
 
-                    <a href={t(cta.ctaUrl).__html} className={"".concat(ts(effectiveTheme, "ctaButtonStyle"))}>
                         <span dangerouslySetInnerHTML={t(cta.ctaTitle || cta.ctaUrl)}/>
                         <svg className={"rtl:rotate-180 w-3.5 h-3.5 ms-2"} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>
-                    </a>
-                </div>); })}
+                    </a>); })}
+            </div>
 
         </div>)];
             }

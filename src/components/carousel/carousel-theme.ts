@@ -3,6 +3,7 @@ import {NodokuComponents} from "nodoku-components";
 import HighlightedCodeTheme = NodokuComponents.HighlightedCodeTheme;
 import ListCompTheme = NodokuComponents.ListCompTheme;
 import ParagraphTheme = NodokuComponents.ParagraphTheme;
+import {ImageStyle} from "nodoku-core";
 
 
 export type NdCarouselOptions = {
@@ -36,6 +37,9 @@ export const defaultOptions: NdCarouselOptions = {
 }
 
 export type CarouselTheme = {
+
+    className?: string;
+
     carouselContainerStyle?: ThemeStyle;
     bgImageStyle?: ThemeStyle;
     bgColorStyle?: ThemeStyle;
@@ -47,6 +51,8 @@ export type CarouselTheme = {
     subTitleStyle?: ThemeStyle;
     paragraphContainerStyle?: ThemeStyle;
     paragraphStyle?: ThemeStyle;
+    imageContainerStyle?: ThemeStyle;
+    imageStyle?: ImageStyle;
     ctaContainerStyle?: ThemeStyle;
     ctaButtonStyle?: ThemeStyle;
     codeHighlightTheme?: HighlightedCodeTheme;

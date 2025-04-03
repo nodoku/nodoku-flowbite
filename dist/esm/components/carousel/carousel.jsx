@@ -8,8 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -64,14 +64,14 @@ export function CarouselImpl(props) {
                     effectiveOptions = mergeTheme(options, defaultOptions);
                     indicatorButtons = content.map(function (b, slideIndex) {
                         var indicatorButtonId = "carousel-indicator-".concat(slideIndex);
-                        return (<button id={indicatorButtonId} key={indicatorButtonId} type="button" className="carousel-indicator w-3 h-3 rounded-full" aria-current="true" aria-label={"Slide ".concat(slideIndex)} data-carousel-slide-to={"".concat(slideIndex)}>
+                        return (<button id={indicatorButtonId} key={indicatorButtonId} type="button" className="carousel-indicator w-3 h-3 rounded-full" aria-current={slideIndex === 0} aria-label={"Slide ".concat(slideIndex)} data-carousel-slide-to={"".concat(slideIndex)}>
             </button>);
                     });
                     carouselElementId = "carousel-".concat(10000 * Math.random());
                     return [4 /*yield*/, Promise.all(content.map(function (b, slideIndex) { return __awaiter(_this, void 0, void 0, function () {
-                            var slideTheme, effectiveSlideTheme, block, paragraphs, backgrounds;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
+                            var slideTheme, effectiveSlideTheme, block, paragraphs, backgrounds, url, alt, _a;
+                            return __generator(this, function (_b) {
+                                switch (_b.label) {
                                     case 0:
                                         slideTheme = themes.length > 0 ? themes[slideIndex % themes.length] : {};
                                         effectiveSlideTheme = mergeTheme(slideTheme, effectiveTheme);
@@ -79,17 +79,17 @@ export function CarouselImpl(props) {
                                         return [4 /*yield*/, Paragraphs({
                                                 lng: lng,
                                                 blockParagraphs: block.paragraphs,
-                                                paragraphTheme: {
+                                                paragraphTheme: effectiveSlideTheme ? {
                                                     paragraphStyle: effectiveSlideTheme.paragraphStyle,
-                                                    paragraphContainer: effectiveTheme.paragraphContainerStyle
-                                                } || paragraphDefaultTheme,
+                                                    paragraphContainer: effectiveSlideTheme.paragraphContainerStyle
+                                                } : paragraphDefaultTheme,
                                                 codeHighlightTheme: effectiveSlideTheme.codeHighlightTheme || highlightedCodeDefaultTheme,
                                                 listTheme: effectiveSlideTheme.listTheme || listCompDefaultTheme,
                                                 defaultThemeName: defaultThemeName,
                                                 i18nextTrustedHtmlProvider: i18nextTrustedHtmlProvider
                                             })];
                                     case 1:
-                                        paragraphs = _a.sent();
+                                        paragraphs = _b.sent();
                                         return [4 /*yield*/, Backgrounds({
                                                 lng: lng,
                                                 defaultThemeName: defaultThemeName,
@@ -97,15 +97,30 @@ export function CarouselImpl(props) {
                                                 bgImageStyle: effectiveSlideTheme.bgImageStyle
                                             })];
                                     case 2:
-                                        backgrounds = _a.sent();
-                                        return [2 /*return*/, (<div id={"carousel-".concat(carouselElementId, "-item-").concat(slideIndex)} key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"carousel-item ".concat(slideIndex === 0 ? "" : "hidden", " ").concat(ts(effectiveSlideTheme, "slideAnimation"), " ").concat(ts(effectiveSlideTheme, "containerStyle"))} data-carousel-item={""}>
+                                        backgrounds = _b.sent();
+                                        url = undefined, alt = undefined;
+                                        if (block.images && block.images.length > 0) {
+                                            url = block.images[0].url;
+                                            alt = block.images[0].alt;
+                                        }
+                                        _a = url;
+                                        if (!_a) return [3 /*break*/, 4];
+                                        return [4 /*yield*/, imageProvider({ url: t(url).__html, alt: alt && t(alt).__html, imageStyle: effectiveTheme.imageStyle })];
+                                    case 3:
+                                        _a = <div className={"".concat(ts(effectiveTheme, "imageContainerStyle"))}>
+                        {_b.sent()}
+                    </div>;
+                                        _b.label = 4;
+                                    case 4: return [2 /*return*/, (<div id={"carousel-".concat(carouselElementId, "-item-").concat(slideIndex)} key={"row-".concat(rowIndex, "-component-").concat(componentIndex, "-slide-").concat(slideIndex)} className={"carousel-item ".concat(slideIndex === 0 ? "" : "hidden", " ").concat(ts(effectiveSlideTheme, "slideAnimation"), " ").concat(ts(effectiveSlideTheme, "containerStyle"))} data-carousel-item={"slide-".concat(slideIndex)}>
 
                 {backgrounds}
 
+                {_a}
+
                 {block.title &&
-                                                    <div className={"".concat(ts(effectiveTheme, "titleStyle"))} dangerouslySetInnerHTML={t(block.title)}/>}
+                                                <div className={"".concat(ts(effectiveTheme, "titleStyle"))} dangerouslySetInnerHTML={t(block.title)}/>}
                 {block.subTitle &&
-                                                    <div className={"".concat(ts(effectiveTheme, "subTitleStyle"))} dangerouslySetInnerHTML={t(block.subTitle)}/>}
+                                                <div className={"".concat(ts(effectiveTheme, "subTitleStyle"))} dangerouslySetInnerHTML={t(block.subTitle)}/>}
 
                 {paragraphs}
 
@@ -136,9 +151,9 @@ export function CarouselImpl(props) {
                             animation = animationFadeInFadeOut;
                             break;
                     }
-                    return [2 /*return*/, (<div className={"relative ".concat(ts(effectiveTheme, "carouselContainerStyle"), " carousel-container-main")}>
+                    return [2 /*return*/, (<div className={"relative ".concat(effectiveTheme.className, " ").concat(ts(effectiveTheme, "carouselContainerStyle"), " carousel-container-main")}>
 
-            <div id={carouselElementId} className="relative w-full aspect-[2/4] md:aspect-square lg:aspect-[4/1.61]" data-carousel="static">
+            <div id={carouselElementId} data-carousel="static" className="relative w-full aspect-[2/4] md:aspect-square lg:aspect-[4/1.61]">
                 <div className="absolute inset-0">
                     {slides}
                 </div>
@@ -168,6 +183,8 @@ export function CarouselImpl(props) {
                                 activeClasses: ts(effectiveTheme, "indicatorActiveClasses"),
                                 inactiveClasses: ts(effectiveTheme, "indicatorInactiveClasses")
                             }}/>
+
+            {/*<CarouselClientSide />*/}
 
         </div>)];
             }
