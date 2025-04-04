@@ -41,6 +41,7 @@ export type CarouselTheme = {
     className?: string;
 
     carouselContainerStyle?: ThemeStyle;
+    carouselAspectStyle?: ThemeStyle;
     bgImageStyle?: ThemeStyle;
     bgColorStyle?: ThemeStyle;
     containerStyle?: ThemeStyle;

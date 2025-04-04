@@ -153,7 +153,7 @@ export function CarouselImpl(props) {
                     }
                     return [2 /*return*/, (<div className={"relative ".concat(effectiveTheme.className, " ").concat(ts(effectiveTheme, "carouselContainerStyle"), " carousel-container-main")}>
 
-            <div id={carouselElementId} data-carousel="static" className="relative w-full aspect-[2/4] md:aspect-square lg:aspect-[4/1.61]">
+            <div id={carouselElementId} data-carousel="static" className={"relative ".concat(ts(effectiveTheme, "carouselAspectStyle"))}>
                 <div className="absolute inset-0">
                     {slides}
                 </div>

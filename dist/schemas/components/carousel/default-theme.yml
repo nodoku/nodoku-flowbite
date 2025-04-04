@@ -1,5 +1,10 @@
 # yaml-language-server: $schema=./visual-schema.json
-
+carouselContainerStyle:
+    base: ''
+    decoration: ''
+carouselAspectStyle:
+    base: w-full,
+    decoration: aspect-[2/4] md:aspect-square lg:aspect-[4/1.61]
 bgImageStyle:
     base: '-z-20 bg-cover bg-no-repeat'
     decoration: 'blur-sm '
