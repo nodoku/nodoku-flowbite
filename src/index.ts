@@ -11,6 +11,7 @@ import {JumbotronImpl} from "./components/jumbotron/jumbotron";
 import {NavHeaderTheme} from "./components/nav-header/nav-header-theme";
 import {NavHeaderImpl} from "./components/nav-header/nav-header";
 import {NdCarouselOptions} from "./components/carousel/carousel-theme";
+import {NavHeaderOptions} from "./components/nav-header/nav-header-theme";
 
 
 export namespace NodokuFlowbite {
@@ -31,7 +32,7 @@ export namespace NodokuFlowbite {
         return JumbotronImpl(props)
     }
 
-    export async function NavHeader(props: NdSkinComponentProps<NavHeaderTheme, void>): Promise<JSX.Element> {
+    export async function NavHeader(props: NdSkinComponentProps<NavHeaderTheme, NavHeaderOptions>): Promise<JSX.Element> {
         return NavHeaderImpl(props)
     }
 }

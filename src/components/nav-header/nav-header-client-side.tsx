@@ -172,9 +172,9 @@ const handleWindowClick = (event: any) => {
     Object.keys(collapses).forEach(k => {
         // console.log("collapse id", id, "btn-" + k)
         if (id.startsWith("btn-" + k)) {
-            console.log("leaving intact ", k, id, "btn-" + k)
+            // console.log("leaving intact ", k, id, "btn-" + k)
         } else {
-            console.log("collapsing ", k, id, "btn-" + k)
+            // console.log("collapsing ", k, id, "btn-" + k)
             collapses[k].collapse()
         }
     });
@@ -187,7 +187,8 @@ function handleThemeToggle(themeSwitchBtnId: string) {
     // var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
     var themeToggleBtn = document.getElementById(themeSwitchBtnId);
     if (!themeToggleBtn) {
-        throw new Error("buttons are not yet loaded !!!")
+        console.warn("buttons are not yet loaded !!!")
+        return;
     }
 
     // var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -196,14 +197,15 @@ function handleThemeToggle(themeSwitchBtnId: string) {
     var themeToggleLightIcon = themeToggleBtn.querySelector(".theme-toggle-light-icon");
 
     if (!themeToggleDarkIcon || !themeToggleLightIcon) {
-        throw new Error("buttons are not yet loaded !!!")
+        console.warn("neither dark no light theme toggle icons are loaded !!!")
+        return;
     }
 
     // toggle icons inside button
     themeToggleDarkIcon.classList.toggle('hidden');
     themeToggleLightIcon.classList.toggle('hidden');
 
-    console.log("in event listener")
+    // console.log("in event listener")
 
     // if set via local storage previously
     if (localStorage.getItem('color-theme')) {
@@ -237,7 +239,8 @@ function initOnce(themeSwitchBtnId: string) {
 
     var themeToggleBtn = document.getElementById(themeSwitchBtnId);
     if (!themeToggleBtn) {
-        throw new Error("buttons are not yet loaded !!!")
+        console.warn("themeToggleBtn is not yet loaded !!!")
+        return;
     }
 
     // var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -260,7 +263,8 @@ function initOnce(themeSwitchBtnId: string) {
 
 
     if (!themeToggleBtn) {
-        throw new Error("themeToggleBtn is not yet loaded !!!")
+        console.warn("buttons are not yet loaded !!!")
+        return;
     }
 
     console.log("adding event listener to theme-toggle")
@@ -295,7 +299,7 @@ export function NavHeaderClientSide(props: {themeSwitchBtnId: string}): JSX.Elem
     const {themeSwitchBtnId} = props;
     // initCollapses();
 
-    console.log("about to setTimeout to initialize carousels")
+    // console.log("about to setTimeout to initialize carousels")
     if (typeof window !== 'undefined') {
 
         if (document.readyState === "complete" || document.readyState === "interactive") {

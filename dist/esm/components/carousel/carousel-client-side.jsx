@@ -114,7 +114,7 @@ function initMe(carouselElementId, options, animation, indicators) {
 export function CarouselClientSide(props) {
     var options = props.options, carouselElementId = props.carouselElementId, indicators = props.indicators, animation = props.animation;
     if (typeof window !== 'undefined') {
-        console.log("about to setTimeout to initialize carousels");
+        // console.log("about to setTimeout to initialize carousels")
         if (document.readyState === "complete" || document.readyState === "interactive") {
             // // call on next available tick
             // var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');

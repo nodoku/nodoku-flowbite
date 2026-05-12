@@ -28,6 +28,7 @@
     },
     "flowbite/nav-header": {
       "schemaFile": "./schemas/components/nav-header/visual-schema.json",
+      "optionsFile": "./schemas/components/nav-header/options-schema.json",
       "defaultThemeFile": "./schemas/components/nav-header/default-theme.yml",
       "implementation": "NavHeader",
       "numBlocks": 1,

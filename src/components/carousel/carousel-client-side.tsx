@@ -167,7 +167,7 @@ export function CarouselClientSide(props: NdCarouselProps): JSX.Element {
 
     if (typeof window !== 'undefined') {
 
-        console.log("about to setTimeout to initialize carousels")
+        // console.log("about to setTimeout to initialize carousels")
 
         if (document.readyState === "complete" || document.readyState === "interactive") {
             // // call on next available tick

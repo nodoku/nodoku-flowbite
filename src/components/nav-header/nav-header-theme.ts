@@ -1,5 +1,8 @@
 import {ThemeStyle} from "nodoku-core";
-import {NodokuComponents} from "nodoku-components";
+
+export type NavHeaderOptions = {
+    showThemeSwitcher?: boolean;
+}
 
 export type NavHeaderTheme = {
 
@@ -22,4 +25,6 @@ export type NavHeaderTheme = {
 
 export const defaultTheme: NavHeaderTheme = { }
 
-// export default JumbotronTheme.defaultTheme;
+export const defaultOptions: NavHeaderOptions = {
+    showThemeSwitcher: true
+}

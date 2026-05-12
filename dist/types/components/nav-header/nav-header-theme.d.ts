@@ -1,4 +1,7 @@
 import { ThemeStyle } from "nodoku-core";
+export type NavHeaderOptions = {
+    showThemeSwitcher?: boolean;
+};
 export type NavHeaderTheme = {
     className?: string;
     navStyle?: ThemeStyle;
@@ -16,3 +19,4 @@ export type NavHeaderTheme = {
     mainMenuDropdownList?: ThemeStyle;
 };
 export declare const defaultTheme: NavHeaderTheme;
+export declare const defaultOptions: NavHeaderOptions;
