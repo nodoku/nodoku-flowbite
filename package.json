@@ -22,7 +22,7 @@
     "@types/node": "^20.12.11",
     "@types/react": "^18.3.2",
     "@types/react-dom": "18.3.0",
-    "nodoku-core": "../nodoku-core/dist",
+    "nodoku-core": "^0.3",
     "nodoku-components": "^0.3",
     "flowbite": "^2.3.0",
     "react": ">=18",
