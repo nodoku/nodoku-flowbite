@@ -7,8 +7,8 @@ logoImageStyle:
     base: h-8
     decoration: ''
 navInnerContainer:
-    base: flex flex-wrap items-center justify-between mx-auto p-4
-    decoration: ''
+    base: flex flex-wrap items-center justify-between mx-auto
+    decoration: p-4
 logoLinkStyle:
     base: flex items-center space-x-3 rtl:space-x-reverse
     decoration: ''
